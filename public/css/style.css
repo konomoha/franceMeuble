@@ -1,0 +1,14 @@
+header{
+    min-height: 200px;
+    background-color: steelblue;
+}
+
+.carrouss{
+    height: 400px!important;
+    width: auto!important;
+}
+
+footer{
+    min-height: 200px;
+    background-color: slategrey;
+}
