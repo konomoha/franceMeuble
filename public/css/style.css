@@ -15,11 +15,11 @@ header{
 
 .logosearch{
     font-size: 30px;
-    color: steelblue;
+    color: rgb(84, 86, 88);
 }
 
 .searchfield{
-    border: solid 2px steelblue;
+    border: solid 2px rgb(84, 85, 85);
 }
 
 nav{
@@ -28,12 +28,28 @@ nav{
 }
 
 .carrouss{
-    height: 400px!important;
+    height: 300px!important;
     width: auto!important;
 }
 
 
 footer{
     min-height: 200px;
-    background-color: slategrey;
+    background-color: rgb(84, 85, 85);
 }
+
+
+.services li{
+    list-style-type: none;
+    
+}
+
+.services li a, .services p a{
+    color: white;
+    text-decoration: none;
+}
+
+.services  p i{
+    font-size: 2rem;
+}
+
