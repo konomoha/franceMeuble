@@ -30,7 +30,7 @@ class BackofficeController extends AbstractController
 
         if($formCategory->isSubmitted())
         {
-            $manager->persist($category);
+            $manager->persist($category);//test
             $manager->flush();
             return $this->redirectToRoute('backoffice');
         }
