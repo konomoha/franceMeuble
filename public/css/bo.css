@@ -1,0 +1,83 @@
+.pointure{
+    margin-top: 100px !important;
+}
+
+.color-form{
+    background-color: rgba(0, 100, 0, 0.24);
+    padding: 10px !important;
+    border-radius: 5px;
+}
+
+
+.main-bo{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.main-bo-2{
+    margin: 0 !important;
+    padding: 0 !important;
+    height: contain !important;
+}
+
+
+/* CRUD CHAUSSURE */
+.icone-tableau
+{
+    font-size: 2em;
+}
+
+/* #MainStock
+{
+    overflow-x: auto;
+    overflow-y: scroll;
+} */
+
+/* Photo du tableau affichage général */
+.photobo
+{
+    width:40%;
+}
+/* Tableau Ajout produit */
+#tabAjout
+{
+    width: 30vw;
+}
+.entete-comments{
+    background-color: rgba(98, 20, 243, 0.418);
+}
+
+.main-inscription{
+    background-image: url("../img/img2.jpg");
+    background-size: contain;
+}
+
+.div-inscription{
+    background-color: rgba(240, 248, 255, 0.548) !important;
+}
+
+.form-inscription{
+    padding: 30px !important;
+    /* border: 2px solid rgba(19, 19, 19, 0.767);
+    border-radius: 10px; */
+}
+
+.taille-lien{
+    width: 150px;
+    height: 150px;
+}
+
+th, td
+{
+    vertical-align: middle !important;
+}
+
+.avatarbo
+{
+    width: 7vw;
+}
+
+.select-form-top{
+    height: 40px;
+    width: 10px;
+}

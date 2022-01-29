@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css2?family=Bakbak+One&family=Dancing+Script:wght@600&family=Indie+Flower&family=Permanent+Marker&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset("css/bo.css") }}">
+
+    {# Fontawesome icon script #}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {# Bootstrap #}
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">
+
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    {# Bootstrap icon #}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    {# Bootstrap dataTable #}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css"> 
+
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+
+    <script src="{{ asset('js/dataTable.js') }}"></script>
+    
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      .icon-titre{
+          
+          height: 30px;
+          width: 30px;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    {% block stylesheets %}
+        
+    {% endblock %}
+
+
+
+
+    <title>    
+    {% block title %}
+        France Meuble | BackOffice
+    {% endblock %}    
+    </title>
+
+  </head>
+
+  <body>
+
+    <main>
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark position-fixed h-100" style="width: 20%;">
+            <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            
+            <span class="fs-4">FranceMeuble BackOffice</span>
+            </a>
+            <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="" class="nav-link text-white"
+                     aria-current="page">
+                    <i class="bi bi-house-fill"></i>&nbsp;
+                    Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="" class="nav-link text-white">
+                    <i class="bi bi-card-text"></i>&nbsp;
+                    Liste des produits
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="" class="nav-link text-white">
+                    <i class="bi bi-tag-fill"></i></i>&nbsp;
+                    Catégories
+                    </a>
+                </li>
+
+                <li>
+                    <a href="" class="nav-link text-white">
+                    <i class="bi bi-tags"></i></i>&nbsp;
+                    Sous-catégories
+                    </a>
+                </li>
+
+                 <li>
+                    <a href="" class="nav-link text-white">
+                    <i class="bi bi-envelope-fill"></i>&nbsp;
+                    Messages contact
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="nav-link text-white">
+                    <i class="bi bi-people"></i>&nbsp;
+                    Utilisateurs
+                    </a>
+                </li>
+                </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong>Nom admin</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-secondary text-small shadow" aria-labelledby="dropdownUser1">
+                    <li><a class="dropdown-item" href="">Profil</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="">Quitter</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="">Deconnexion</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="p-2 main-23" style="width: 80%; margin-left: 20%; overflow-y: auto;">        
+        {% block body %}
+            
+        {% endblock %}        
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    {% block javascripts %}
+        
+    {% endblock %}
+  </body>
+</html>
