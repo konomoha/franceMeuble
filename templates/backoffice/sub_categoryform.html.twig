@@ -1,0 +1,22 @@
+{% extends "base_admin.html.twig" %}
+
+{% block title %}
+    France meuble | Ajout - Sous-catégorie
+{% endblock %}
+
+{% block body %}
+
+<h1>Ajouter une sous-catégorie</h1>
+
+ {{form_start(subcategorieForm, {'attr':{'class':'col-3 mx-auto'}}) }}
+
+ {{form_row(subcategorieForm.nom, {'attr':{'class':'form-control mb-4'}})}}
+ {{form_row(subcategorieForm.categorie, {'attr':{'class':'form-control'}})}}
+ <div class="text-center my-4">
+    <button class="btn btn-dark text-white">Ajouter
+    </button>
+</div>
+
+ {{form_end(subcategorieForm)}}
+
+ {% endblock %}

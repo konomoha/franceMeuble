@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\SouscategorieRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Categorie;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SouscategorieRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: SouscategorieRepository::class)]
 class Souscategorie
