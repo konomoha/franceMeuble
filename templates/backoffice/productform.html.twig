@@ -1,0 +1,33 @@
+{% extends "base_admin.html.twig" %}
+
+{% block title %}
+    France Meuble | Ajout Produit
+{% endblock %}
+
+{% block body %}
+
+{{form_start(productForm, {'attr':{'class':'col-3 mx-auto form-control'}})}}
+
+    {{form_row(productForm.nom)}}
+    {{form_row(productForm.couleur)}}
+    {{form_row(productForm.matiere)}}
+    {{form_row(productForm.longueur)}}
+    {{form_row(productForm.largeur)}}
+    {{form_row(productForm.hauteur)}}
+    {{form_row(productForm.profondeur)}}
+    {{form_row(productForm.diametre)}}
+    {{form_row(productForm.prix)}}
+    {{form_row(productForm.stock)}}
+    {{form_row(productForm.photo)}}
+    {{form_row(productForm.souscategorie)}}
+
+    <div class="text-center my-4">
+    <button class="btn btn-dark text-white">Ajouter
+    </button>
+</div>
+
+{{form_end(productForm)}}
+
+
+
+{% endblock %}

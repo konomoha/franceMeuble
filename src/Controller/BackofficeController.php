@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Produit;
 use App\Entity\Categorie;
+use App\Form\ProductType;
 use App\Form\CategorieType;
 use App\Entity\Souscategorie;
 use App\Form\SousCategorieType;
@@ -58,7 +59,7 @@ class BackofficeController extends AbstractController
 
         $subcategorieForm->handleRequest($request);
 
-        if($subcategorieForm->isSubmitted())
+        if($subcategorieForm->isSubmitted() && $subcategorieForm->isValid())
         {
             $manager->persist($souscategorie);//test
             $manager->flush();
@@ -77,18 +78,18 @@ class BackofficeController extends AbstractController
     {
         $product = new Produit;
         
-        $productForm = $this->createForm(Product::class, $product);
+        $productForm = $this->createForm(ProductType::class, $product);
 
         $productForm->handleRequest($request);
 
-        if($productForm->isSubmitted())
+        if($productForm->isSubmitted() && $productForm->isValid())
         {
-            $manager->persist($productForm);//test
+            $manager->persist($product);//test
             $manager->flush();
             return $this->redirectToRoute('backoffice');
         }
 
-        return $this->render('backoffice/product.html.twig', [
+        return $this->render('backoffice/productform.html.twig', [
             'controller_name' => 'BackofficeController',
             'productForm'=> $productForm->createView()
             
