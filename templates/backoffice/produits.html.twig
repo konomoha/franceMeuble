@@ -1,0 +1,75 @@
+{% extends "base_admin.html.twig" %}
+
+{% block title %}
+    France Meuble | Gestion des produits
+{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center mb-5">Liste des Produits</h1>
+
+{# {{dump(articles)}}#}
+
+    {% for message in app.flashes('success') %}
+
+        <div class="bg-success col-5 text-center mx-auto my-4 p-3">{{message}}</div>
+        
+    {% endfor %}
+     
+
+
+    <table class="table table-striped text-center s" id="table-backoffice">
+    <thead>
+        <tr>
+        {% for data in colonnes %}
+        {# On exclue la colonne 'id' #}
+        {% if data != 'id' %}
+                {# capitalize : filtre Twig permettant de mettre la 1ère lettre de la chaine de caractères en majuscule #}
+            <th class="border border-1 border-dark">{{data|capitalize}}</th>
+            
+        {% endif %}
+            
+        {% endfor %}
+            <th class="border border-1 border-dark">Sous-Catégorie</th>
+            <th class="border border-1 border-dark">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for data in produits %}
+            <tr>
+                <td><a href="">{{ data.nom}}</a></td>
+                <td>{{ data.couleur}}</td>
+                <td>{{ data.matiere}}</td>
+                <td style= "{{ (data.longueur) ? '' : 'background-color:lightgrey;' }}">{{ data.longueur}}</td>
+                <td style= "{{ (data.largeur) ? '' : 'background-color:lightgrey;' }}">{{ data.largeur}}</td>
+                <td style= "{{ (data.hauteur) ? '' : 'background-color:lightgrey;' }}">{{ data.hauteur}}</td>
+                <td style= "{{ (data.profondeur) ? '' : 'background-color:lightgrey;' }}">{{ data.profondeur}}</td>
+                <td style= "{{ (data.diametre) ? '' : 'background-color:lightgrey;' }}">{{ data.diametre}}</td>
+                <td>{{ data.prix}} €</td>
+                <td>{{ data.stock}}</td>
+                
+               {# <td>{{ data.contenu|striptags|slice(0,100)}}[...]</td> #}
+
+                {# Si la valeur de la photo en BDD est différente de null, cela veut dire qu'une photo a bien été téléchargée, on entre dans le IF et on affiche l'image #}
+                {% if data.photo != null %}
+                    <td><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="{{data.nom}}"></td>
+                    {% else %}
+                    <td class="text-danger">Aucune photo uploadée</td>
+                {% endif %}
+
+                <td>{{ data.souscategorie.nom}}</td>
+
+                
+                <td>
+                    <a href="#" onclick="return(confirm('Voulez-vous vraiment supprimmer l\'article n° {{data.id}}?'));"><span > <i class="bi bi-trash"></i></span></a>
+                    <a href="{{path('edit_product', {'id': data.id})}}"><span><i class="bi bi-caret-up-square"></i></span></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </tr></table>
+
+
+    
+{% endblock %}

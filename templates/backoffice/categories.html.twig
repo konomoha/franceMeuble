@@ -1,0 +1,52 @@
+{% extends "base_admin.html.twig" %}
+
+{% block title %}
+    France Meuble | Gestion des catégories
+{% endblock %}
+
+{% block body %}
+<h1 class="text-center mb-5">Liste des Catégories</h1>
+{# {{dump(category)}} #}
+
+{#     {% for message in app.flashes('success') %}
+
+        <div class="bg-success col-5 text-center mx-auto my-4 p-3">{{message}}</div>
+        
+    {% endfor %}
+     #}
+
+
+    <table class="table table-striped text-center s" id="table-backoffice">
+    <thead>
+        <tr>
+        {% for data in colonnes %}
+        {# capitalize : filtre Twig permettant de mettre la 1ère lettre de la chaine de caractères en majuscule #}
+            <th class="border border-1 border-dark">{{data|capitalize}}</th> 
+        {% endfor %}
+        <th class="border border-1 border-dark">Sous-catégories</th>
+            <th class="border border-1 border-dark">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for data in category %}
+            <tr>
+                <td>{{data.id}}</td>
+                <td>{{ data.nom}}</td>
+                <td>
+                    {% for value in data.souscategories %}
+                        <p>{{value.nom|capitalize}}</p>
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="#" onclick="return(confirm('Voulez-vous vraiment supprimmer l\'article n° {{data.id}}?'));"><span > <i class="bi bi-trash"></i></span></a>
+                    <a href="{{path('edit_category', {'id': data.id})}}"><span><i class="bi bi-caret-up-square"></i></span></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </tr></table>
+
+
+    
+{% endblock %}

@@ -15,4 +15,13 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+    #[Route('/CGV', name: 'cgv')]
+    public function cgv(): Response
+    {
+        return $this->render('home/cgv.html.twig', [
+
+        ]);
+    }
+
 }
