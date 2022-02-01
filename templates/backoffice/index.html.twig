@@ -10,6 +10,12 @@
 
     <p class="text-center">Vous pouvez ici gérer la totalité de votre site.</p>
 
-    <p><a href="{{path('add_category')}}">Ajouter une catégorie</a></p>
-    <p><a href="{{path('add_sub_category')}}">Ajouter une sous-catégorie</a></p>
+    <div class="row justify-content-around col-8 mx-auto my-3">
+        <p class="col-3 btn btn-dark p-3 mx-2 my-2"><a href="{{path('add_category')}}" class="text-white">Ajouter une catégorie</a></p>
+        <p class="col-3 btn btn-dark p-3 mx-2 my-2"><a href="{{path('add_sub_category')}}" class="text-white">Ajouter une sous-catégorie</a></p>
+        <p class="col-3 btn btn-dark p-3 mx-2 my-2"><a href="{{path('add_product')}}" class="text-white">Ajouter un produit</a></p>
+        <p class="col-3 btn btn-dark p-3 mx-2 my-2"><a href="{{path('backoffice_categories')}}" class="text-white">Liste des Catégories</a></p>
+        <p class="col-3 btn btn-dark p-3 mx-2 my-2"><a href="{{path('backoffice_subcategories')}}" class="text-white">Liste des Sous-catégories</a></p>
+        <p class="col-3 btn btn-dark p-3 mx-2 my-2"><a href="{{path('backoffice_products')}}" class="text-white">Liste des produits</a></p>
+    </div>
 {% endblock %}
