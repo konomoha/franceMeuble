@@ -23,13 +23,14 @@
         <tr>
         {% for data in colonnes %}
         {# On exclue la colonne 'id' #}
-        {% if data != 'id' %}
+        {% if data != 'id' and data != 'longueur' and data != 'largeur' and data != 'hauteur' and data != 'profondeur' and data != 'diametre'%}
                 {# capitalize : filtre Twig permettant de mettre la 1ère lettre de la chaine de caractères en majuscule #}
             <th class="border border-1 border-dark">{{data|capitalize}}</th>
             
         {% endif %}
             
         {% endfor %}
+            <th class="border border-1 border-dark">Dimensions</th>
             <th class="border border-1 border-dark">Sous-Catégorie</th>
             <th class="border border-1 border-dark">Action</th>
         </tr>
@@ -41,14 +42,8 @@
                 <td><a href="">{{ data.nom}}</a></td>
                 <td>{{ data.couleur}}</td>
                 <td>{{ data.matiere}}</td>
-                <td style= "{{ (data.longueur) ? '' : 'background-color:lightgrey;' }}">{{ data.longueur}}</td>
-                <td style= "{{ (data.largeur) ? '' : 'background-color:lightgrey;' }}">{{ data.largeur}}</td>
-                <td style= "{{ (data.hauteur) ? '' : 'background-color:lightgrey;' }}">{{ data.hauteur}}</td>
-                <td style= "{{ (data.profondeur) ? '' : 'background-color:lightgrey;' }}">{{ data.profondeur}}</td>
-                <td style= "{{ (data.diametre) ? '' : 'background-color:lightgrey;' }}">{{ data.diametre}}</td>
                 <td>{{ data.prix}} €</td>
                 <td>{{ data.stock}}</td>
-                
                {# <td>{{ data.contenu|striptags|slice(0,100)}}[...]</td> #}
 
                 {# Si la valeur de la photo en BDD est différente de null, cela veut dire qu'une photo a bien été téléchargée, on entre dans le IF et on affiche l'image #}
@@ -57,13 +52,20 @@
                     {% else %}
                     <td class="text-danger">Aucune photo uploadée</td>
                 {% endif %}
-
+                <td class="text-justify">
+                {{ (data.longueur)? "Longueur : #{data.longueur} cm"|nl2br : '' }}
+                {{ (data.largeur)? "\nLargeur : #{data.largeur} cm"|nl2br : '' }}
+                {{ (data.hauteur)? "\nHauteur : #{data.hauteur} cm"|nl2br : '' }} 
+                {{ (data.profondeur)? "\nProfondeur : #{data.profondeur} cm"|nl2br : '' }}
+                {{ (data.diametre)? "\nDiametre : #{data.diametre} cm"|nl2br : '' }} 
+                {# <p>Diamètre : {{ data.diametre}}</p> #}
+                </td>
                 <td>{{ data.souscategorie.nom}}</td>
 
                 
                 <td>
                     <a href="#" onclick="return(confirm('Voulez-vous vraiment supprimmer l\'article n° {{data.id}}?'));"><span > <i class="bi bi-trash"></i></span></a>
-                    <a href="{{path('edit_product', {'id': data.id})}}"><span><i class="bi bi-caret-up-square"></i></span></a>
+                    <a href="{{path('app_admin_product_edit', {'id': data.id})}}"><span><i class="bi bi-caret-up-square"></i></span></a>
                 </td>
             </tr>
         {% endfor %}
