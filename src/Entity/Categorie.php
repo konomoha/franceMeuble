@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -20,6 +20,9 @@ class Categorie
 
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Souscategorie::class)]
     private $souscategories;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $description;
 
     public function __construct()
     {
@@ -69,6 +72,18 @@ class Categorie
                 $souscategory->setCategorie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

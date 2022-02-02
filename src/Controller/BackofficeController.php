@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class BackofficeController extends AbstractController
 {
-    #[Route('/backoffice', name: 'backoffice')]
+    #[Route('/backoffice', name: 'app_admin')]
     public function index(): Response
     {
         return $this->render('backoffice/index.html.twig', [
@@ -29,44 +29,46 @@ class BackofficeController extends AbstractController
         ]);
     }
 
-    #[Route('backoffice/products', name: 'backoffice_products')]
+    // ################################ AFFICHAGE DE TOUS LES PRODUITS ######################################
+
+    #[Route('backoffice/products', name: 'app_admin_products')]
     public function adminProducts(ProduitRepository $repoProduit, EntityManagerInterface $manager)
     {
+        //on récupère ici les noms de tous les champs de la table Produit grâce à la fonction getFieldNames(), elle même issue de la fonction getClassMetadata()
         $colonnes = $manager->getClassMetadata(Produit::class)->getFieldNames();
 
+        //$produits stockera toutes les informations  de tous les produits enregistrés en bdd
         $produits = $repoProduit->findAll();
 
-        return $this->render('backoffice/produits.html.twig', [
+        return $this->render('backoffice/admin_products.html.twig', [
             'colonnes'=>$colonnes,
             'produits'=>$produits
         ]);
         
     }
 
-    #[Route('/backoffice/product/add', name: 'add_product')]
-    #[Route('/backoffice/product/{id}/edit', name: 'edit_product')]
+    //################################### CREATION ET MODIFICATION DE PRODUITS ##############################
+
+    #[Route('/backoffice/product/add', name: 'app_admin_product_add')]
+    #[Route('/backoffice/product/{id}/edit', name: 'app_admin_product_edit')]
     public function addProduct(EntityManagerInterface $manager, Request $request, Produit $produit=null,SluggerInterface $slugger): Response
     {
+        //si la condition IF retourne TRUE, cela veut dire que $article contient un article stocké en BDD, on stock la photo actuelle de l'article dans la variable $photoActuelle
         if($produit)
         {
             $photoActuelle = $produit->getPhoto();
         }
 
+        //Si $produit est null cela signifie que nous ajoutons un nouveau produit, on crée donc un objet issu de la classe Produit.
         if(!$produit)
         {
             $produit = new Produit;
         }
-        
 
-        // $produit ->setTitre("titre à la con")
-        //         ->setContenu("contenu à la con");
-
+        //On crée ici un formulaire avec la méthode createForm() qui attend comme arguments une classe et l'objet $produit;
         $formProduit = $this->createForm(ProductType::class, $produit );
 
-        //$produit ->setTitre($_POST['titre'])
-        //$produit ->setContenu($_POST['contenu'])
         //handleRequest() permet d'envoyer chaque données de $_POST et de kes transmettre aux bons setters de l'objet entité $produit 
-
         $formProduit->handleRequest($request);
 
         if($formProduit->isSubmitted() && $formProduit->isValid())
@@ -107,7 +109,7 @@ class BackofficeController extends AbstractController
 
             }
 
-            //Sinon, aucune image n'a été uploadée, on renvoie dans la bdd la photo actuelle de l'article
+            //Si aucune image n'a été uploadée, on renvoie dans la bdd la photo actuelle de l'article
             else
             {
                 //Si la photo actuelle est définie en BDD, alors en cas de modification, si on ne change pas de photo, on renvoie la photo actuelle en bdd
@@ -124,9 +126,7 @@ class BackofficeController extends AbstractController
                 
             }
 
-            // FIN TRAITEMENT PHOTO
-
-            // dd($produit );
+            // FIN TRAITEMENT PHOTO////////////////////////////////////////////////////////
 
             //Message de validation en session
             if(!$produit ->getId())
@@ -140,11 +140,11 @@ class BackofficeController extends AbstractController
             $manager->persist($produit );
             $manager->flush();
 
-            //Une fois l'insertion/modification exécutée en BDD, on redirige l'internaute vers le détail de l'article, on transmet l'id à fournir dans l'url en 2ème paramètre de la méthode redirectToRoute()
-            return $this->redirectToRoute('products');
+            //Une fois l'insertion/modification exécutée en BDD, on redirige l'internaute vers la liste des produits.
+            return $this->redirectToRoute('app_admin_products');
         }
 
-        return $this->render('backoffice/productform.html.twig', [
+        return $this->render('backoffice/admin_product_form.html.twig', [
             'productForm'=> $formProduit->createView(),
             'editMode' => $produit->getId(),
             'photoActuelle' => $produit->getPhoto()
@@ -152,22 +152,26 @@ class BackofficeController extends AbstractController
         ]); 
     }
 
-    #[Route('backoffice/categories', name: 'backoffice_categories')]
+    //############################## AFFICHAGE DES CATEGORIES ###########################################
+
+    #[Route('backoffice/categories', name: 'app_admin_categories')]
     public function adminCategories(CategorieRepository $repoCategory, EntityManagerInterface $manager)
     {
         $colonnes = $manager->getClassMetadata(Categorie::class)->getFieldNames();
 
         $category = $repoCategory->findAll();
 
-        return $this->render('backoffice/categories.html.twig', [
+        return $this->render('backoffice/admin_categories.html.twig', [
             'colonnes'=>$colonnes,
             'category'=>$category
         ]);
         
     }
 
-    #[Route('/backoffice/category/add', name: 'add_category')]
-    #[Route('/backoffice/category/{id}/edit', name: 'edit_category')]
+    //#################################### CREATION ET MODIFICATION DE CATEGORIES #############################
+
+    #[Route('/backoffice/category/add', name: 'app_admin_category_add')]
+    #[Route('/backoffice/category/{id}/edit', name: 'app_admin_category_edit')]
     public function add(Request $request, EntityManagerInterface $manager, Categorie $category=null): Response
     {
         if(!$category)
@@ -176,38 +180,50 @@ class BackofficeController extends AbstractController
         }
         
         $formCategory = $this->createForm(CategorieType::class, $category);
+
         $formCategory->handleRequest($request);
 
-        if($formCategory->isSubmitted())
+        if($formCategory->isSubmitted() && $formCategory->isValid())
         {
+            if(!$category ->getId())
+                $txt = "enregistrée";
+            else
+                $txt = "modifiée";
+
+            $this->addFlash('success', "La catégorie a été $txt avec succès!");
+
             $manager->persist($category);//test
             $manager->flush();
-            return $this->redirectToRoute('backoffice');
+            return $this->redirectToRoute('app_admin_categories');
         }
         
 
-        return $this->render('backoffice/categoryform.html.twig', [
+        return $this->render('backoffice/admin_category_form.html.twig', [
             'controller_name' => 'BackofficeController',
             'formCategory' => $formCategory->createView(),
         ]);
     }
 
-    #[Route('backoffice/subcategories', name: 'backoffice_subcategories')]
+    //################################ AFFICHAGE DES SOUS-CATEGORIES #######################################
+
+    #[Route('backoffice/subcategories', name: 'app_admin__subcategories')]
     public function adminSubcategories(SouscategorieRepository $repoSubcategorie, EntityManagerInterface $manager)
     {
-        $colonnes = $manager->getClassMetadata(Categorie::class)->getFieldNames();
+        $colonnes = $manager->getClassMetadata(Souscategorie::class)->getFieldNames();
 
         $subcategory = $repoSubcategorie->findAll();
 
-        return $this->render('backoffice/subcategories.html.twig', [
+        return $this->render('backoffice/admin_subcategories.html.twig', [
             'colonnes'=>$colonnes,
             'subcategory'=>$subcategory
         ]);
         
     }
 
-    #[Route('/backoffice/subcategory/add', name: 'add_sub_category')]
-    #[Route('/backoffice/subcategory/{id}/edit', name: 'edit_sub_category')]
+    //################################## AJOUT ET MODIFICATION DE SOUS-CATEGORIES ###########################
+
+    #[Route('/backoffice/subcategory/add', name: 'app_admin__subcategories_add')]
+    #[Route('/backoffice/subcategory/{id}/edit', name: 'app_admin__subcategories_edit')]
     public function addSubCategory(Request $request, EntityManagerInterface $manager, Souscategorie $souscategorie=null):Response
     {
         if(!$souscategorie)
@@ -221,12 +237,20 @@ class BackofficeController extends AbstractController
 
         if($subcategorieForm->isSubmitted() && $subcategorieForm->isValid())
         {
+
+            if(!$souscategorie ->getId())
+                $txt = "enregistrée";
+            else
+                $txt = "modifiée";
+
+            $this->addFlash('success', "La sous-catégorie a été $txt avec succès!");
+
             $manager->persist($souscategorie);//test
             $manager->flush();
-            return $this->redirectToRoute('backoffice_subcategories');
+            return $this->redirectToRoute('app_admin__subcategories');
         }
 
-        return $this->render('backoffice/sub_categoryform.html.twig', [
+        return $this->render('backoffice/admin_subcategory_form.html.twig', [
             'controller_name' => 'BackofficeController',
             'subcategorieForm' => $subcategorieForm->createView(),
             

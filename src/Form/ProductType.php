@@ -35,7 +35,7 @@ class ProductType extends AbstractType
                         'maxMessage'=> "Nom trop long"
                     ]),
                     new NotBlank([
-                        'message' => "Merci de sasir un nom de produit"
+                        'message' => "Merci de saisir un nom de produit."
                     ])
                 ]
             ])
