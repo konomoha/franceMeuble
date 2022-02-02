@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Produit;
+use App\Entity\Assortiment;
 use App\Entity\Souscategorie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

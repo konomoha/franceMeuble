@@ -33,12 +33,36 @@
             <tr>
                 <td>{{data.id}}</td>
                 <td>{{ data.nom}}</td>
-                <td>{{ data.description}}</td>
+
+                {% if data.description != null %}
+                    <td>{{ data.description}}</td>
+                {% else %}
+                    <td class="text-danger">Aucune description</td>
+                {% endif %}
+                
+                
+                {% if data.photo != null %}
+                    <td><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="{{data.nom}}"></td>
+                    {% else %}
+                    <td class="text-danger">Aucune photo uploadée</td>
+                {% endif %}
+
+                
+
                 <td>
                     {% for value in data.souscategories %}
-                        <p>{{value.nom|capitalize}}</p>
+
+                        {% if value.nom != null %}
+                            <p>{{value.nom|capitalize}}</p>
+                        {% else %}
+                            <p class="text-danger">Aucune sous-catégorie</p>
+                        {% endif %}
+
                     {% endfor %}
                 </td>
+
+                 
+                
                 <td>
                     <a href="#" onclick="return(confirm('Voulez-vous vraiment supprimmer l\'article n° {{data.id}}?'));"><span > <i class="bi bi-trash"></i></span></a>
                     <a href="{{path('app_admin_category_edit', {'id': data.id})}}"><span><i class="bi bi-caret-up-square"></i></span></a>
@@ -46,7 +70,7 @@
             </tr>
         {% endfor %}
     </tbody>
-    </tr></table>
+    </table>
 
 
     

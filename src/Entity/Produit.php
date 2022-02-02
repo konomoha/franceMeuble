@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Entity;
-
-use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use App\Repository\ProduitRepository;
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit
 {
@@ -48,6 +48,14 @@ class Produit
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $photo;
+
+    #[ORM\ManyToMany(targetEntity: Assortiment::class, inversedBy: 'produits')]
+    private $assortiment;
+
+    public function __construct()
+    {
+        $this->assortiment = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -194,6 +202,30 @@ class Produit
     public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Assortiment[]
+     */
+    public function getAssortiment(): Collection
+    {
+        return $this->assortiment;
+    }
+
+    public function addAssortiment(Assortiment $assortiment): self
+    {
+        if (!$this->assortiment->contains($assortiment)) {
+            $this->assortiment[] = $assortiment;
+        }
+
+        return $this;
+    }
+
+    public function removeAssortiment(Assortiment $assortiment): self
+    {
+        $this->assortiment->removeElement($assortiment);
 
         return $this;
     }
