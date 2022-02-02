@@ -53,13 +53,15 @@
                     <td class="text-danger">Aucune photo uploadée</td>
                 {% endif %}
                 <td class="text-justify">
-                {{ (data.longueur)? "Longueur : #{data.longueur} cm"|nl2br : '' }}
-                {{ (data.largeur)? "\nLargeur : #{data.largeur} cm"|nl2br : '' }}
-                {{ (data.hauteur)? "\nHauteur : #{data.hauteur} cm"|nl2br : '' }} 
-                {{ (data.profondeur)? "\nProfondeur : #{data.profondeur} cm"|nl2br : '' }}
-                {{ (data.diametre)? "\nDiametre : #{data.diametre} cm"|nl2br : '' }} 
-                {# <p>Diamètre : {{ data.diametre}}</p> #}
+
+                    {{ (data.longueur)? "Longueur : #{data.longueur} cm"|nl2br : '' }}
+                    {{ (data.largeur)? "\nLargeur : #{data.largeur} cm"|nl2br : '' }}
+                    {{ (data.hauteur)? "\nHauteur : #{data.hauteur} cm"|nl2br : '' }} 
+                    {{ (data.profondeur)? "\nProfondeur : #{data.profondeur} cm"|nl2br : '' }}
+                    {{ (data.diametre)? "\nDiametre : #{data.diametre} cm"|nl2br : '' }} 
+                
                 </td>
+                
                 <td>{{ data.souscategorie.nom}}</td>
 
                 

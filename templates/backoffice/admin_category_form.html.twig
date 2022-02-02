@@ -5,6 +5,20 @@
 {% endblock %}
 
 {% block body %}
+
+    <h1 class="text-center my-5">   
+
+        {% if editMode %}
+
+            Modification du produit
+
+        {% else %}
+
+            Ajout de produit
+
+        {% endif %}    
+    </h1>
+
     <div class="container">
         <div class="d-flex flex-column">
         {{form_start(formCategory)}}
@@ -14,6 +28,18 @@
           
 
         {{form_row(formCategory.description, {'attr':{'class':'col-5 mx-auto my-4'}})}}
+
+        {{form_row(formCategory.photo, {'attr':{'class':'form-control mb-4'}})}}
+
+        {% if photoActuelle %}
+
+            <p>
+                <em>Vous pouvez uploader une nouvelle photo si vous souhaitez la modifier</em>
+                <img src="{{ asset('img/photos/' ~ photoActuelle)}}"  class="col-12 img-responsive">
+            </p>
+
+        {% endif %}
+
         <div class="text-center">
             <button class="btn btn-dark text-white">Ajouter
             </button>

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}France Meubles | Catégories{% endblock %}
+
+{% block body %}
+    {% for data in categories %}
+    <p>{{data.nom}}</p>
+        
+    {% endfor %}
+{% endblock %}

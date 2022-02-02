@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Produit;
 use App\Entity\Categorie;
 use App\Form\ProductType;
+use App\Entity\Assortiment;
 use App\Form\CategorieType;
 use App\Entity\Souscategorie;
+use App\Form\AssortimentType;
 use App\Form\SousCategorieType;
 use App\Repository\ProduitRepository;
 use App\Repository\CategorieRepository;
@@ -172,8 +174,13 @@ class BackofficeController extends AbstractController
 
     #[Route('/backoffice/category/add', name: 'app_admin_category_add')]
     #[Route('/backoffice/category/{id}/edit', name: 'app_admin_category_edit')]
-    public function add(Request $request, EntityManagerInterface $manager, Categorie $category=null): Response
+    public function add(Request $request, EntityManagerInterface $manager, Categorie $category=null, SluggerInterface $slugger): Response
     {
+        if($category)
+        {
+            $photoActuelle = $category->getPhoto();
+        }
+
         if(!$category)
         {
             $category = new Categorie;
@@ -185,6 +192,52 @@ class BackofficeController extends AbstractController
 
         if($formCategory->isSubmitted() && $formCategory->isValid())
         {
+            $photo = $formCategory->get('photo')->getData();
+
+            
+
+            if($photo)
+            {
+                
+                $nomOriginePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+                
+
+                
+                $secureNomPhoto = $slugger->slug($nomOriginePhoto);
+            
+                $nouveauNomFichier = $secureNomPhoto . '-' . uniqid(). '.' .$photo->guessExtension();
+                
+
+                try 
+                {
+                    $photo->move(
+                        $this->getparameter('photo_directory'),
+                        $nouveauNomFichier
+                    );
+                }
+                catch(FileException $e)
+                {
+                    
+                }
+
+                $category ->setPhoto($nouveauNomFichier);
+
+            }
+
+            else
+            {
+               if(isset($photoActuelle))
+               {
+                   $category ->setPhoto($photoActuelle);
+               }
+
+               else
+               {
+                    $category ->setPhoto(null);
+               }
+                
+            }
+
             if(!$category ->getId())
                 $txt = "enregistrée";
             else
@@ -192,7 +245,7 @@ class BackofficeController extends AbstractController
 
             $this->addFlash('success', "La catégorie a été $txt avec succès!");
 
-            $manager->persist($category);//test
+            $manager->persist($category);
             $manager->flush();
             return $this->redirectToRoute('app_admin_categories');
         }
@@ -201,6 +254,8 @@ class BackofficeController extends AbstractController
         return $this->render('backoffice/admin_category_form.html.twig', [
             'controller_name' => 'BackofficeController',
             'formCategory' => $formCategory->createView(),
+            'editMode' => $category->getId(),
+            'photoActuelle' => $category->getPhoto()
         ]);
     }
 
@@ -253,6 +308,41 @@ class BackofficeController extends AbstractController
         return $this->render('backoffice/admin_subcategory_form.html.twig', [
             'controller_name' => 'BackofficeController',
             'subcategorieForm' => $subcategorieForm->createView(),
+            
+        ]);  
+    }
+
+    //################################## AJOUT ET MODIFICATION DE COLLECTION ###########################
+    #[Route('/backoffice/assortiment/add', name: 'app_admin__assortiment_add')]
+    public function addAssortiment(Request $request, EntityManagerInterface $manager, Assortiment $assortiment=null):Response
+    {
+        if(!$assortiment)
+        {
+            $assortiment = new Assortiment;
+        }
+
+        $assortimentForm = $this->createForm(AssortimentType::class, $assortiment);
+
+        $assortimentForm->handleRequest($request);
+
+        if($assortimentForm->isSubmitted() && $assortimentForm->isValid())
+        {
+
+            if(!$assortiment ->getId())
+                $txt = "enregistrée";
+            else
+                $txt = "modifiée";
+
+            $this->addFlash('success', "La sous-catégorie a été $txt avec succès!");
+
+            $manager->persist($assortiment);//test
+            $manager->flush();
+            return $this->redirectToRoute('app_admin__subcategories');
+        }
+
+        return $this->render('backoffice/admin_assortiment_form.html.twig', [
+            'controller_name' => 'BackofficeController',
+            'assortimentForm' => $assortimentForm->createView(),
             
         ]);  
     }
