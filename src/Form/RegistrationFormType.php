@@ -141,13 +141,6 @@ class RegistrationFormType extends AbstractType
                     ]
                 ])
 
-                ->add('dateNaissance', BirthdayType::class, [
-                    'label' => "Date de Naissance",
-                    'placeholder' => [
-                        'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
-                    ],
-                ])
-
                 ->add('avatar', FileType::class, [
                     'label' => "Uploader une photo",
                     'mapped' => true, 
