@@ -34,3 +34,7 @@ footer{
     background-color: rgb(49, 49, 112);
 }
 
+footer div{
+    min-height: 100px;
+}
+
