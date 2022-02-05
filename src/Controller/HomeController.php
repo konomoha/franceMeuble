@@ -29,15 +29,15 @@ class HomeController extends AbstractController
     //############################## AFFICHAGE DES CATEGORIES ###########################################
 
     #[Route('/categories', name: 'boutique_categories')]
-    public function boutiqueCategories(CategorieRepository $repoCategory, EntityManagerInterface $manager)
+    public function allCategories(CategorieRepository $repoCategory, EntityManagerInterface $manager)
     {
         $colonnes = $manager->getClassMetadata(Categorie::class)->getFieldNames();
 
-        $category = $repoCategory->findAll();
+        $categories = $repoCategory->findAll();
 
         return $this->render('boutique/categories_list.html.twig', [
             'colonnes'=>$colonnes,
-            'category'=>$category
+            'categories'=>$categories
         ]);
         
     }

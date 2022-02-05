@@ -1,10 +1,5 @@
-{% extends 'base.html.twig' %}
+{% for data in categories %}
 
-{% block title %}France Meubles | Catégories{% endblock %}
+    <a class="p-2 link-secondary text-white" href="">{{data.nom}}</a>
 
-{% block body %}
-    {% for data in categories %}
-    <p>{{data.nom}}</p>
-        
-    {% endfor %}
-{% endblock %}
+{% endfor %}

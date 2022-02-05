@@ -1,61 +1,36 @@
 header{
-    /* min-height: 200px; */
+    min-height: 150px;
+    background-color: rgb(121, 68, 68);
+}
+
+main{
+    min-height: 500px;
+}
+
+.categories{
+    min-height: 100px;
+}
+
+.categories div{
+    min-height: 250px;
+}
+
+.section_collection{
     display: flex;
-    align-items: center;
-    justify-content: center;
-
-    /* background-color: steelblue; */
+    flex-direction: column;
+    justify-content: space-around;
 }
 
-.logo{
-    width: 180px;
-    height: 170px;
-    margin-right: 30px;
+.section_collection div:nth-child(even){
+    justify-content: center!important;
 }
 
-.logosearch{
-    font-size: 30px;
-    color: rgb(84, 86, 88);
+.collection{
+    min-height: 350px;
 }
-
-.searchfield{
-    border: solid 2px rgb(84, 85, 85);
-}
-
-nav{
-    border-top: solid 1px black;
-    background-color: rgb(243, 243, 243);
-}
-
-.carrouss{
-    height: 300px!important;
-    width: auto!important;
-}
-
 
 footer{
     min-height: 200px;
-    background-color: rgb(84, 85, 85);
+    background-color: rgb(49, 49, 112);
 }
-
-
-.services li{
-    list-style-type: none;
-    
-}
-
-.services li a, .services p a{
-    color: white;
-    text-decoration: none;
-}
-
-.services  p i{
-    font-size: 2rem;
-}
-
-a{
-    text-decoration: none!important;
-    color: inherit!important;
-  }
-  
 
