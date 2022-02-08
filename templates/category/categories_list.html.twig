@@ -1,0 +1,14 @@
+<ul>
+{% for data in categories %}
+<div class="my-3">
+
+    <h4><a class="p-2 link-secondary" href="">{{data.nom}}</a></h4>
+    
+        <ul class="p-2">
+            {% for data in data.souscategories %}
+                <li>{{data.nom}}</li>
+            {% endfor %}
+        </ul><hr>
+</div>
+{% endfor %}
+</ul>
