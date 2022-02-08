@@ -25,6 +25,11 @@ main{
     justify-content: center!important;
 }
 
+li{
+    list-style-type: none;
+    
+}
+
 .collection{
     min-height: 350px;
 }

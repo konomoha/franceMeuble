@@ -26,22 +26,9 @@ class HomeController extends AbstractController
         ]);
     }
 
-    //############################## AFFICHAGE DES CATEGORIES ###########################################
+    //############################## CGV ###########################################
 
-    #[Route('/categories', name: 'boutique_categories')]
-    public function allCategories(CategorieRepository $repoCategory, EntityManagerInterface $manager)
-    {
-        $colonnes = $manager->getClassMetadata(Categorie::class)->getFieldNames();
-
-        $categories = $repoCategory->findAll();
-
-        return $this->render('boutique/categories_list.html.twig', [
-            'colonnes'=>$colonnes,
-            'categories'=>$categories
-        ]);
-        
-    }
-
+  
     #[Route('/CGV', name: 'boutique_cgv')]
     public function cgv(): Response
     {

@@ -279,8 +279,13 @@ class BackofficeController extends AbstractController
 
     #[Route('/backoffice/subcategory/add', name: 'app_admin__subcategories_add')]
     #[Route('/backoffice/subcategory/{id}/edit', name: 'app_admin__subcategories_edit')]
-    public function addSubCategory(Request $request, EntityManagerInterface $manager, Souscategorie $souscategorie=null):Response
+    public function addSubCategory(Request $request, EntityManagerInterface $manager, Souscategorie $souscategorie=null, SluggerInterface $slugger):Response
     {
+        if($souscategorie)
+        {
+            $photoActuelle = $souscategorie->getPhoto();
+        }
+
         if(!$souscategorie)
         {
             $souscategorie = new Souscategorie;
@@ -292,6 +297,49 @@ class BackofficeController extends AbstractController
 
         if($subcategorieForm->isSubmitted() && $subcategorieForm->isValid())
         {
+            $photo = $subcategorieForm->get('photo')->getData();
+
+            if($photo)
+            {
+                
+                $nomOriginePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+                
+
+                
+                $secureNomPhoto = $slugger->slug($nomOriginePhoto);
+            
+                $nouveauNomFichier = $secureNomPhoto . '-' . uniqid(). '.' .$photo->guessExtension();
+                
+
+                try 
+                {
+                    $photo->move(
+                        $this->getparameter('photo_directory'),
+                        $nouveauNomFichier
+                    );
+                }
+                catch(FileException $e)
+                {
+                    
+                }
+
+                $souscategorie ->setPhoto($nouveauNomFichier);
+
+            }
+
+            else
+            {
+               if(isset($photoActuelle))
+               {
+                   $souscategorie ->setPhoto($photoActuelle);
+               }
+
+               else
+               {
+                    $souscategorie ->setPhoto(null);
+               }
+                
+            }
 
             if(!$souscategorie ->getId())
                 $txt = "enregistrée";
@@ -308,6 +356,8 @@ class BackofficeController extends AbstractController
         return $this->render('backoffice/admin_subcategory_form.html.twig', [
             'controller_name' => 'BackofficeController',
             'subcategorieForm' => $subcategorieForm->createView(),
+            'editMode' => $souscategorie->getId(),
+            'photoActuelle' => $souscategorie->getPhoto()
             
         ]);  
     }

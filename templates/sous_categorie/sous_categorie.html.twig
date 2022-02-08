@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}France Meuble | Sous-catégorie{% endblock %}
+
+{% block body %}
+<h1 class="text-center mb-5">{{subcatData.nom}}</h1>
+
+    {% for data in subcatData.produits %}
+    <div class="col-2 bg-info text-center">
+       <a href=""><h4>{{data.nom}}</h4>
+        <img src="{{ asset('img/photos/' ~ data.photo)}}" alt="" class="img-fluid"></a> 
+    </div>    
+    {% endfor %}
+
+{% endblock %}

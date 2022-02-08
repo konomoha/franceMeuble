@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}France Meuble | Categorie{% endblock %}
+
+{% block body %}
+
+<div class="categories row justify-content-around align-items-center">
+<h1 class="text-center mb-5">{{datacat.nom}}</h1>
+
+    {% for data in datacat.souscategories %}
+    <div class="col-2 bg-info text-center">
+       <a href="{{path('boutique_subcategory_show', {'id': data.id})}}"><h4>{{data.nom}}</h4>
+        <img src="{{ asset('img/photos/' ~ data.photo)}}" alt="" class="img-fluid"></a> 
+    </div>    
+    {% endfor %}
+
+{% endblock %}
