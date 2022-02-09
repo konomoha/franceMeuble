@@ -396,6 +396,5 @@ class BackofficeController extends AbstractController
             
         ]);  
     }
-
     
 }

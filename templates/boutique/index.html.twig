@@ -2,14 +2,23 @@
 {% block body %}
 <h2 class="text-center">Catégories</h1>
 
-<div class="categories row justify-content-around align-items-center">
+<div class="categories row justify-content-around my-4">
+    {% for data in category %}
+        
+    <div class="card col-3">
 
-    <div class="col-2 bg-info text-center">Luminaires</div>
-    <div class="col-2 bg-info text-center">Ameublement</div>
-    <div class="col-2 bg-info text-center">Mousses</div>
-    <div class="col-2 bg-info text-center">Literie</div>
-    <div class="col-2 bg-info text-center">Boiserie</div>
+        <img src="{{asset('img/photos/')~ data.photo}}" class="card-img-top" alt="image {{data.nom}}">
 
+        <div class="card-body row justify-content-center p-2">
+
+            <h5 class="card-title text-center">{{data.nom}}</h5>
+            <a href="#" class="btn btn-primary col-6">Go somewhere</a>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
 </div>
 
 <h2 class="text-center">Collections</h2>

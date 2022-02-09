@@ -25,21 +25,23 @@
 
     
 
-   <div class="col-1 bg bg-warning p-3 text-center">Logo</div>
+   <div class="col-2  text-center"><img src="{{asset('img/photos/logo.png')}}" alt="" class="logo img-fluid"></div>
 
-   <div class="col-5 bg bg-warning p-3 text-center">Barre de recherche</div>
+   <div class="col-7 text-center row justify-content-end"><form class="d-flex">
+        <input class="form-control me-2 border-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-success" type="submit">Search</button>
+      </form></div>
 
-   <div class="col-2 bg bg-warning row justify-content-around p-3 text-center">
+   <div class="col-3  row justify-content-end text-center">
 
-      <div class="col-5 bg bg-info text-center">Mon compte</div>
-      <div class="col-5 bg bg-info text-center">Mon panier</div>
+      <div class="col-6 p-0 text-center"><i class="bi bi-person-fill"></i>Mon Compte</div>
+      <div class="col-6 p-0  text-center"><i class="bi bi-cart"></i>Mon Panier</div>
 
    </div>
 
   </header>
-
   <div class="container">
-    <nav class="row justify-content-start my-3">
+    <nav class="row justify-content-start mb-3 p-2">
       {# <div class="col-2 bg-danger p-2 mx-5 text-center">Nos Produits</div>
       <div class="col-2 bg-danger p-2 mx-5 text-center">Nos Collections</div>
       <div class="col-2 bg-danger p-2 mx-5 text-center">Maryam coutures</div> #}
@@ -95,7 +97,7 @@
       </div>
     </nav>
   </div>
-  <hr>
+ 
 
     <main>
         
