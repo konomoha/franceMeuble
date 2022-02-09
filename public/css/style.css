@@ -1,19 +1,33 @@
 header{
-    min-height: 150px;
-    background-color: rgb(121, 68, 68);
+    border-bottom: 1px solid rgb(153, 153, 153);
+    background-color: rgb(224, 236, 246);
+}
+
+.logo{
+    width: 125px!important;
+    height: 125px!important;
+}
+
+nav{
+    /* background-color: rgb(228, 86, 51); */
+    border-radius: 5px 5px;
+}
+
+i{
+    font-size: 35px;
 }
 
 main{
     min-height: 500px;
 }
 
-.categories{
+/* .categories{
     min-height: 100px;
 }
 
 .categories div{
     min-height: 250px;
-}
+} */
 
 .section_collection{
     display: flex;
@@ -35,8 +49,8 @@ li{
 }
 
 footer{
-    min-height: 200px;
-    background-color: rgb(49, 49, 112);
+    /* min-height: 200px; */
+    background-color: rgb(121, 119, 139);
 }
 
 footer div{

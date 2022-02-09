@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Produit;
+use App\Form\ProductType;
 use App\Entity\Assortiment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,10 +19,10 @@ class AssortimentType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class,[
-                'label' => "Nom du produit",
+                'label' => "Assortiment",
                 'required' => false,
                 'attr'=>[
-                    'placeholder' => "Saisir le nom du produit",
+                    'placeholder' => "Saisir le nom de l'assortiment",
                 ],
                 'constraints' => [
                     new Length([
@@ -31,15 +32,11 @@ class AssortimentType extends AbstractType
                         'maxMessage'=> "Nom trop long"
                     ]),
                     new NotBlank([
-                        'message' => "Merci de saisir un nom de produit."
+                        'message' => "Merci de saisir un nom d'assortiment."
                     ])
                 ]
             ])
-            ->add('produits', EntityType::class, [
-                'label' => "Choisir une sous-catégorie",
-                'class' => Produit::class, // On précise de quelle entité vient ce champ
-                'choice_label' => 'nom'//on définit la valeur qui apparaitra dans la liste déroulante
-            ])
+            
         ;
     }
 

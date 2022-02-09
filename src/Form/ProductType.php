@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Produit;
 use App\Entity\Assortiment;
 use App\Entity\Souscategorie;
+use App\Form\AssortimentType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -137,6 +138,15 @@ class ProductType extends AbstractType
                 'label' => "Choisir une sous-catégorie",
                 'class' => Souscategorie::class, // On précise de quelle entité vient ce champ
                 'choice_label' => 'nom'//on définit la valeur qui apparaitra dans la liste déroulante
+            ])
+
+            ->add('assortiment', EntityType::class, [
+                'label' => "Assortiment",
+                'class' => Assortiment::class, // On précise de quelle entité vient ce champ
+                'choice_label' => 'nom',
+                'multiple'=>true,
+                'expanded'=>true
+                
             ])
         ;
     }
