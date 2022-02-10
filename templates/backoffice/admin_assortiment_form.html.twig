@@ -5,20 +5,42 @@
 {% endblock %}
 
 {% block body %}
+
+    <h1 class="text-center my-5">
+        {# Si editMode renvoie TRUE, cela veut dire que l'id possède un ID, c'est une modification #}
+        {% if editMode %}
+            Modification d'assortiment
+        {% else %}
+            {# Sinon, l'article ne possède pas d'id, c'est une insertion #}
+            Ajout d'assortiment
+        {% endif %}    
+    </h1>
+
     <div class="container">
 
-        <div class="d-flex flex-column">
-        {{form_start(assortimentForm)}}
+        <div class="d-flex flex-column col-6 mx-auto">
+            {{form_start(assortimentForm)}}
 
-        
-            {{form_row(assortimentForm.nom, {'attr':{'class':'col-5 mx-auto my-4'}})}}
-          
-        <div class="text-center">
-            <button class="btn btn-dark text-white">Ajouter
-            </button>
-        </div>
+            
+                {{form_row(assortimentForm.nom, {'attr':{'class':'col-5 mx-auto my-4'}})}}
 
-        {{form_end(assortimentForm)}}
+                {{form_row(assortimentForm.photo, {'attr':{'class':'col-5 mx-auto my-4'}})}}
+
+                {% if photoActuelle %}
+
+                    <p>
+                        <em>Vous pouvez uploader une nouvelle photo si vous souhaitez la modifier</em>
+                        <img src="{{ asset('img/photos/' ~ photoActuelle)}}"  class="col-12 img-responsive">
+                    </p>
+
+                {% endif %}
+            
+                <div class="text-center">
+
+                    <button class="btn btn-dark text-white">Ajouter</button>
+                </div>
+
+            {{form_end(assortimentForm)}}
         </div>
     
     </div>

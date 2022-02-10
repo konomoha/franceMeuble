@@ -42,8 +42,6 @@
     
     {{form_row(productForm.photo, {'attr':{'class':'form-control mb-4'}})}}
 
-    {{form_row(productForm.assortiment, {'attr':{'class':'form-control mb-4'}})}}
-
     {% if photoActuelle %}
         <p>
             <em>Vous pouvez uploader une nouvelle photo si vous souhaitez la modifier</em>
@@ -52,6 +50,8 @@
 
     {% endif %}
 
+    {{form_row(productForm.assortiment, {'attr':{'class':'form-control mb-4'}})}}
+    
     <div class="text-center my-4">
     <button class="btn btn-dark text-white">Ajouter
     </button>

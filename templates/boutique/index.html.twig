@@ -1,71 +1,72 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<h2 class="text-center">Catégories</h1>
+    <h2 class="text-center">Catégories</h1>
+    {# !!AJOUTER LES BONNES BALISES!! #}
 
-<div class="categories row justify-content-around my-4">
-    {% for data in category %}
-        
-    <div class="card col-3">
+    <div class="categories row justify-content-around my-4">
+        {% for data in category %}
+            
+        <div class="card col-3">
 
-        <img src="{{asset('img/photos/')~ data.photo}}" class="card-img-top" alt="image {{data.nom}}">
+            <img src="{{asset('img/photos/')~ data.photo}}" class="card-img-top" alt="image {{data.nom}}">
 
-        <div class="card-body row justify-content-center p-2">
+            <div class="card-body row justify-content-center p-2">
 
-            <h5 class="card-title text-center">{{data.nom}}</h5>
-            <a href="#" class="btn btn-primary col-6">Go somewhere</a>
+                <h5 class="card-title text-center">{{data.nom}}</h5>
+                <a href="#" class="btn btn-primary col-6">Go somewhere</a>
+
+            </div>
 
         </div>
 
+        {% endfor %}
     </div>
 
-    {% endfor %}
-</div>
+    <h2 class="text-center">Collections</h2>
+    <section class="row justify-content-around">
+        <div class="section_collection col-10">
 
-<h2 class="text-center">Collections</h2>
-<section>
-    <div class="section_collection">
+            {% for data in assortiment %}
 
-        <div class="row align-items-center my-4">
-            <div class="col-5 bg-danger mx-3 collection">Image</div>
-            <p class="col-5 bg-success">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero amet ex quas. Magnam natus eveniet ipsam omnis laborum facilis culpa voluptates quis dolores error pariatur fugit debitis sunt totam necessitatibus, reiciendis maiores libero ex eligendi commodi quam! Molestias corrupti vero est quaerat totam quidem omnis sit odit corporis at! Possimus unde ut nemo minus perspiciatis, magni quia, saepe aliquam assumenda quis voluptas vitae. Molestias architecto veritatis magni nobis quo, odit ullam vitae accusamus quas modi perferendis vel soluta sunt doloribus velit et esse cum obcaecati perspiciatis, rerum minus? Necessitatibus quos doloribus doloremque cupiditate fugiat culpa recusandae tenetur quo praesentium. Sapiente.</p>
-        </div>
+                <div class="row justify-content-start my-4">
 
-        <div class="row align-items-center my-4">
-            <div class="col-5 bg-danger mx-3 collection">Image</div>
-            <p class="col-5 bg-success">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero amet ex quas. Magnam natus eveniet ipsam omnis laborum facilis culpa voluptates quis dolores error pariatur fugit debitis sunt totam necessitatibus, reiciendis maiores libero ex eligendi commodi quam! Molestias corrupti vero est quaerat totam quidem omnis sit odit corporis at! Possimus unde ut nemo minus perspiciatis, magni quia, saepe aliquam assumenda quis voluptas vitae. Molestias architecto veritatis magni nobis quo, odit ullam vitae accusamus quas modi perferendis vel soluta sunt doloribus velit et esse cum obcaecati perspiciatis, rerum minus? Necessitatibus quos doloribus doloremque cupiditate fugiat culpa recusandae tenetur quo praesentium. Sapiente.</p>
-        </div>
+                    <div class="col-5 collection p-0">
+                        <a href=""><img src="{{asset('img/photos/')~ data.photo}}" class="img-fluid" alt="image {{data.nom}}"></a>
+                    </div>
 
-        <div class="row align-items-center my-4">
-            <div class="col-5 bg-danger mx-3 collection">Image</div>
-            <p class="col-5 bg-success">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero amet ex quas. Magnam natus eveniet ipsam omnis laborum facilis culpa voluptates quis dolores error pariatur fugit debitis sunt totam necessitatibus, reiciendis maiores libero ex eligendi commodi quam! Molestias corrupti vero est quaerat totam quidem omnis sit odit corporis at! Possimus unde ut nemo minus perspiciatis, magni quia, saepe aliquam assumenda quis voluptas vitae. Molestias architecto veritatis magni nobis quo, odit ullam vitae accusamus quas modi perferendis vel soluta sunt doloribus velit et esse cum obcaecati perspiciatis, rerum minus? Necessitatibus quos doloribus doloremque cupiditate fugiat culpa recusandae tenetur quo praesentium. Sapiente.</p>
+                    <h3 class="col-6 mx-3 text-center fst-italic align-self-center">{{data.nom}}</h3>
+
+                </div>
+
+            {% endfor %}
+            
+            <button class="text-center btn btn-success col-3 mx-auto">Voir toutes nos collections</button>
+            
         </div>
         
-        <p class="text-center">Voir toutes nos collections</p>
-    </div>
+
+    </section>
 
     <hr>
     
     <section class="row justify-content-around">
 
         <div class="col-3">
-            <h4>Paiement sécurisé</h4>
+            <div class="text-center mb-2"><i class="bi bi-lock"></i></div>
+            <h4 class="text-center">Paiement sécurisé</h4>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cupiditate voluptatum quod id facilis architecto et ut corporis amet, soluta illo deleniti, accusantium sunt qui fugiat. Sequi voluptates repellendus consequuntur.</p>
         </div>
 
         <div class="col-3">
-            <h4>Livraison</h4
+            <div class="text-center mb-2"><i class="bi bi-truck"></i></i></div>
+            <h4 class="text-center">Livraison</h4
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cupiditate voluptatum quod id facilis architecto et ut corporis amet, soluta illo deleniti, accusantium sunt qui fugiat. Sequi voluptates repellendus consequuntur.</p>>
         </div>
 
         <div class="col-3">
-            <h4>Montage et installation</h4>
+            <div class="text-center mb-2"><i class="bi bi-screwdriver"></i></i></div>
+            <h4 class="text-center">Montage et installation</h4>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cupiditate voluptatum quod id facilis architecto et ut corporis amet, soluta illo deleniti, accusantium sunt qui fugiat. Sequi voluptates repellendus consequuntur.</p>
-        </div>
-        <div class="col-3">
-            <h4 class="text-center">Maryam Couture</h4>
-            <div><img src="{{ asset('img/photos/maryam_couture_font.jpg')}}" alt="" class="img-fluid"></div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cupiditate voluptatum quod id facilis architecto et ut corporis amet, soluta illo deleniti, accusantium sunt qui fugiat. Sequi voluptates repellendus consequuntur.</p>
-            
         </div>
     </section>
     <hr>
