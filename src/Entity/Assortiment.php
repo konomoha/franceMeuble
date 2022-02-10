@@ -22,6 +22,9 @@ class Assortiment
     #[ORM\ManyToMany(targetEntity: Produit::class, mappedBy: 'assortiment')]
     private $produits;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $photo;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
@@ -67,6 +70,18 @@ class Assortiment
         if ($this->produits->removeElement($produit)) {
             $produit->removeAssortiment($this);
         }
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

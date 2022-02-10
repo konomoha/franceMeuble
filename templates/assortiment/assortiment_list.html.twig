@@ -1,0 +1,9 @@
+<ul>
+{% for data in assortiment %}
+<div class="my-4">
+
+    <h5 class="text-center"><a class="p-2 link-secondary" href="">{{data.nom}}</a></h5>
+{# Il faudra sans doute ajouter un champ couleur à la table assortiments pour mieux les regrouper dans le menu #}
+</div> <hr>
+{% endfor %}
+</ul>

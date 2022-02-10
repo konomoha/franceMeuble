@@ -10,6 +10,7 @@ use App\Form\CategorieType;
 use App\Entity\Souscategorie;
 use App\Form\AssortimentType;
 use App\Form\SousCategorieType;
+use App\Repository\AssortimentRepository;
 use App\Repository\ProduitRepository;
 use App\Repository\CategorieRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -362,10 +363,31 @@ class BackofficeController extends AbstractController
         ]);  
     }
 
-    //################################## AJOUT ET MODIFICATION DE COLLECTION ###########################
-    #[Route('/backoffice/assortiment/add', name: 'app_admin__assortiment_add')]
-    public function addAssortiment(Request $request, EntityManagerInterface $manager, Assortiment $assortiment=null):Response
+    ###################################### AFFICHAGE DES ASSORTIMENTS ##################################
+    #[Route('backoffice/assortiments', name: 'app_admin__assortiments')]
+    public function adminAssortiment(AssortimentRepository $assortimentRepo, EntityManagerInterface $manager)
     {
+        $colonnes = $manager->getClassMetadata(Assortiment::class)->getFieldNames();
+
+        $assortiment = $assortimentRepo->findAll();
+
+        return $this->render('backoffice/admin_assortiments.html.twig', [
+            'colonnes'=>$colonnes,
+            'assortiment'=>$assortiment
+        ]);
+        
+    }
+
+    //################################ AJOUT ET MODIFICATION DES ASSORTIMENTS ###########################
+    #[Route('/backoffice/assortiment/add', name: 'app_admin__assortiment_add')]
+    #[Route('/backoffice/assortiment/{id}/edit', name: 'app_admin__assortiment_edit')]
+    public function addAssortiment(Request $request, EntityManagerInterface $manager, SluggerInterface $slugger, Assortiment $assortiment=null):Response
+    {
+        if($assortiment)
+        {
+            $photoActuelle = $assortiment->getPhoto();
+        }
+
         if(!$assortiment)
         {
             $assortiment = new Assortiment;
@@ -378,21 +400,68 @@ class BackofficeController extends AbstractController
         if($assortimentForm->isSubmitted() && $assortimentForm->isValid())
         {
 
-            if(!$assortiment ->getId())
-                $txt = "enregistrée";
-            else
-                $txt = "modifiée";
+            $photo = $assortimentForm->get('photo')->getData();
 
-            $this->addFlash('success', "La sous-catégorie a été $txt avec succès!");
+            if($photo)
+            {
+                
+                $nomOriginePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+                
+
+                
+                $secureNomPhoto = $slugger->slug($nomOriginePhoto);
+            
+                $nouveauNomFichier = $secureNomPhoto . '-' . uniqid(). '.' .$photo->guessExtension();
+                
+
+                try 
+                {
+                    $photo->move(
+                        $this->getparameter('photo_directory'),
+                        $nouveauNomFichier
+                    );
+                }
+                catch(FileException $e)
+                {
+                    
+                }
+
+                $assortiment ->setPhoto($nouveauNomFichier);
+
+            }
+
+            else
+            {
+               if(isset($photoActuelle))
+               {
+                   $assortiment ->setPhoto($photoActuelle);
+               }
+
+               else
+               {
+                    $assortiment ->setPhoto(null);
+               }
+                
+            }
+
+
+            if(!$assortiment ->getId())
+                $txt = "enregistré";
+            else
+                $txt = "modifié";
+
+            $this->addFlash('success', "L'assortiment a été $txt avec succès!");
 
             $manager->persist($assortiment);//test
             $manager->flush();
-            return $this->redirectToRoute('app_admin__subcategories');
+            return $this->redirectToRoute('app_admin__assortiments');
         }
 
         return $this->render('backoffice/admin_assortiment_form.html.twig', [
             'controller_name' => 'BackofficeController',
             'assortimentForm' => $assortimentForm->createView(),
+            'editMode' => $assortiment->getId(),
+            'photoActuelle' => $assortiment->getPhoto()
             
         ]);  
     }

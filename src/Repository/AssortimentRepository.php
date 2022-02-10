@@ -47,4 +47,15 @@ class AssortimentRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    //Query builder qui permettra d'afficher les collections les plus récentes sur la page d'accueil
+    public function findNewest()
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
