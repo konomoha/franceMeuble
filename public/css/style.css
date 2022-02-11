@@ -31,7 +31,12 @@ a{
 main{
     min-height: 500px;
 }
-
+.carte_categorie{
+    transition-duration: 0.2s;
+}
+.carte_categorie:hover{
+   box-shadow: 6px 8px 4px rgb(204, 204, 204);
+}
 
 .section_collection{
     display: flex;
@@ -51,6 +56,26 @@ main{
 li{
     list-style-type: none;
     
+}
+
+.carte_subcategory
+{
+    transition-duration: 0.2s;
+    border-radius: 5px;
+}
+
+.carte_subcategory:hover{
+    box-shadow: 6px 8px 4px rgb(204, 204, 204);
+ }
+
+
+.btn_subcategory i{
+    font-size: 1.3rem!important;
+    
+}
+
+.prix_article{
+    font-size: 1.6rem;
 }
 
 footer{
