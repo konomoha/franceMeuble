@@ -4,14 +4,14 @@
 
 {% block body %}
 
-<div class="categories row justify-content-around align-items-center">
 <h1 class="text-center mb-5">{{datacat.nom}}</h1>
+<div class="categories row justify-content-around align-items-center">
 
     {% for data in datacat.souscategories %}
-    <div class="col-2 bg-info text-center">
-       <a href="{{path('boutique_subcategory_show', {'id': data.id})}}"><h4>{{data.nom}}</h4>
-        <img src="{{ asset('img/photos/' ~ data.photo)}}" alt="" class="img-fluid"></a> 
-    </div>    
+    <div class="col-3 text-center card carte_categorie">
+       <h5 class="fw-bold fst-italic">{{data.nom|capitalize}}</h5>
+        <div class="mb-3"><a href="{{path('boutique_subcategory_show', {'id': data.id})}}"><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="" class="img-fluid"></a></div> 
+    </div>
     {% endfor %}
-
+</div>
 {% endblock %}

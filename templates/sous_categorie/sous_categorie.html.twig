@@ -5,11 +5,16 @@
 {% block body %}
 <h1 class="text-center mb-5">{{subcatData.nom}}</h1>
 
-    {% for data in subcatData.produits %}
-    <div class="col-2 bg-info text-center">
-       <a href=""><h4>{{data.nom}}</h4>
-        <img src="{{ asset('img/photos/' ~ data.photo)}}" alt="" class="img-fluid"></a> 
-    </div>    
-    {% endfor %}
+    <div class="row justify-content-around ">
+        {% for data in subcatData.produits %}
+        <div class="col-3 card text-center row justify-content-around my-3 carte_subcategory">
+            
+                <a href=""><div class="align-self-center col-7 mx-auto mt-2"><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="{{data.nom}}" class="img-fluid img_soutcat" ></div></a><hr>
+            <h5 class="mb-3 fw-bold fst-italic">{{data.nom|capitalize}}</h5>
+            <div class="row justify-content-between  mx-auto mb-3"><p class="col-5 fw-bold text-danger prix_article">{{data.prix}}€00</p><button class="col-3 btn btn-primary p-0 btn_subcategory" title="Ajouter au panier"><i class="bi bi-cart-fill d-block"></i></button></div> 
+
+        </div>    
+        {% endfor %}
+    </div>
 
 {% endblock %}

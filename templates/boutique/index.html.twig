@@ -6,14 +6,14 @@
     <div class="categories row justify-content-around my-4">
         {% for data in category %}
             
-        <div class="card col-3">
+        <div class="card col-3 carte_categorie">
 
             <img src="{{asset('img/photos/')~ data.photo}}" class="card-img-top" alt="image {{data.nom}}">
 
-            <div class="card-body row justify-content-center p-2">
+            <div class="card-body  row justify-content-center p-2">
 
-                <h5 class="card-title text-center">{{data.nom}}</h5>
-                <a href="#" class="btn btn-primary col-6">Go somewhere</a>
+                <h5 class="card-title text-center">{{data.nom|capitalize}}</h5>
+                <a href="{{path('boutique_category_show', {'id': data.id}) }}" class="btn btn-primary col-6">Découvrir !</a>
 
             </div>
 
