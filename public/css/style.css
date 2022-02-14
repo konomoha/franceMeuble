@@ -49,7 +49,7 @@ main{
 }
 
 .section_collection div:nth-child(even){
-    justify-content: center!important;
+    justify-content: end!important;
     background-color: rgb(255, 255, 255);
 }
 
@@ -85,4 +85,3 @@ footer{
 footer div{
     min-height: 100px;
 }
-
