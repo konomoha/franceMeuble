@@ -14,7 +14,7 @@
                     
                 <li class="card col-3 carte_categorie splide__slide" >
 
-                    <img src="{{asset('img/photos/')~ data.photo}}" class="img-fluid" alt="image {{data.nom}}">
+                    <a href="{{path('boutique_category_show', {'id': data.id}) }}"><img src="{{asset('img/photos/')~ data.photo}}" class="img-fluid" alt="image {{data.nom}}"></a>
 
                     <div class="card-body  row justify-content-center p-2">
 
@@ -68,7 +68,7 @@
         <div class="col-3">
             <div class="text-center mb-2"><i class="bi bi-truck"></i></i></div>
             <h4 class="text-center">Livraison</h4
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cupiditate voluptatum quod id facilis architecto et ut corporis amet, soluta illo deleniti, accusantium sunt qui fugiat. Sequi voluptates repellendus consequuntur.</p>>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cupiditate voluptatum quod id facilis architecto et ut corporis amet, soluta illo deleniti, accusantium sunt qui fugiat. Sequi voluptates repellendus consequuntur.</p>
         </div>
 
         <div class="col-3">
