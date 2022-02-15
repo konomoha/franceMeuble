@@ -1,33 +1,39 @@
 {% extends 'base.html.twig' %}
 
-   
+{% block title %} France Meuble | Accueil{% endblock %} 
+
 {% block body %}
 
-    <h2 class="text-center">Catégories</h1>
+    <h2 class="text-center">Catégories</h2>
     {# !!AJOUTER LES BONNES BALISES!! #}
 
-    <div class="categories  my-4 splide" id="#card-slider">
-        <div class="splide__track">
-            <ul class="splide__list row justify-content-around">
+    <div class="categories  my-4 mx-auto" >
+        <div class="splide" id="card-slider">
+            <div class="splide__track">
 
-                {% for data in category %}
-                    
-                <li class="card col-3 carte_categorie splide__slide" >
+                <ul class="splide__list">
 
-                    <a href="{{path('boutique_category_show', {'id': data.id}) }}"><img src="{{asset('img/photos/')~ data.photo}}" class="img-fluid" alt="image {{data.nom}}"></a>
+                    {% for data in category %}
+                        
+                        <li class="card col-3 mx-3 carte_categorie splide__slide" >
 
-                    <div class="card-body  row justify-content-center p-2">
+                            <a href="{{path('boutique_category_show', {'id': data.id}) }}"><img src="{{asset('img/photos/')~ data.photo}}" class="img-fluid" alt="image {{data.nom}}"></a>
 
-                        <h5 class="card-title text-center">{{data.nom|capitalize}}</h5>
-                        <a href="{{path('boutique_category_show', {'id': data.id}) }}" class="btn btn-primary col-6">Découvrir !</a>
+                            <div class="card-body  row justify-content-center p-2">
 
-                    </div>
+                                <h5 class="card-title text-center">{{data.nom|capitalize}}</h5>
+                                <a href="{{path('boutique_category_show', {'id': data.id}) }}" class="btn btn-primary col-6">Découvrir !</a>
 
-                </li>
-                {% endfor %}
+                            </div>
 
-            </ul>
+                        </li>
+                    {% endfor %}
+
+                </ul> 
+            
+            </div>
         </div>   
+        
     </div>
 
     <h2 class="text-center">Collections</h2>
@@ -81,3 +87,4 @@
 
 
 {% endblock %}
+

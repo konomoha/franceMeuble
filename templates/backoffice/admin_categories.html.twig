@@ -66,6 +66,7 @@
                 <td>
                     <a href="#" onclick="return(confirm('Voulez-vous vraiment supprimmer l\'article n° {{data.id}}?'));"><span > <i class="bi bi-trash"></i></span></a>
                     <a href="{{path('app_admin_category_edit', {'id': data.id})}}"><span><i class="bi bi-caret-up-square"></i></span></a>
+                    <a href="{{path('app_admin_category_add')}}"><span><i class="bi bi-plus-square-fill"></i></span></a>
                 </td>
             </tr>
         {% endfor %}

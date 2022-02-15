@@ -85,3 +85,14 @@ footer{
 footer div{
     min-height: 100px;
 }
+
+.thumb_slide {
+    opacity: 0.3;
+    border: 1px solid black!important;
+    padding: 5px!important;
+    
+  }
+  
+  .thumb_slide.is-active {
+    opacity: 1;
+  }

@@ -34,7 +34,7 @@
             <tr>
                 <td>{{data.id}}</td>
                 <td>{{ data.nom}}</td>
-                <td>{{ data.nom}}</td>
+                <td><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="{{data.nom}}"></td>
                 <td>
                     <p>{{data.categorie.nom}}</p>
                 </td>
@@ -44,6 +44,7 @@
                 <td>
                     <a href="#" onclick="return(confirm('Voulez-vous vraiment supprimmer l\'article n° {{data.id}}?'));"><span > <i class="bi bi-trash"></i></span></a>
                     <a href="{{path('app_admin__subcategories_edit', {'id': data.id})}}"><span><i class="bi bi-caret-up-square"></i></span></a>
+                    <a href="{{path('app_admin__subcategories_add')}}"><span><i class="bi bi-plus-square-fill"></i></span></a>
                 </td>
             </tr>
         {% endfor %}
