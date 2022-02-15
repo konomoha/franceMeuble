@@ -17,7 +17,7 @@ class DetailsProduitController extends AbstractController
 
         $dataProduit = $produitRepo->find($id);
 
-        return $this->render('details_produit/index.html.twig', [
+        return $this->render('details_produit/details_produit.html.twig', [
             'dataProduit' => $dataProduit,
         ]);
     }

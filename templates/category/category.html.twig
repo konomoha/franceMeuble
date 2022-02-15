@@ -8,7 +8,7 @@
 <div class="categories row justify-content-around align-items-center">
 
     {% for data in datacat.souscategories %}
-    <div class="col-3 text-center card carte_categorie">
+    <div class="col-3 text-center card carte_categorie my-5">
        <h5 class="fw-bold fst-italic">{{data.nom|capitalize}}</h5>
         <div class="mb-3"><a href="{{path('boutique_subcategory_show', {'id': data.id})}}"><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="" class="img-fluid"></a></div> 
     </div>

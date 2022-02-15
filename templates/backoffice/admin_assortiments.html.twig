@@ -1,12 +1,12 @@
 {% extends "base_admin.html.twig" %}
 
 {% block title %}
-    France Meuble | Gestion des Assortiments
+    France Meuble | Gestion des Collections
 {% endblock %}
 
 {% block body %}
-    <h1 class="text-center mb-5">Liste des Assortiments</h1>
-    {{dump(assortiment)}}
+    <h1 class="text-center mb-5">Liste des Collections</h1>
+    {# {{dump(assortiment)}} #}
 
      {% for message in app.flashes('success') %}
 
@@ -53,6 +53,7 @@
                 <td>
                     <a href="#" onclick="return(confirm('Voulez-vous vraiment supprimmer l\'assortiment n° {{data.id}}?'));"><span > <i class="bi bi-trash"></i></span></a>
                     <a href="{{path('app_admin__assortiment_edit', {'id': data.id})}}"><span><i class="bi bi-caret-up-square"></i></span></a>
+                    <a href="{{path('app_admin__assortiment_add')}}"><span><i class="bi bi-plus-square-fill"></i></span></a>
                 </td>
 
             </tr>
