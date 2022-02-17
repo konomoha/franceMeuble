@@ -47,4 +47,25 @@ class ProduitRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findModel($nom)
+    {
+        $query = $this->createQueryBuilder(alias:'p')
+                        ->where(predicates:'p.nom = :nom')
+                        ->setParameters(['nom'=>$nom]
+                        )
+                        ->getQuery();
+        return $query->getResult();
+    }
+
+    public function findGroup($id)
+    {
+        $query = $this->createQueryBuilder(alias:'p')
+                        ->where(predicates:'p.souscategorie = :id')
+                        ->setParameters(['id'=>$id]
+                        )
+                        ->groupBy('p.nom') 
+                        ->getQuery();
+        return $query->getResult();
+    }
 }

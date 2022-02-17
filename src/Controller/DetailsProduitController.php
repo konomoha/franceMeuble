@@ -14,11 +14,16 @@ class DetailsProduitController extends AbstractController
     public function index(Produit $produit, ProduitRepository $produitRepo): Response
     {
         $id = $produit->getId();
+        $nom = $produit->getNom();
 
         $dataProduit = $produitRepo->find($id);
+        $alldata = $produitRepo->findModel($nom);
+
+
 
         return $this->render('details_produit/details_produit.html.twig', [
             'dataProduit' => $dataProduit,
+            'alldata' => $alldata
         ]);
     }
 }

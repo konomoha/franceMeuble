@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Souscategorie;
+use App\Repository\ProduitRepository;
 use App\Repository\SouscategorieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,12 +26,17 @@ class SousCategorieController extends AbstractController
     }
 
     #[Route('/subcategory/{id}', name: 'boutique_subcategory_show')]
-    public function subCategoryShow(Souscategorie $souscategorie, SouscategorieRepository $subcatRepo)
+    public function subCategoryShow(Souscategorie $souscategorie, SouscategorieRepository $subcatRepo, ProduitRepository $productRepo)
     {
         $subcatData = $subcatRepo->find($souscategorie);
+        $id = $souscategorie->getId();
+        $products = $productRepo->findGroup($id);
+        
+        
 
         return $this->render('sous_categorie/sous_categorie.html.twig', [
-            'subcatData' => $subcatData
+            'subcatData' => $subcatData,
+            'products' => $products
         ]);
     }
 }
