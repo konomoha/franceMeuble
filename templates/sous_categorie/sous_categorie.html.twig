@@ -2,6 +2,11 @@
 
 {% block title %}France Meuble | Sous-catégorie{% endblock %}
 
+{% block javascripts %}
+  {# {{ parent() }} #}
+  <script src="{{ asset("js/panier.js") }}" type="text/javascript"></script>
+{% endblock %}
+
 {% block body %}
 
 {# {% for data in products %}
@@ -13,11 +18,11 @@
 
     <div class="row justify-content-around ">
         {% for data in products %}
-        <div class="col-3 card text-center row justify-content-around my-5 carte_subcategory">
+        <div class="col-3 card text-center row justify-content-around my-5 carte_subcategory add-cart">
             
                 <a href="{{path('details_produit', {'id' : data.id })}}"><div class="align-self-center col-7 mx-auto mt-2"><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="{{data.nom}}" class="img-fluid img_soutcat" ></div></a><hr>
             <h5 class="mb-3 fw-bold fst-italic">{{data.nom|capitalize}}</h5>
-            <div class="row justify-content-between  mx-auto mb-3"><p class="col-5 fw-bold text-danger prix_article">{{data.prix}}€00</p><button class="col-3 btn btn-primary p-0 btn_subcategory" title="Ajouter au panier"><i class="bi bi-cart-fill d-block"></i></button></div> 
+            <div class="row justify-content-between  mx-auto mb-3"><p class="col-5 fw-bold text-danger prix_article">{{data.prix}}€00</p><button class="col-3 btn btn-primary p-0 btn_subcategory  produit" data-id="{{data.id}}" data-name="{{data.nom}}" data-price="{{data.prix}}" data-img="{{ asset('img/photos/' ~ data.photo)}}" title="Ajouter au panier"><i class="bi bi-cart-fill d-block"></i></button></div> 
 
         </div>    
         {% endfor %}
