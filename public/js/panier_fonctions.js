@@ -1,131 +1,126 @@
-let nbproduit = document.querySelectorAll('.nbproduits');
+// let nbproduit = document.querySelectorAll('.nbproduits');
 
-let produit = document.querySelectorAll('.produit');
+// let produit = document.querySelectorAll('.produit');
 
-let products = {};
+// let products = {};
 
-for (let i=0; i < nbproduit.length; i++){
-    products[i] = 
-    {
-        id: produit[i].dataset.id,
-        name: produit[i].dataset.name,
-        price: parseInt(produit[i].dataset.price),
-        image: produit[i].dataset.img
+// for (let i=0; i < nbproduit.length; i++){
+//     products[i] = 
+//     {
+//         id: produit[i].dataset.id,
+//         name: produit[i].dataset.name,
+//         price: parseInt(produit[i].dataset.price),
+//         image: produit[i].dataset.img
 
-    }
-}
+//     }
+// }
 
-for (let i=0; i < nbproduit.length; i++){
-    nbproduit[i].addEventListener('click', () => {
-        addCart(products[i]);
-    });
-}
+// for (let i=0; i < nbproduit.length; i++){
+//     nbproduit[i].addEventListener('click', () => {
+//         addCart(products[i]);
+//     });
+// }
 
-function onLoadCartNumbers(){
-    let productNumbers = getNumberProduct();
+class Cart{
+    constructor(){
+        let cart = localStorage.getItem("cart");
 
-    if(productNumbers)
-    {
-        document.querySelector('.cart span').textContent = productNumbers;
-    }
-}
-
-function saveCart(cart){
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-}
-
-function getCart(){
-
-    let cart = localStorage.getItem("cart");
-
-    if(cart == null)
-    {
-        return [];
-    }
-
-    else
-    {
-        return JSON.parse(cart);
-    }
-}
-
-function addCart(product){
-
-    let cart = getCart();
-
-    let foundProduct = cart.find(p => p.id == product.id);
-
-    if(foundProduct != undefined)
-    {
-        foundProduct.quantity++;
-    }
-    
-    else
-    {
-        product.quantity = 1;
-        cart.push(product);
-    }
-    
-    
-    saveCart(cart);
-
-    document.querySelector('.cart span').textContent = getNumberProduct();
-}
-
-function removeFromCart(product){
-
-    let cart = getCart();
-    cart = cart.filter(p => p.id != product.id);
-    saveCart(cart);
-}
-
-function changeQuantity(product, quantity){
-
-    let cart = getCart();
-
-    let foundProduct = cart.find(p => p.id == product.id);
-
-    if(foundProduct != undefined)
-    {
-        foundProduct.quantity += quantity;
-
-        if (foundProduct.quantity <= 0)
+        if(cart == null)
         {
-            removeFromCart(foundProduct);
+           this.cart = [];
         }
+
         else
         {
-           saveCart(cart); 
+            this.cart= JSON.parse(cart);
         }
-        document.querySelector('.cart span').textContent = getNumberProduct();
-    }
-}
-
-function getNumberProduct(){
-
-    let cart = getCart();
-
-    let number = 0;
-
-    for(let product of cart){
-        number += product.quantity;
     }
 
-    return number;
-}
+    save(){
 
-function getTotalPrice(){
-    let cart = getCart();
+        localStorage.setItem("cart", JSON.stringify(this.cart));
+    
+    }
+    
+    onLoad(){
 
-    let total = 0;
+        let productNumbers = this.getNumberProduct();
 
-    for(let product of cart){
-        total += product.quantity * product.price;
+        if(productNumbers)
+        {
+            document.querySelector('.cart span').textContent = productNumbers;
+        }
     }
 
-    return total;
+    add(product){
+
+        let foundProduct = this.cart.find(p => p.id == product.id);
+    
+        if(foundProduct != undefined)
+        {
+            foundProduct.quantity++;
+        }
+        
+        else
+        {
+            product.quantity = 1;
+            this.cart.push(product);
+        }
+        
+        
+        this.save();
+    
+        document.querySelector('.cart span').textContent = this.getNumberProduct();
+    }
+
+    remove(product){
+
+        this.cart = this.cart.filter(p => p.id != product.id);
+        this.save();
+    }
+
+    changeQuantity(product, quantity){
+
+        let foundProduct = cart.find(p => p.id == product.id);
+    
+        if(foundProduct != undefined)
+        {
+            foundProduct.quantity += quantity;
+    
+            if (foundProduct.quantity <= 0)
+            {
+                remove(foundProduct);
+            }
+            else
+            {
+               this.save(); 
+            }
+            document.querySelector('.cart span').textContent = this.getNumberProduct();
+        }
+    }
+
+    getNumberProduct(){
+
+        let number = 0;
+    
+        for(let product of this.cart){
+            number += product.quantity;
+        }
+    
+        return number;
+    }
+
+    getTotalPrice(){
+
+        let total = 0;
+    
+        for(let product of this.cart){
+            total += product.quantity * product.price;
+        }
+    
+        return total;
+    }
+
 }
 
-onLoadCartNumbers();
+// onLoad();
