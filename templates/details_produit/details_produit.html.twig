@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}France Meuble | Details produit{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+    <script src="{{ asset("js/slide.js") }}" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+{% endblock %}
 
 {% block body %}
     
