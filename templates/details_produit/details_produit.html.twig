@@ -7,7 +7,16 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
 {% endblock %}
 
+
 {% block body %}
+<div aria-label="breadcrumb">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
+<li class="breadcrumb-item"><a href="{{path('boutique_category_show', {'id': dataProduit.souscategorie.categorie.id})}}">{{dataProduit.souscategorie.categorie.nom|capitalize}}</a></li>
+<li class="breadcrumb-item"><a href="{{path('boutique_subcategory_show', {'id': dataProduit.souscategorie.id})}}">{{dataProduit.souscategorie.nom|capitalize}}</a></li>
+<li class="breadcrumb-item active">{{dataProduit.nom}}</li>
+</ol>
+</div>
     
     {# {% for data in alldata %}
         {{dump(data)}}
@@ -101,8 +110,8 @@
 
             </div>
 
-            <div>
-                <button>Ajouter au panier</button>
+            <div class="nbproduits">
+                <button class="col-3 btn btn-primary p-0 btn_subcategory  produit" data-id="{{dataProduit.id}}" data-name="{{dataProduit.nom}}" data-price="{{dataProduit.prix}}" data-color="{{dataProduit.couleur}}" data-img="{{ asset('img/photos/' ~ dataProduit.photo)}}" title="Ajouter au panier"><i class="bi bi-cart-fill d-block"></i></button>
             </div>
             
         </div>

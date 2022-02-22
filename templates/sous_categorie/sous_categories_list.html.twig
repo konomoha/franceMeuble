@@ -1,5 +1,5 @@
 {% for data in subcategories %}
 
-    <a class="p-2 link-secondary text-white" href="">{{data.nom}}</a>
+    <a class="p-2 link-secondary text-white" href="{{path('boutique_subcategory_show', {'id' : data.id })}}">{{data.nom}}</a>
 
 {% endfor %}

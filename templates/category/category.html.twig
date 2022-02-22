@@ -4,6 +4,15 @@
 
 {% block body %}
 
+<div aria-label="breadcrumb">
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
+        <li class="breadcrumb-item active">{{datacat.nom|capitalize}}</li>
+    </ol>
+
+</div>
+
 <h1 class="text-center mb-5">{{datacat.nom}}</h1>
 <div class="categories row justify-content-around align-items-center">
 
