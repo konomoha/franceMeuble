@@ -96,3 +96,8 @@ footer div{
   .thumb_slide.is-active {
     opacity: 1;
   }
+
+  .img-cart{
+     width: 50px;
+     height: auto;
+  }
