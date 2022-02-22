@@ -101,3 +101,8 @@ footer div{
      width: 50px;
      height: auto;
   }
+
+  td{
+      vertical-align: middle;
+      padding: 0;
+  }

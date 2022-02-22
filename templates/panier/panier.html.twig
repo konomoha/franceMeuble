@@ -3,9 +3,18 @@
 {% block title %}Hello PanierController!{% endblock %}
 
 {% block body %}
-<h1 class="text-center">Votre panier</h1>
 
-<table class="table text-center">
+<div aria-label="breadcrumb">
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{path('home')}}" class="fw-bold">< Continuer mes achats</a></li>
+    </ol>
+
+</div>
+
+<h1 class="text-center">Votre panier</h1>
+<div class="container">
+<table class="table table-striped text-center">
 
     <thead>
         
@@ -32,5 +41,5 @@
 
     </tfoot>
 
-</table>
+</table></div>
 {% endblock %}

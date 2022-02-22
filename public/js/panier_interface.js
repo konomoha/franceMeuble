@@ -6,7 +6,9 @@ let produit = document.querySelectorAll('.produit');
 
 let products = {};
 
-let test = document.querySelector('.item');
+let article = document.querySelector('.item');
+
+let total = document.querySelector('.total');
 
 let items = cart.getCartItems();
 
@@ -14,6 +16,7 @@ for (let i=0; i < nbproduit.length; i++){
 
     products[i] = 
     {
+        color: produit[i].dataset.color,
         id: produit[i].dataset.id,
         name: produit[i].dataset.name,
         price: parseInt(produit[i].dataset.price),
@@ -23,9 +26,9 @@ for (let i=0; i < nbproduit.length; i++){
 
 }
 
-for (let i=0; i < nbproduit.length; i++){
+for (let i=0; i < produit.length; i++){
 
-    nbproduit[i].addEventListener('click', () => {
+    produit[i].addEventListener('click', () => {
         cart.add(products[i]);
     });
 
@@ -37,10 +40,14 @@ cart.onLoad();
 
 items.forEach((product) =>{
 
-    test.innerHTML += 
-        "<tr><td class='row align-items-center'>" + "<div class='col-2'><img src=" + product.image + " class= ' img-fluid img-cart'></div><p class='col-8 text-center'>" + product.name + "</p></td><td>" + product.quantity + "</td><td class='text-center'>"+ product.price+"€</td></tr>";
-        
+    article.innerHTML += 
+        "<tr><td>" + "<p class='text-start mb-0'><span class='col-2 mx-5'><img src=" + product.image + " class= ' img-fluid img-cart'></span>" + product.name + " (" + product.color + ")</p></td><td>" + product.quantity + "</td><td class='text-center'>"+ product.price+"€</td></tr>";
+        total.innerHTML = 
+        "<th colspan='2' class='text-end p-2 mx-2'>Total TTC</th><td class='text-center fw-bold'>" + cart.getTotalPrice() + "€</td>";
+
 })
+
+
 
 
 
