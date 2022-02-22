@@ -1,26 +1,3 @@
-// let nbproduit = document.querySelectorAll('.nbproduits');
-
-// let produit = document.querySelectorAll('.produit');
-
-// let products = {};
-
-// for (let i=0; i < nbproduit.length; i++){
-//     products[i] = 
-//     {
-//         id: produit[i].dataset.id,
-//         name: produit[i].dataset.name,
-//         price: parseInt(produit[i].dataset.price),
-//         image: produit[i].dataset.img
-
-//     }
-// }
-
-// for (let i=0; i < nbproduit.length; i++){
-//     nbproduit[i].addEventListener('click', () => {
-//         addCart(products[i]);
-//     });
-// }
-
 class Cart{
     constructor(){
         let cart = localStorage.getItem("cart");
@@ -121,6 +98,15 @@ class Cart{
         return total;
     }
 
-}
+    getCartItems(){
 
-// onLoad();
+        let items=[];
+
+        for(let product of this.cart){
+            items.push(product);
+        }
+
+        return items;
+    }
+
+}
