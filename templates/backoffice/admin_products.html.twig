@@ -52,13 +52,32 @@
                     {% else %}
                     <td class="text-danger">Aucune photo uploadée</td>
                 {% endif %}
+
+                {% if data.photo2 != null %}
+                    <td><img src="{{ asset('img/photos/' ~ data.photo2)}}" alt="{{data.nom}}"></td>
+                    {% else %}
+                    <td class="text-danger">Aucune photo uploadée</td>
+                {% endif %}
+
+                {% if data.photo3 != null %}
+                    <td><img src="{{ asset('img/photos/' ~ data.photo3)}}" alt="{{data.nom}}"></td>
+                    {% else %}
+                    <td class="text-danger">Aucune photo uploadée</td>
+                {% endif %}
+
+                {% if data.photo4 != null %}
+                    <td><img src="{{ asset('img/photos/' ~ data.photo4)}}" alt="{{data.nom}}"></td>
+                    {% else %}
+                    <td class="text-danger">Aucune photo uploadée</td>
+                {% endif %}
+
                 <td class="text-justify">
 
-                    {{ (data.longueur)? "Longueur : #{data.longueur} cm"|nl2br : '' }}
-                    {{ (data.largeur)? "\nLargeur : #{data.largeur} cm"|nl2br : '' }}
-                    {{ (data.hauteur)? "\nHauteur : #{data.hauteur} cm"|nl2br : '' }} 
-                    {{ (data.profondeur)? "\nProfondeur : #{data.profondeur} cm"|nl2br : '' }}
-                    {{ (data.diametre)? "\nDiametre : #{data.diametre} cm"|nl2br : '' }} 
+                    {{ (data.longueur)? "Longueur : #{data.longueur}"|nl2br : '' }}
+                    {{ (data.largeur)? "\nLargeur : #{data.largeur}"|nl2br : '' }}
+                    {{ (data.hauteur)? "\nHauteur : #{data.hauteur}"|nl2br : '' }} 
+                    {{ (data.profondeur)? "\nProfondeur : #{data.profondeur}"|nl2br : '' }}
+                    {{ (data.diametre)? "\nDiametre : #{data.diametre}"|nl2br : '' }} 
                 
                 </td>
                 

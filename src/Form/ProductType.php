@@ -115,7 +115,67 @@ class ProductType extends AbstractType
             ])
 
             ->add('photo', FileType::class, [
-                'label' => "Uploader une photo",
+                'label' => "Uploader photo 1",
+                'mapped' => true, 
+                'data_class'=> null,
+                'required'=> false,
+                
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/jpg',
+                            'image/gif'
+                        ],
+                        'mimeTypesMessage' => 'Formats autorisés : jpg/jpeg/png'
+                    ])
+                ]
+            ])
+
+            ->add('photo2', FileType::class, [
+                'label' => "Uploader photo 2",
+                'mapped' => true, 
+                'data_class'=> null,
+                'required'=> false,
+                
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/jpg',
+                            'image/gif'
+                        ],
+                        'mimeTypesMessage' => 'Formats autorisés : jpg/jpeg/png'
+                    ])
+                ]
+            ])
+
+            ->add('photo3', FileType::class, [
+                'label' => "Uploader photo 3",
+                'mapped' => true, 
+                'data_class'=> null,
+                'required'=> false,
+                
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/jpg',
+                            'image/gif'
+                        ],
+                        'mimeTypesMessage' => 'Formats autorisés : jpg/jpeg/png'
+                    ])
+                ]
+            ])
+
+            ->add('photo4', FileType::class, [
+                'label' => "Uploader photo 4",
                 'mapped' => true, 
                 'data_class'=> null,
                 'required'=> false,
@@ -141,7 +201,7 @@ class ProductType extends AbstractType
             ])
 
             ->add('assortiment', EntityType::class, [
-                'label' => "Assortiment",
+                'label' => "Choisir une collection",
                 'class' => Assortiment::class, // On précise de quelle entité vient ce champ
                 'choice_label' => 'nom',
                 'multiple'=>true,

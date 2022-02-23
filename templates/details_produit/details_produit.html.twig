@@ -42,7 +42,17 @@
                             </li>
                             <li class="splide__slide d-flex justify-content-around mx-auto">
                                 
-                                <img src="{{asset('img/photos/')~ dataProduit.photo}}"  alt="Photo {{dataProduit.nom}}" class="img-fluid">
+                                <img src="{{asset('img/photos/')~ dataProduit.photo2}}"  alt="Photo {{dataProduit.nom}}" class="img-fluid">
+                                
+                            </li>
+                            <li class="splide__slide d-flex justify-content-around mx-auto">
+                                
+                                <img src="{{asset('img/photos/')~ dataProduit.photo3}}"  alt="Photo {{dataProduit.nom}}" class="img-fluid">
+                                
+                            </li>
+                            <li class="splide__slide d-flex justify-content-around mx-auto">
+                                
+                                <img src="{{asset('img/photos/')~ dataProduit.photo4}}"  alt="Photo {{dataProduit.nom}}" class="img-fluid">
                                 
                             </li>
                             
@@ -65,14 +75,37 @@
                             
                             
                         </li>
-                        <li class="splide__slide thumb_slide  p-3">
 
-                            <img src="{{asset('img/photos/')~ dataProduit.photo}}"  alt="Photo {{dataProduit.nom}}" class="img-fluid">
-                            
-                            
-                        </li>
-                           
+                        {% if dataProduit.photo2  is not empty %}
 
+                            <li class="splide__slide thumb_slide  p-3">
+
+                            <img src="{{asset('img/photos/')~ dataProduit.photo2}}"  alt="Photo {{dataProduit.nom}}" class="img-fluid">
+                            
+                            </li>
+
+                        {% endif %}
+                        
+                        {% if dataProduit.photo3 is not empty %}
+
+                            <li class="splide__slide thumb_slide  p-3">
+
+                            <img src="{{asset('img/photos/')~ dataProduit.photo3}}"  alt="Photo {{dataProduit.nom}}" class="img-fluid">
+                            
+                            </li>
+
+                        {% endif %}
+                        
+                        {% if dataProduit.photo4 is not empty %}
+                            
+                            <li class="splide__slide thumb_slide  p-3">
+
+                            <img src="{{asset('img/photos/')~ dataProduit.photo4}}"  alt="Photo {{dataProduit.nom}}" class="img-fluid">
+                            
+                            </li>
+
+                        {% endif %}
+                        
                     </ul>
 
                 </div>
@@ -111,7 +144,7 @@
             </div>
 
             <div class="nbproduits">
-                <button class="col-3 btn btn-primary p-0 btn_subcategory  produit" data-id="{{dataProduit.id}}" data-name="{{dataProduit.nom}}" data-price="{{dataProduit.prix}}" data-color="{{dataProduit.couleur}}" data-img="{{ asset('img/photos/' ~ dataProduit.photo)}}" title="Ajouter au panier"><i class="bi bi-cart-fill d-block"></i></button>
+                <button class="col-3 btn btn-primary p-0 btn_subcategory  produit" data-id="{{dataProduit.id}}" data-name="{{dataProduit.nom}}" data-price="{{dataProduit.prix}}" data-color="{{dataProduit.couleur}}" data-stock="{{dataProduit.stock}}" data-img="{{ asset('img/photos/' ~ dataProduit.photo)}}" title="Ajouter au panier"><i class="bi bi-cart-fill d-block"></i></button>
             </div>
             
         </div>

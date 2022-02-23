@@ -36,12 +36,16 @@ class Cart{
         if(foundProduct != undefined)
         {
             foundProduct.quantity++;
+            // foundProduct.stock--;
         }
         
         else
-        {
+        {   
+            
             product.quantity = 1;
             this.cart.push(product);
+            // product.stock--;
+            
         }
         
         
@@ -58,7 +62,7 @@ class Cart{
 
     changeQuantity(product, quantity){
 
-        let foundProduct = cart.find(p => p.id == product.id);
+        let foundProduct = this.cart.find(p => p.id == product.id);
     
         if(foundProduct != undefined)
         {
