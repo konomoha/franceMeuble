@@ -106,3 +106,7 @@ footer div{
       vertical-align: middle;
       padding: 0;
   }
+
+  .qte_plus i, .qte_minus i{
+    font-size: 1.5rem;
+  }

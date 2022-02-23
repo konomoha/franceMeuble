@@ -60,6 +60,10 @@ class BackofficeController extends AbstractController
         if($produit)
         {
             $photoActuelle = $produit->getPhoto();
+            $photoActuelle2 = $produit->getPhoto2();
+            $photoActuelle3 = $produit->getPhoto3();
+            $photoActuelle4 = $produit->getPhoto4();
+
         }
 
         //Si $produit est null cela signifie que nous ajoutons un nouveau produit, on crée donc un objet issu de la classe Produit.
@@ -77,31 +81,42 @@ class BackofficeController extends AbstractController
         if($formProduit->isSubmitted() && $formProduit->isValid())
         {
             
-            //DEBUT TRAITEMENT DE LA PHOTO
-            //On récupère toutes les informations de l'image uploadé dans le formulaire
-            $photo = $formProduit->get('photo')->getData();
+            ////////////////////////////////////////// DEBUT TRAITEMENT DES PHOTOS ///////////////////////////////////////
 
-            // dd($photo);
+            //On récupère toutes les informations de l'image uploadé dans le formulaire
+
+            $photo = $formProduit->get('photo')->getData();
+            $photo2 = $formProduit->get('photo2')->getData();
+            $photo3 = $formProduit->get('photo3')->getData();
+            $photo4 = $formProduit->get('photo4')->getData();
+
+            ###################################### TRAITEMENT PHOTO 1 ##########################################################
 
             if($photo)//si une photo est uploadé dans le formulaire, on entre le IF et on traite l'image
             {
                 //On récupère le nom d'origine de la photo
+
                 $nomOriginePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+
                 // dd($nomOriginePhoto);
 
                 //cela est nécessaire pour inclure en toute sécurité le nom du fichier dans l'URL
+
                 $secureNomPhoto = $slugger->slug($nomOriginePhoto);
             
                 $nouveauNomFichier = $secureNomPhoto . '-' . uniqid(). '.' .$photo->guessExtension();
+
                 // dd($nouveauNomFichier);
 
                 try // on tente de copier l'image dans le dossier
                 {
                     // On copie l'image vers le bon chemin, vers le bon dossier 'public/uploads/photos' (services.yaml)
+
                     $photo->move(
                         $this->getparameter('photo_directory'),
                         $nouveauNomFichier
                     );
+
                 }
                 catch(FileException $e)
                 {
@@ -113,15 +128,18 @@ class BackofficeController extends AbstractController
             }
 
             //Si aucune image n'a été uploadée, on renvoie dans la bdd la photo actuelle de l'article
+
             else
             {
                 //Si la photo actuelle est définie en BDD, alors en cas de modification, si on ne change pas de photo, on renvoie la photo actuelle en bdd
+
                if(isset($photoActuelle))
                {
                    $produit ->setPhoto($photoActuelle);
                }
 
                //Sinon aucune photo n'a été uploadée, on envoie la valeur NULL en BDD pour la photo
+
                else
                {
                     $produit ->setPhoto(null);
@@ -129,7 +147,145 @@ class BackofficeController extends AbstractController
                 
             }
 
-            // FIN TRAITEMENT PHOTO////////////////////////////////////////////////////////
+            ################################################## TRAITEMENT PHOTO2 ##############################################
+
+            if($photo2)
+            {
+                
+                $nomOriginePhoto = pathinfo($photo2->getClientOriginalName(), PATHINFO_FILENAME);
+                                
+                $secureNomPhoto = $slugger->slug($nomOriginePhoto);
+            
+                $nouveauNomFichier = $secureNomPhoto . '-' . uniqid(). '.' .$photo2->guessExtension();
+
+                // dd($nouveauNomFichier);
+                
+                try 
+                {
+                    
+                    $photo2->move(
+                        $this->getparameter('photo_directory'),
+                        $nouveauNomFichier
+                    );
+                }
+
+                catch(FileException $e)
+                {
+                    
+                }
+
+                $produit ->setPhoto2($nouveauNomFichier);
+
+            }
+
+            else
+            {
+               
+               if(isset($photoActuelle2))
+               {
+                   $produit ->setPhoto2($photoActuelle2);
+               }
+
+               else
+               {
+                    $produit ->setPhoto2(null);
+               }
+                
+            }
+
+            ############################################### TRAITEMENT PHOTO3 ##########################################
+
+            if($photo3)
+            {
+                
+                $nomOriginePhoto = pathinfo($photo3->getClientOriginalName(), PATHINFO_FILENAME);
+                                
+                $secureNomPhoto = $slugger->slug($nomOriginePhoto);
+            
+                $nouveauNomFichier = $secureNomPhoto . '-' . uniqid(). '.' .$photo3->guessExtension();
+
+                // dd($nouveauNomFichier);
+                
+                try 
+                {
+                    
+                    $photo3->move(
+                        $this->getparameter('photo_directory'),
+                        $nouveauNomFichier
+                    );
+                }
+
+                catch(FileException $e)
+                {
+                    
+                }
+
+                $produit ->setPhoto3($nouveauNomFichier);
+
+            }
+
+            else
+            {
+               
+               if(isset($photoActuelle3))
+               {
+                   $produit ->setPhoto3($photoActuelle3);
+               }
+
+               else
+               {
+                    $produit ->setPhoto3(null);
+               }
+                
+            }
+
+            ################################################# TRAITEMENT PHOTO4 #######################################
+
+            if($photo4)
+            {
+                
+                $nomOriginePhoto = pathinfo($photo4->getClientOriginalName(), PATHINFO_FILENAME);
+                                
+                $secureNomPhoto = $slugger->slug($nomOriginePhoto);
+            
+                $nouveauNomFichier = $secureNomPhoto . '-' . uniqid(). '.' .$photo4->guessExtension();
+
+                // dd($nouveauNomFichier);
+                
+                try 
+                {
+                    
+                    $photo4->move(
+                        $this->getparameter('photo_directory'),
+                        $nouveauNomFichier
+                    );
+                }
+
+                catch(FileException $e)
+                {
+                    
+                }
+
+                $produit ->setPhoto4($nouveauNomFichier);
+
+            }
+
+            else
+            {
+               
+               if(isset($photoActuelle4))
+               {
+                   $produit ->setPhoto4($photoActuelle4);
+               }
+
+               else
+               {
+                    $produit ->setPhoto4(null);
+               }
+                
+            }
+
+            /////////////////////////////////////////////// FIN DU TRAITEMENT PHOTO //////////////////////////////////////////
 
             //Message de validation en session
             if(!$produit ->getId())
