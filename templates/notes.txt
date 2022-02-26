@@ -1,21 +1,37 @@
-Salon orientaux
-catégorie boiserie, 
-tissus, mousses (plusieurs types), 
-rembourage (plusieurs dimensions), 
-coussins (catégorie à part)
-Catégorie luminaires
-Catégorie déco
-Mentions légales
-Contact
-début de projet occasions
-(Maghreb design)
-service de médiation MEDYCIS
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+ACCUEIL:
+
+    - enlever champ stock produit
+    - ajouter option état réassort
+    - Logo accueil enlever made in France sur france meuble. (Plusieurs versions)
+    - remplacer collections par thèmes
+    - Thème chinois qui redirigera vers tous les produits et collections made in Chine
+    - Thème turc qui redirigera vers tous les produits et collections made in Turquie
+    - Thème marocain (indiquer visuellement que tout est made in france) qui redirigera vers la section Maryam couture
+    - Dans le menu de navigation, chaque thème ensemble de produits et de collection (ajouter un champ thème dans les produits)
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+MARYAM COUTURE:
+
+    - slogan: "Créateur de salons sur nmesure"
+
+    - catégories :  - boiserie (subcats: banquettes, accoudoirs, dossiers, coffre, banquette coin, etc...), 
+                    - mousse (plusieurs types), 
+                    - tissus, 
+                    - rembourage
+                    - coussins (catégorie à part)
+
+    - service tapisserie 
+    - réseaux Maryam couture
+    - Logo france meuble + made in france
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+CGV, MEDIATION, MENTIONS LEGALES
 
 mail : www.medicys.fr
-
 adresse postale : MEDICYS- Centre de médiation et règlement amiable des huissiers de justice- 73, Boulevard de Clichy, 75009 - 
 
-Il faudrait une table catégorie. Les champs seraient le nom de la catégorie, un id. Et dans la table produit, il n'y aurait pas de champ catégorie mais plutôt un category_id. 
-Peut-être la même chose avec une sous catégorie? dans ce cas là, cette table aurait un champ catégorie_id. Est-ce que la table catégorie aurait un champ "sous_catégorie_id"? 
-Un produit de la bdd aurait donc un champ category_id et un champ sous_catégorie_id (il faudrait peut-être trouver un autre)
+confirmation  de livraison à l'achat
+
+"<tr><td>" + "<p class='text-start mb-0'><span class='col-2 mx-5'><img src=" + product.image + " class= ' img-fluid img-cart'></span><a href='/produit/" + product.id + "'>" + product.name + " (" + product.color + ")</a></p></td><td><span class='qte_minus mx-2'><i class='bi bi-dash-circle-fill'></i></span>" + product.quantity + "<button class='qte_plus mx-2 ' data-id=" + product.id + " data-name=" + product.nom + " data-price=" + product.prix + " data-color=" + product.couleur + " data-stock=" + product.stock + " data-img=" + product.photo + "><i class='bi bi-plus-circle-fill'></i></button></td><td class='text-center'>"+ product.price+"€</td></tr>";
 
