@@ -76,7 +76,23 @@ class Cart{
             {
                this.save(); 
             }
-            document.querySelector('.cart span').textContent = this.getNumberProduct();
+            // location.reload();
+            // document.querySelector('.cart span').textContent = this.getNumberProduct();
+        }
+    }
+
+    renderCart(item, x, y, z){
+        for(let i=0; i<item.length; i++){
+
+            x.innerHTML +=`
+                <tr><td><p class='text-start mb-0'><span class='col-2 mx-5'><img src=${item[i].image} class= ' img-fluid img-cart'></span><a href='/produit/${item[i].id}'>${item[i].name} (${item[i].color})</a></p></td><td> ${item[i].quantity} <button class='${z} mx-2 cartitem'>+</button></td><td class='text-center'>${item[i].price}€</td></tr>`;
+        
+                y.innerHTML = 
+                "<th colspan='2' class='text-end p-2 mx-2'>Total TTC</th><td class='text-center fw-bold'>" + this.getTotalPrice() + "€</td>";
+           
+                z[i].addEventListener('click', () => {
+                    this.changeQuantity(items[i], 1);
+                });
         }
     }
 
