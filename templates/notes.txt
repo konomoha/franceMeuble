@@ -1,10 +1,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ACCUEIL:
 
-    - enlever champ stock produit
-    - ajouter option état réassort
+    - enlever champ stock produit ---- DONE
+    - ajouter option état réassort ---- DONE
     - Logo accueil enlever made in France sur france meuble. (Plusieurs versions)
-    - remplacer collections par thèmes
+    - remplacer collections par thèmes ---- DONE
     - Thème chinois qui redirigera vers tous les produits et collections made in Chine
     - Thème turc qui redirigera vers tous les produits et collections made in Turquie
     - Thème marocain (indiquer visuellement que tout est made in france) qui redirigera vers la section Maryam couture
@@ -33,5 +33,5 @@ adresse postale : MEDICYS- Centre de médiation et règlement amiable des huissi
 
 confirmation  de livraison à l'achat
 
-"<tr><td>" + "<p class='text-start mb-0'><span class='col-2 mx-5'><img src=" + product.image + " class= ' img-fluid img-cart'></span><a href='/produit/" + product.id + "'>" + product.name + " (" + product.color + ")</a></p></td><td><span class='qte_minus mx-2'><i class='bi bi-dash-circle-fill'></i></span>" + product.quantity + "<button class='qte_plus mx-2 ' data-id=" + product.id + " data-name=" + product.nom + " data-price=" + product.prix + " data-color=" + product.couleur + " data-stock=" + product.stock + " data-img=" + product.photo + "><i class='bi bi-plus-circle-fill'></i></button></td><td class='text-center'>"+ product.price+"€</td></tr>";
+"<tr><td>" + "<p class='text-start mb-0'><span class='col-2 mx-5'><img src=" + product.image + " class= ' img-fluid img-cart'></span><a href='/produit/" + product.id + "'>" + product.name + " (" + product.color + ")</a></p></td><td><span class='qte_minus mx-2'><i class='bi bi-dash-circle-fill'></i></span>" + product.quantity + "<button class='qte_plus mx-2 ' data-id=" + product.id + " data-name=" + product.nom + " data-price=" + product.prix + " data-color=" + product.couleur + " data-img=" + product.photo + "><i class='bi bi-plus-circle-fill'></i></button></td><td class='text-center'>"+ product.price+"€</td></tr>";
 

@@ -45,21 +45,21 @@
     <section class="row justify-content-start">
         <div class="section_collection col-11 ow justify-content-start">
 
-            {% for data in assortiment %}
+            {% for data in theme %}
 
                 <div class="row justify-content-start my-4">
 
-                    <div class="col-4 collection p-0">
+                    <div class="col-5 collection p-0">
                         <a href=""><img src="{{asset('img/photos/')~ data.photo}}" class="img-fluid" alt="image {{data.nom}}"></a>
                     </div>
 
-                    <h3 class="col-6 mx-3 text-center fst-italic align-self-center">{{data.nom}}</h3>
+                    <h3 class="col-6 mx-3 text-center fst-italic align-self-center">{{data.description}}</h3>
 
                 </div>
 
             {% endfor %}
             
-            <button class="text-center btn btn-success col-3 mx-auto">Voir toutes nos collections</button>
+            {# <button class="text-center btn btn-success col-3 mx-auto">Voir toutes nos collections</button> #}
             
         </div>
         

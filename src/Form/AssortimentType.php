@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Form;
+use App\Entity\Theme;
 use App\Entity\Assortiment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -56,6 +58,12 @@ class AssortimentType extends AbstractType
                 ]
             ])
 
+            ->add('theme', EntityType::class, [
+                'label' => "Choisir un thème",
+                'class' => Theme::class, // On précise de quelle entité vient ce champ
+                'choice_label' => 'nom',//on définit la valeur qui apparaitra dans la liste déroulante
+                'required'=>false
+            ])
             
         ;
     }

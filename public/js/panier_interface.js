@@ -23,7 +23,6 @@ for (let i=0; i < nbproduit.length; i++){
         name: produit[i].dataset.name,
         price: parseInt(produit[i].dataset.price),
         image: produit[i].dataset.img,
-        stock: produit[i].dataset.stock
 
     }
 

@@ -35,8 +35,7 @@ class Cart{
     
         if(foundProduct != undefined)
         {
-            foundProduct.quantity++;
-            // foundProduct.stock--;
+            foundProduct.quantity++;   
         }
         
         else
@@ -44,7 +43,6 @@ class Cart{
             
             product.quantity = 1;
             this.cart.push(product);
-            // product.stock--;
             
         }
         

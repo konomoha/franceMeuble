@@ -19,11 +19,12 @@
     <table class="table table-striped text-center s" id="table-backoffice">
     <thead>
         <tr>
-        {% for data in colonnes %}
-        {# capitalize : filtre Twig permettant de mettre la 1ère lettre de la chaine de caractères en majuscule #}
-            <th class="border border-1 border-dark">{{data|capitalize}}</th> 
-        {% endfor %}
-        <th class="border border-1 border-dark">Nb produits associés</th>
+            {% for data in colonnes %}
+            {# capitalize : filtre Twig permettant de mettre la 1ère lettre de la chaine de caractères en majuscule #}
+                <th class="border border-1 border-dark">{{data|capitalize}}</th> 
+            {% endfor %}
+            <th class="border border-1 border-dark">Nb produits associés</th>
+            <th class="border border-1 border-dark">Thème</th>
             <th class="border border-1 border-dark">Action</th>
         </tr>
     </thead>
@@ -48,6 +49,12 @@
 
                         <td><p class="text-danger">Aucun produit associé</p></td>
                         
+                    {% endif %}
+
+                    {% if data.theme is empty %}
+                        <td>test</td>
+                    {% else %}
+                        <td>{{ data.theme.nom}}</td>
                     {% endif %}
 
                 <td>
