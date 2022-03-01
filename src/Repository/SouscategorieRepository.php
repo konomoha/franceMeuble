@@ -47,4 +47,14 @@ class SouscategorieRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findByName($nom)
+    {
+        $query = $this->createQueryBuilder(alias:'s')
+                        ->where(predicates:'s.nom = :nom')
+                        ->setParameters(['nom'=>$nom]
+                        )
+                        ->getQuery();
+        return $query->getResult();
+    }
 }

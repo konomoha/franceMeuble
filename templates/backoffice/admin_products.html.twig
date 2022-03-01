@@ -8,7 +8,13 @@
 
 <h1 class="text-center mb-5">Liste des Produits</h1>
 
-{# {{dump(articles)}}#}
+{# {{dump(produits)}}
+
+{% for data in produits %}
+
+       {{dump(data.assortiment)}}
+        
+{% endfor %} #}
 
     {% for message in app.flashes('success') %}
 
@@ -23,7 +29,7 @@
         <tr>
         {% for data in colonnes %}
         {# On exclue la colonne 'id' #}
-        {% if data != 'id' and data != 'longueur' and data != 'largeur' and data != 'hauteur' and data != 'profondeur' and data != 'diametre'%}
+        {% if data != 'id' and data != 'longueur' and data != 'largeur' and data != 'hauteur' and data != 'profondeur' and data != 'diametre' and data != 'photo2'%}
                 {# capitalize : filtre Twig permettant de mettre la 1ère lettre de la chaine de caractères en majuscule #}
             <th class="border border-1 border-dark">{{data|capitalize}}</th>
             
@@ -32,6 +38,8 @@
         {% endfor %}
             <th class="border border-1 border-dark">Dimensions</th>
             <th class="border border-1 border-dark">Sous-Catégorie</th>
+            <th class="border border-1 border-dark">Collection</th>
+            <th class="border border-1 border-dark">Thème</th>
             <th class="border border-1 border-dark">Action</th>
         </tr>
     </thead>
@@ -43,7 +51,6 @@
                 <td>{{ data.couleur}}</td>
                 <td>{{ data.matiere}}</td>
                 <td>{{ data.prix}} €</td>
-                <td>{{ data.stock}}</td>
                {# <td>{{ data.contenu|striptags|slice(0,100)}}[...]</td> #}
 
                 {# Si la valeur de la photo en BDD est différente de null, cela veut dire qu'une photo a bien été téléchargée, on entre dans le IF et on affiche l'image #}
@@ -52,24 +59,13 @@
                     {% else %}
                     <td class="text-danger">Aucune photo uploadée</td>
                 {% endif %}
-
-                {% if data.photo2 != null %}
-                    <td><img src="{{ asset('img/photos/' ~ data.photo2)}}" alt="{{data.nom}}"></td>
-                    {% else %}
-                    <td class="text-danger">Aucune photo uploadée</td>
+                
+                {% if data.etat is empty %}
+                    <td class="text-success">Produit en stock</td>
+                {% else %}
+                    <td class="text-danger">Produit en rupture de stock !</td>
                 {% endif %}
-
-                {% if data.photo3 != null %}
-                    <td><img src="{{ asset('img/photos/' ~ data.photo3)}}" alt="{{data.nom}}"></td>
-                    {% else %}
-                    <td class="text-danger">Aucune photo uploadée</td>
-                {% endif %}
-
-                {% if data.photo4 != null %}
-                    <td><img src="{{ asset('img/photos/' ~ data.photo4)}}" alt="{{data.nom}}"></td>
-                    {% else %}
-                    <td class="text-danger">Aucune photo uploadée</td>
-                {% endif %}
+                
 
                 <td class="text-justify">
 
@@ -81,7 +77,32 @@
                 
                 </td>
                 
-                <td>{{ data.souscategorie.nom}}</td>
+                <td>{{ data.souscategorie.nom}}</td>  
+                
+                {% if data.assortiment is empty %}
+                    
+                    <td>test</td>
+                    
+                {% else %}
+
+                    <td>
+
+                        {% for data2 in data.assortiment %}
+                            <p class='text-center'>{{data2.nom}}</p>
+                        {% endfor %}
+
+                    </td>
+
+                {% endif %}
+        
+                
+
+                {% if data.theme is empty %}
+                    <td>test</td>
+                {% else %}
+                <td>{{ data.theme.nom}}</td>
+                {% endif %}
+                
 
                 
                 <td>

@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    France Meuble | Theme
+{% endblock %}
+
+
+{% block body %}
+    
+    <h1>Theme {{themeData.nom}}</h1>
+
+    {% for data in produitData %}
+
+        {{dump(data)}}
+        
+    {% endfor %}
+    
+
+    {% for tab in subcatTab %}
+
+        {% for data in tab %}
+
+            {{dump(data)}}
+
+        {% endfor %}
+        
+    {% endfor %}
+
+    {% for data in assortimenTab %}
+
+        {{dump(data.nom)}}
+        
+    {% endfor %}
+
+{% endblock %}

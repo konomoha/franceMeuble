@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Theme;
 use App\Entity\Produit;
 use App\Entity\Categorie;
 use App\Form\ProductType;
@@ -10,11 +11,13 @@ use App\Form\CategorieType;
 use App\Entity\Souscategorie;
 use App\Form\AssortimentType;
 use App\Form\SousCategorieType;
-use App\Repository\AssortimentRepository;
+use App\Form\ThemeFormType;
 use App\Repository\ProduitRepository;
 use App\Repository\CategorieRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\AssortimentRepository;
 use App\Repository\SouscategorieRepository;
+use App\Repository\ThemeRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -61,8 +64,6 @@ class BackofficeController extends AbstractController
         {
             $photoActuelle = $produit->getPhoto();
             $photoActuelle2 = $produit->getPhoto2();
-            $photoActuelle3 = $produit->getPhoto3();
-            $photoActuelle4 = $produit->getPhoto4();
 
         }
 
@@ -87,8 +88,6 @@ class BackofficeController extends AbstractController
 
             $photo = $formProduit->get('photo')->getData();
             $photo2 = $formProduit->get('photo2')->getData();
-            $photo3 = $formProduit->get('photo3')->getData();
-            $photo4 = $formProduit->get('photo4')->getData();
 
             ###################################### TRAITEMENT PHOTO 1 ##########################################################
 
@@ -189,98 +188,6 @@ class BackofficeController extends AbstractController
                else
                {
                     $produit ->setPhoto2(null);
-               }
-                
-            }
-
-            ############################################### TRAITEMENT PHOTO3 ##########################################
-
-            if($photo3)
-            {
-                
-                $nomOriginePhoto = pathinfo($photo3->getClientOriginalName(), PATHINFO_FILENAME);
-                                
-                $secureNomPhoto = $slugger->slug($nomOriginePhoto);
-            
-                $nouveauNomFichier = $secureNomPhoto . '-' . uniqid(). '.' .$photo3->guessExtension();
-
-                // dd($nouveauNomFichier);
-                
-                try 
-                {
-                    
-                    $photo3->move(
-                        $this->getparameter('photo_directory'),
-                        $nouveauNomFichier
-                    );
-                }
-
-                catch(FileException $e)
-                {
-                    
-                }
-
-                $produit ->setPhoto3($nouveauNomFichier);
-
-            }
-
-            else
-            {
-               
-               if(isset($photoActuelle3))
-               {
-                   $produit ->setPhoto3($photoActuelle3);
-               }
-
-               else
-               {
-                    $produit ->setPhoto3(null);
-               }
-                
-            }
-
-            ################################################# TRAITEMENT PHOTO4 #######################################
-
-            if($photo4)
-            {
-                
-                $nomOriginePhoto = pathinfo($photo4->getClientOriginalName(), PATHINFO_FILENAME);
-                                
-                $secureNomPhoto = $slugger->slug($nomOriginePhoto);
-            
-                $nouveauNomFichier = $secureNomPhoto . '-' . uniqid(). '.' .$photo4->guessExtension();
-
-                // dd($nouveauNomFichier);
-                
-                try 
-                {
-                    
-                    $photo4->move(
-                        $this->getparameter('photo_directory'),
-                        $nouveauNomFichier
-                    );
-                }
-
-                catch(FileException $e)
-                {
-                    
-                }
-
-                $produit ->setPhoto4($nouveauNomFichier);
-
-            }
-
-            else
-            {
-               
-               if(isset($photoActuelle4))
-               {
-                   $produit ->setPhoto4($photoActuelle4);
-               }
-
-               else
-               {
-                    $produit ->setPhoto4(null);
                }
                 
             }
@@ -620,6 +527,108 @@ class BackofficeController extends AbstractController
             'photoActuelle' => $assortiment->getPhoto()
             
         ]);  
+    }
+
+    ################################################ AFFICHGE DES THEMES ###############################################
+    #[Route('backoffice/themes', name: 'app_admin_themes')]
+    public function adminThemes(ThemeRepository $themeRepo, EntityManagerInterface $manager)
+    {
+        $colonnes = $manager->getClassMetadata(Theme::class)->getFieldNames();
+
+        $theme = $themeRepo->findAll();
+
+        return $this->render('backoffice/admin_themes.html.twig', [
+            'colonnes'=>$colonnes,
+            'theme'=>$theme
+        ]);
+        
+    }
+
+    #[Route('/backoffice/theme/add', name:'app_admin_theme_add')]
+    #[Route('/backoffice/theme/{id}/edit', name: 'app_admin_theme_edit')]
+
+    public function addTheme(EntityManagerInterface $manager, SluggerInterface $slugger, Request $request, Theme $theme=null): Response{
+
+        if($theme)
+        {
+            $photoActuelle = $theme->getPhoto();
+        }
+
+        if(!$theme)
+        {
+            $theme = new Theme;
+        }
+
+        $formTheme = $this->createForm(ThemeFormType::class, $theme);
+
+        $formTheme->handleRequest($request);
+
+        if($formTheme->isSubmitted() && $formTheme->isValid())
+        {
+
+            $photo = $formTheme->get('photo')->getData();
+
+            if($photo)
+            {
+                
+                $nomOriginePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+                
+
+                
+                $secureNomPhoto = $slugger->slug($nomOriginePhoto);
+            
+                $nouveauNomFichier = $secureNomPhoto . '-' . uniqid(). '.' .$photo->guessExtension();
+                
+
+                try 
+                {
+                    $photo->move(
+                        $this->getparameter('photo_directory'),
+                        $nouveauNomFichier
+                    );
+                }
+                catch(FileException $e)
+                {
+                    
+                }
+
+                $theme ->setPhoto($nouveauNomFichier);
+
+            }
+
+            else
+            {
+               if(isset($photoActuelle))
+               {
+                   $theme ->setPhoto($photoActuelle);
+               }
+
+               else
+               {
+                    $theme ->setPhoto(null);
+               }
+                
+            }
+
+
+            if(!$theme ->getId())
+                $txt = "enregistré";
+            else
+                $txt = "modifié";
+
+            $this->addFlash('success', "Le thème a été $txt avec succès!");
+
+            $manager->persist($theme);
+            $manager->flush();
+            return $this->redirectToRoute('app_admin_themes');
+        }
+
+
+        return $this->render('backoffice/admin_theme_form.html.twig', [
+            'formTheme' => $formTheme->createView(),
+            'editMode' => $theme->getId(),
+            'photoActuelle' => $theme->getPhoto()
+        ]);
     }
     
 }

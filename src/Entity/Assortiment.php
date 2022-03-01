@@ -25,6 +25,9 @@ class Assortiment
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $photo;
 
+    #[ORM\ManyToOne(targetEntity: Theme::class, inversedBy: 'assortiment')]
+    private $theme;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
@@ -82,6 +85,18 @@ class Assortiment
     public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getTheme(): ?Theme
+    {
+        return $this->theme;
+    }
+
+    public function setTheme(?Theme $theme): self
+    {
+        $this->theme = $theme;
 
         return $this;
     }

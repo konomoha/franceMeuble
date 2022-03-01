@@ -68,4 +68,16 @@ class ProduitRepository extends ServiceEntityRepository
                         ->getQuery();
         return $query->getResult();
     }
+
+    public function findByTheme($id)
+    {
+        $query = $this->createQueryBuilder(alias:'p')
+                        ->where(predicates:'p.theme = :id')
+                        ->setParameters(['id'=>$id]
+                        )
+                        // ->groupBy('p.souscategorie')
+                        ->getQuery();
+        return $query->getResult();
+    }
+
 }

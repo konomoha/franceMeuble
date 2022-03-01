@@ -40,9 +40,6 @@ class Produit
     #[ORM\Column(type: 'float')]
     private $prix;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $stock;
-
     #[ORM\ManyToOne(targetEntity: Souscategorie::class, inversedBy: 'produits')]
     private $souscategorie;
 
@@ -56,10 +53,10 @@ class Produit
     private $photo2;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $photo3;
+    private $etat;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $photo4;
+    #[ORM\ManyToOne(targetEntity: Theme::class, inversedBy: 'produit')]
+    private $theme;
 
     public function __construct()
     {
@@ -179,18 +176,6 @@ class Produit
         return $this;
     }
 
-    public function getStock(): ?int
-    {
-        return $this->stock;
-    }
-
-    public function setStock(?int $stock): self
-    {
-        $this->stock = $stock;
-
-        return $this;
-    }
-
     public function getSouscategorie(): ?Souscategorie
     {
         return $this->souscategorie;
@@ -251,26 +236,26 @@ class Produit
         return $this;
     }
 
-    public function getPhoto3(): ?string
+    public function getEtat(): ?string
     {
-        return $this->photo3;
+        return $this->etat;
     }
 
-    public function setPhoto3(?string $photo3): self
+    public function setEtat(?string $etat): self
     {
-        $this->photo3 = $photo3;
+        $this->etat = $etat;
 
         return $this;
     }
 
-    public function getPhoto4(): ?string
+    public function getTheme(): ?Theme
     {
-        return $this->photo4;
+        return $this->theme;
     }
 
-    public function setPhoto4(?string $photo4): self
+    public function setTheme(?Theme $theme): self
     {
-        $this->photo4 = $photo4;
+        $this->theme = $theme;
 
         return $this;
     }

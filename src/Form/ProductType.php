@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Theme;
 use App\Entity\Produit;
 use App\Entity\Assortiment;
 use App\Entity\Souscategorie;
@@ -15,6 +16,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
@@ -105,15 +107,6 @@ class ProductType extends AbstractType
                     'required'=>false,
             ])
 
-            ->add('stock', NumberType::class,[
-                'constraints' => [
-                    new NotBlank([
-                        'message'=>"Veuillez renseigner la quantité du produit."
-                    ])
-                    ],
-                    'required'=>false,
-            ])
-
             ->add('photo', FileType::class, [
                 'label' => "Uploader photo 1",
                 'mapped' => true, 
@@ -154,46 +147,6 @@ class ProductType extends AbstractType
                 ]
             ])
 
-            ->add('photo3', FileType::class, [
-                'label' => "Uploader photo 3",
-                'mapped' => true, 
-                'data_class'=> null,
-                'required'=> false,
-                
-                'constraints' => [
-                    new File([
-                        'maxSize' => '5M',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                            'image/jpg',
-                            'image/gif'
-                        ],
-                        'mimeTypesMessage' => 'Formats autorisés : jpg/jpeg/png'
-                    ])
-                ]
-            ])
-
-            ->add('photo4', FileType::class, [
-                'label' => "Uploader photo 4",
-                'mapped' => true, 
-                'data_class'=> null,
-                'required'=> false,
-                
-                'constraints' => [
-                    new File([
-                        'maxSize' => '5M',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                            'image/jpg',
-                            'image/gif'
-                        ],
-                        'mimeTypesMessage' => 'Formats autorisés : jpg/jpeg/png'
-                    ])
-                ]
-            ])
-
             ->add('souscategorie', EntityType::class, [
                 'label' => "Choisir une sous-catégorie",
                 'class' => Souscategorie::class, // On précise de quelle entité vient ce champ
@@ -206,6 +159,22 @@ class ProductType extends AbstractType
                 'choice_label' => 'nom',
                 'multiple'=>true,
                 'expanded'=>true
+                
+            ])
+
+            ->add('theme', EntityType::class, [
+                'label' => "Choisir un thème",
+                'class' => Theme::class, // On précise de quelle entité vient ce champ
+                'choice_label' => 'nom',//on définit la valeur qui apparaitra dans la liste déroulante
+                'required'=>false
+            ])
+
+            ->add('etat', ChoiceType::class,[
+                'choices'=>[
+                    'Rupture de stock' => true],
+                'expanded'=>true,
+                'label'=> 'Signaler une rupture de stock',
+                'required'=>false
                 
             ])
         ;

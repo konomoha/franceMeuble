@@ -1,0 +1,65 @@
+{% extends "base_admin.html.twig" %}
+
+{% block title %}
+    France Meuble | Gestion des themes
+{% endblock %}
+
+{% block body %}
+    <h1 class="text-center mb-5">Liste des Themes</h1>
+    {{dump(theme)}}
+
+    {% for message in app.flashes('success') %}
+
+        <div class="bg-success col-5 text-center mx-auto my-4 p-3">{{message}}</div>
+        
+    {% endfor %}
+   
+
+
+    <table class="table table-striped text-center s" id="table-backoffice">
+    <thead>
+        <tr>
+        {% for data in colonnes %}
+        {# capitalize : filtre Twig permettant de mettre la 1ère lettre de la chaine de caractères en majuscule #}
+            <th class="border border-1 border-dark">{{data|capitalize}}</th> 
+        {% endfor %}
+            <th class="border border-1 border-dark">Nb de collections associées</th>
+            <th class="border border-1 border-dark">Nb produits associés</th>
+            <th class="border border-1 border-dark">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for data in theme %}
+            <tr>
+                <td>{{data.id}}</td>
+
+                <td>{{ data.nom}}</td>
+
+                <td><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="{{data.nom}}"></td>
+                
+                <td>{{data.description}}</td>
+
+                <td>
+
+                    <p>{{data.assortiment|length}}</p>
+                    
+                </td>
+
+                <td>
+                    <p>{{data.produit|length}}</p>
+                </td>
+
+                <td>
+                    <a href="#" onclick="return(confirm('Voulez-vous vraiment supprimmer le thème {{data.nom}}?'));"><span > <i class="bi bi-trash"></i></span></a>
+                    <a href="{{path('app_admin_theme_edit', {'id': data.id})}}"><span><i class="bi bi-caret-up-square"></i></span></a>
+                    <a href="{{path('app_admin_theme_add')}}"><span><i class="bi bi-plus-square-fill"></i></span></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </tr></table>
+
+
+    
+{% endblock %}
