@@ -59,7 +59,7 @@ class BackofficeController extends AbstractController
     #[Route('/backoffice/product/{id}/edit', name: 'app_admin_product_edit')]
     public function addProduct(EntityManagerInterface $manager, Request $request, Produit $produit=null,SluggerInterface $slugger): Response
     {
-        //si la condition IF retourne TRUE, cela veut dire que $article contient un article stocké en BDD, on stock la photo actuelle de l'article dans la variable $photoActuelle
+        //si la condition IF retourne TRUE, cela veut dire que $produit contient un produit stocké en BDD, on stock la photo actuelle du produit dans la variable $photoActuelle
         if($produit)
         {
             $photoActuelle = $produit->getPhoto();
@@ -76,7 +76,7 @@ class BackofficeController extends AbstractController
         //On crée ici un formulaire avec la méthode createForm() qui attend comme arguments une classe et l'objet $produit;
         $formProduit = $this->createForm(ProductType::class, $produit );
 
-        //handleRequest() permet d'envoyer chaque données de $_POST et de kes transmettre aux bons setters de l'objet entité $produit 
+        //handleRequest() permet d'envoyer chaque données de $_POST et de les transmettre aux bons setters de l'objet entité $produit 
         $formProduit->handleRequest($request);
 
         if($formProduit->isSubmitted() && $formProduit->isValid())
@@ -258,7 +258,7 @@ class BackofficeController extends AbstractController
         {
             $photo = $formCategory->get('photo')->getData();
 
-            
+            /////////////////////////////////////// TRAITEMENT PHOTO CATEGORIE ///////////////////////////////////////////////
 
             if($photo)
             {
@@ -302,6 +302,8 @@ class BackofficeController extends AbstractController
                 
             }
 
+            ///////////////////////////////////////////////// FIN DU TRAITEMENT PHOTO //////////////////////////////
+
             if(!$category ->getId())
                 $txt = "enregistrée";
             else
@@ -325,7 +327,7 @@ class BackofficeController extends AbstractController
 
     //################################ AFFICHAGE DES SOUS-CATEGORIES #######################################
 
-    #[Route('backoffice/subcategories', name: 'app_admin__subcategories')]
+    #[Route('backoffice/subcategories', name: 'app_admin_subcategories')]
     public function adminSubcategories(SouscategorieRepository $repoSubcategorie, EntityManagerInterface $manager)
     {
         $colonnes = $manager->getClassMetadata(Souscategorie::class)->getFieldNames();
@@ -341,8 +343,8 @@ class BackofficeController extends AbstractController
 
     //################################## AJOUT ET MODIFICATION DE SOUS-CATEGORIES ###########################
 
-    #[Route('/backoffice/subcategory/add', name: 'app_admin__subcategories_add')]
-    #[Route('/backoffice/subcategory/{id}/edit', name: 'app_admin__subcategories_edit')]
+    #[Route('/backoffice/subcategory/add', name: 'app_admin_subcategories_add')]
+    #[Route('/backoffice/subcategory/{id}/edit', name: 'app_admin_subcategories_edit')]
     public function addSubCategory(Request $request, EntityManagerInterface $manager, Souscategorie $souscategorie=null, SluggerInterface $slugger):Response
     {
         if($souscategorie)
@@ -362,7 +364,8 @@ class BackofficeController extends AbstractController
         if($subcategorieForm->isSubmitted() && $subcategorieForm->isValid())
         {
             $photo = $subcategorieForm->get('photo')->getData();
-
+            
+            /////////////////////////////////// TRAITEMENT PHOTO ///////////////////////////////////////////
             if($photo)
             {
                 
@@ -405,6 +408,8 @@ class BackofficeController extends AbstractController
                 
             }
 
+            /////////////////////////////////////////////// FIN DU TRAITEMENT PHOTO /////////////////////////////////////////
+
             if(!$souscategorie ->getId())
                 $txt = "enregistrée";
             else
@@ -414,7 +419,7 @@ class BackofficeController extends AbstractController
 
             $manager->persist($souscategorie);//test
             $manager->flush();
-            return $this->redirectToRoute('app_admin__subcategories');
+            return $this->redirectToRoute('app_admin_subcategories');
         }
 
         return $this->render('backoffice/admin_subcategory_form.html.twig', [
@@ -427,7 +432,8 @@ class BackofficeController extends AbstractController
     }
 
     ###################################### AFFICHAGE DES ASSORTIMENTS ##################################
-    #[Route('backoffice/assortiments', name: 'app_admin__assortiments')]
+
+    #[Route('backoffice/assortiments', name: 'app_admin_assortiments')]
     public function adminAssortiment(AssortimentRepository $assortimentRepo, EntityManagerInterface $manager)
     {
         $colonnes = $manager->getClassMetadata(Assortiment::class)->getFieldNames();
@@ -442,8 +448,9 @@ class BackofficeController extends AbstractController
     }
 
     //################################ AJOUT ET MODIFICATION DES ASSORTIMENTS ###########################
-    #[Route('/backoffice/assortiment/add', name: 'app_admin__assortiment_add')]
-    #[Route('/backoffice/assortiment/{id}/edit', name: 'app_admin__assortiment_edit')]
+
+    #[Route('/backoffice/assortiment/add', name: 'app_admin_assortiment_add')]
+    #[Route('/backoffice/assortiment/{id}/edit', name: 'app_admin_assortiment_edit')]
     public function addAssortiment(Request $request, EntityManagerInterface $manager, SluggerInterface $slugger, Assortiment $assortiment=null):Response
     {
         if($assortiment)
@@ -517,7 +524,7 @@ class BackofficeController extends AbstractController
 
             $manager->persist($assortiment);//test
             $manager->flush();
-            return $this->redirectToRoute('app_admin__assortiments');
+            return $this->redirectToRoute('app_admin_assortiments');
         }
 
         return $this->render('backoffice/admin_assortiment_form.html.twig', [
@@ -529,7 +536,8 @@ class BackofficeController extends AbstractController
         ]);  
     }
 
-    ################################################ AFFICHGE DES THEMES ###############################################
+    ################################################ AFFICHAGE DES THEMES ###############################################
+
     #[Route('backoffice/themes', name: 'app_admin_themes')]
     public function adminThemes(ThemeRepository $themeRepo, EntityManagerInterface $manager)
     {
@@ -543,6 +551,8 @@ class BackofficeController extends AbstractController
         ]);
         
     }
+
+    ################################################ AJOUT ET MODIFICATION DES THEMES #####################################
 
     #[Route('/backoffice/theme/add', name:'app_admin_theme_add')]
     #[Route('/backoffice/theme/{id}/edit', name: 'app_admin_theme_edit')]

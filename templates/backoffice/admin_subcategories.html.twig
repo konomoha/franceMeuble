@@ -10,7 +10,7 @@
 
     {% for message in app.flashes('success') %}
 
-        <div class="bg-success col-5 text-center mx-auto my-4 p-3">{{message}}</div>
+        <div class="bg-success col-5 text-center text-white mx-auto my-4 p-3">{{message}}</div>
         
     {% endfor %}
    
@@ -43,8 +43,8 @@
                 </td>
                 <td>
                     <a href="#" onclick="return(confirm('Voulez-vous vraiment supprimmer l\'article n° {{data.id}}?'));"><span > <i class="bi bi-trash"></i></span></a>
-                    <a href="{{path('app_admin__subcategories_edit', {'id': data.id})}}"><span><i class="bi bi-caret-up-square"></i></span></a>
-                    <a href="{{path('app_admin__subcategories_add')}}"><span><i class="bi bi-plus-square-fill"></i></span></a>
+                    <a href="{{path('app_admin_subcategories_edit', {'id': data.id})}}"><span><i class="bi bi-caret-up-square"></i></span></a>
+                    <a href="{{path('app_admin_subcategories_add')}}"><span><i class="bi bi-plus-square-fill"></i></span></a>
                 </td>
             </tr>
         {% endfor %}

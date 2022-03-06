@@ -11,6 +11,18 @@ document.addEventListener( 'DOMContentLoaded', function () {
   } );
 
   document.addEventListener( 'DOMContentLoaded', function () {
+    new Splide( '#assortiment-slider', {
+        type   : 'loop',
+        speed: 2000,
+        pagination:true,
+        wheel: true,
+        autoplay: true,
+        interval: 4000,
+        autoWidth: true,
+    } ).mount();
+  } );
+
+  document.addEventListener( 'DOMContentLoaded', function () {
     var main = new Splide( '#main-slider', {
       type      : 'fade',
       rewind    : true,

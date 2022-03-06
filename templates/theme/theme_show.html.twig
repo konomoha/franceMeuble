@@ -3,33 +3,154 @@
 {% block title %}
     France Meuble | Theme
 {% endblock %}
+{% block javascripts %}
+{{ parent() }}
+    <script src="{{ asset("js/slide.js") }}" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+{% endblock %}
 
 
 {% block body %}
+
+            {% if app.request.query.get('subcat') %}
+                 <div aria-label="breadcrumb">
+
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
+                        <li class="breadcrumb-item"><a href="{{path('boutique_theme_show',{'id': themeData.id })}}">{{themeData.nom|capitalize}}</a></li>
+
+                    {% for tab in subcatTab %}
+
+                        {% for data in tab %}
+
+                            {% if app.request.query.get('subcat') == data.nom %}
+                                <li class="breadcrumb-item active">{{data.nom|capitalize}}</li> 
+                            {% endif %}
+                        
+                        {% endfor %}
+
+                    {% endfor %}
+
+                    </ol>
+
+                </div>
+
+                {% else %}
+                    <div aria-label="breadcrumb">
+
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
+                            <li class="breadcrumb-item active">{{themeData.nom|capitalize}}</li>
+                        </ol>
+
+                    </div>
+            {% endif %}
     
     <h1>Theme {{themeData.nom}}</h1>
 
-    {% for data in produitData %}
+    {{dump(app.request.query.get('subcat'))}}
 
-        {{dump(data)}}
-        
-    {% endfor %}
+    {% if app.request.query.get('subcat') %}
     
+        {% for data in produitData %}
 
-    {% for tab in subcatTab %}
+            {% if app.request.query.get('subcat') == data.souscategorie.nom %}
 
-        {% for data in tab %}
+                {{dump(data.nom)}}
 
-            {{dump(data)}}
+            {% endif %}
 
         {% endfor %}
-        
-    {% endfor %}
 
-    {% for data in assortimenTab %}
+        {% elseif app.request.query.get('assort') %}
 
-        {{dump(data.nom)}}
+            {% for tab in produitData %}
+                 {# {{dump(tab)}} #}
+                {% for data in tab.assortiment %}
+                        {# {{dump(data)}} #}
+                    {% if app.request.query.get('assort') == data.id %}
+
+                        {{dump(data)}}
+
+                        {% for produit in data.produits %}
+                            {{dump(produit)}}
+                        {% endfor %}
+
+                    {% endif %}
+
+                {% endfor %}
+
+            {% endfor %}
+
+        {% else %}
+
+        {# Il faudrait peut-être ajouter un champ couleur à la table assortiment #}
+        <div class="categories  my-4 mx-auto" >
+            <div class="splide" id="assortiment-slider">
+                <div class="splide__track">
+
+                    <ul class="splide__list">
+
+                        {% for data in assortimenTab %}
+                            
+                            <li class="card col-3 mx-3 carte_categorie splide__slide" >
+
+                                <a href="?assort={{data.id}}"><img src="{{asset('img/photos/')~ data.photo}}" class="img-fluid" alt="image {{data.nom}}"></a>
+
+                                <div class="card-body  row justify-content-center p-2">
+
+                                    <h5 class="card-title text-center fst-italic">{{data.nom|capitalize}}</h5>
+                                
+                                </div>
+
+                            </li>
+                        {% endfor %}
+
+                    </ul> 
+                
+                </div>
+            </div>   
+            
+        </div>
+
+        <div class="row justify-content-around align-items-center">
+
+            {% for tab in subcatTab %}
+
+                {% for data in tab %}
+                    <div class="col-2 text-center card my-5">
+                        
+                        <div class="mb-3"><a href="?subcat={{data.nom}}"><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="" class="img-fluid"></a></div> 
+                        <h5 class="fw-bold fst-italic">{{data.nom|capitalize}}</h5> 
+                    </div>
+                {% endfor %}
+
+            {% endfor %}
+            
+        </div>
+
+        {# {% for data in produitData %}
+
+            {{dump(data)}}
+            
+        {% endfor %}
         
-    {% endfor %}
+
+        {% for tab in subcatTab %}
+
+            {% for data in tab %}
+
+                {{dump(data)}}
+
+            {% endfor %}
+            
+        {% endfor %}
+
+        {% for data in assortimenTab %}
+
+            {{dump(data.nom)}}
+            
+        {% endfor %} #}
+    {% endif %}
 
 {% endblock %}

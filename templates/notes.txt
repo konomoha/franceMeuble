@@ -5,6 +5,7 @@ ACCUEIL:
     - ajouter option état réassort ---- DONE
     - Logo accueil enlever made in France sur france meuble. (Plusieurs versions)
     - remplacer collections par thèmes ---- DONE
+    - Ajouter un champ couleur dans la table assortiment
     - Thème chinois qui redirigera vers tous les produits et collections made in Chine
     - Thème turc qui redirigera vers tous les produits et collections made in Turquie
     - Thème marocain (indiquer visuellement que tout est made in france) qui redirigera vers la section Maryam couture
@@ -26,6 +27,11 @@ MARYAM COUTURE:
     - Logo france meuble + made in france
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+BACKOFFICE:
+
+    -Mettre en place un champ de recherche dans toutes les catégories
+    -Mettre en place un classement des produits
+    -Gérer la connexion sécurisée au Backoffice
 CGV, MEDIATION, MENTIONS LEGALES
 
 mail : www.medicys.fr

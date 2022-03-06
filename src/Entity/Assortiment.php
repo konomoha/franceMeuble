@@ -28,6 +28,9 @@ class Assortiment
     #[ORM\ManyToOne(targetEntity: Theme::class, inversedBy: 'assortiment')]
     private $theme;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $couleur;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
@@ -97,6 +100,18 @@ class Assortiment
     public function setTheme(?Theme $theme): self
     {
         $this->theme = $theme;
+
+        return $this;
+    }
+
+    public function getCouleur(): ?string
+    {
+        return $this->couleur;
+    }
+
+    public function setCouleur(?string $couleur): self
+    {
+        $this->couleur = $couleur;
 
         return $this;
     }
