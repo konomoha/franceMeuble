@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class AssortimentType extends AbstractType
 {
@@ -35,6 +36,14 @@ class AssortimentType extends AbstractType
                         'message' => "Merci de saisir un nom d'assortiment."
                     ])
                 ]
+            ])
+
+            ->add('couleur', ChoiceType::class,[
+                'choices'=>[
+                   'gold'=>'gold',
+                   'silver'=>'silver'],
+                'label'=> 'Couleur :',
+                'required'=>false,
             ])
 
             ->add('photo', FileType::class, [

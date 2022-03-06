@@ -16,7 +16,7 @@ class AssortimentController extends AbstractController
     {
         $colonnes = $manager->getClassMetadata(Assortiment::class)->getFieldNames();
 
-        $assortiment = $repoAssortiment->findAll();
+        $assortiment = $repoAssortiment->findAll(); //On récupère ici toutes les informations liées aux collections, cette fonction nous permettra d'intégrer ces informations dans n'importe quel layout.
 
         return $this->render('assortiment/assortiment_list.html.twig', [
             'colonnes'=>$colonnes,

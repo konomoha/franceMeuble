@@ -10,7 +10,7 @@
 
      {% for message in app.flashes('success') %}
 
-        <div class="bg-success col-5 text-center mx-auto my-4 p-3">{{message}}</div>
+        <div class="bg-success col-5 text-center text-white mx-auto my-4 p-3">{{message}}</div>
         
     {% endfor %}
     
@@ -41,26 +41,33 @@
                     <td class="text-danger">Aucune photo uploadée</td>
                 {% endif %}
 
-                    {% if data.produits|length != null %}
+                
+                {% if data.couleur is empty %}
+                    <td class="text-danger fst-italic">Aucune couleur choisie</td>
+                {% else %}
+                    <td>{{ data.couleur}}</td>
+                {% endif %}
 
-                        <td><p>{{data.produits|length}}</p></td>
+                {% if data.produits|length != null %}
 
-                    {% else %}
+                    <td><p>{{data.produits|length}}</p></td>
 
-                        <td><p class="text-danger">Aucun produit associé</p></td>
-                        
-                    {% endif %}
+                {% else %}
 
-                    {% if data.theme is empty %}
-                        <td>test</td>
-                    {% else %}
-                        <td>{{ data.theme.nom}}</td>
-                    {% endif %}
+                    <td><p class="text-danger">Aucun produit associé</p></td>
+                    
+                {% endif %}
+
+                {% if data.theme is empty %}
+                    <td>test</td>
+                {% else %}
+                    <td>{{ data.theme.nom}}</td>
+                {% endif %}
 
                 <td>
                     <a href="#" onclick="return(confirm('Voulez-vous vraiment supprimmer l\'assortiment n° {{data.id}}?'));"><span > <i class="bi bi-trash"></i></span></a>
-                    <a href="{{path('app_admin__assortiment_edit', {'id': data.id})}}"><span><i class="bi bi-caret-up-square"></i></span></a>
-                    <a href="{{path('app_admin__assortiment_add')}}"><span><i class="bi bi-plus-square-fill"></i></span></a>
+                    <a href="{{path('app_admin_assortiment_edit', {'id': data.id})}}"><span><i class="bi bi-caret-up-square"></i></span></a>
+                    <a href="{{path('app_admin_assortiment_add')}}"><span><i class="bi bi-plus-square-fill"></i></span></a>
                 </td>
 
             </tr>
