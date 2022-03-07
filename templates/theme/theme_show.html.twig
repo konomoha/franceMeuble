@@ -9,84 +9,142 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
 {% endblock %}
 
-
 {% block body %}
+{# <div class="container" style="background-image: url('{{ asset('img/photos/') ~ themeData.photo }}');"> #}
+    {% if app.request.query.get('subcat') %}
 
-            {% if app.request.query.get('subcat') %}
-                 <div aria-label="breadcrumb">
+            <div aria-label="breadcrumb">
 
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
-                        <li class="breadcrumb-item"><a href="{{path('boutique_theme_show',{'id': themeData.id })}}">{{themeData.nom|capitalize}}</a></li>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{path('boutique_theme_show',{'id': themeData.id })}}">{{themeData.nom|capitalize}}</a></li>
 
-                    {% for tab in subcatTab %}
+            {% for tab in subcatTab %}
 
-                        {% for data in tab %}
+                {% for data in tab %}
 
-                            {% if app.request.query.get('subcat') == data.nom %}
-                                <li class="breadcrumb-item active">{{data.nom|capitalize}}</li> 
-                            {% endif %}
-                        
-                        {% endfor %}
+                    {% if app.request.query.get('subcat') == data.nom %}
+                        <li class="breadcrumb-item active">{{data.nom|capitalize}}</li> 
+                    {% endif %}
+                
+                {% endfor %}
 
-                    {% endfor %}
+            {% endfor %}
 
-                    </ol>
+            </ol>
 
-                </div>
-
-                {% else %}
-                    <div aria-label="breadcrumb">
-
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
-                            <li class="breadcrumb-item active">{{themeData.nom|capitalize}}</li>
-                        </ol>
-
-                    </div>
-            {% endif %}
+        </div>
     
-    <h1>Theme {{themeData.nom}}</h1>
+    {% elseif app.request.query.get('assort') %}
 
-    {{dump(app.request.query.get('subcat'))}}
+        <div aria-label="breadcrumb">
+
+            <ol class="breadcrumb">
+
+                <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{path('boutique_theme_show',{'id': themeData.id })}}">{{themeData.nom|capitalize}}</a></li>
+
+                {% for data in assortimenTab %}
+
+                    {% if data.id == app.request.query.get('assort') %}
+
+                        <li class="breadcrumb-item active">{{data.nom|capitalize}}</li>
+
+                    {% endif %}
+                    
+                {% endfor %}
+
+            </ol>
+
+        </div>
+
+    {% else %}
+
+        <div aria-label="breadcrumb">
+
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
+                <li class="breadcrumb-item active">{{themeData.nom|capitalize}}</li>
+            </ol>
+
+        </div>
+
+    {% endif %}
+
+    {# {{dump(app.request.query.get('subcat'))}} #}
 
     {% if app.request.query.get('subcat') %}
     
-        {% for data in produitData %}
+        <div class="row justify-content-around ">
 
-            {% if app.request.query.get('subcat') == data.souscategorie.nom %}
+            {% for data in produitData %}
 
-                {{dump(data.nom)}}
+                {% if app.request.query.get('subcat') == data.souscategorie.nom %}
+                    
+                    <div class="col-3 card text-center row justify-content-around my-5 carte_subcategory">
+            
+                        <a href="{{path('details_produit', {'id' : data.id })}}"><div class="align-self-center col-7 mx-auto mt-2"><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="{{data.nom}}" class="img-fluid img_soutcat" ></div></a><hr>
+                        <h5 class="mb-3 fw-bold fst-italic">{{data.nom|capitalize}}</h5>
+
+                    </div>    
+
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+    {% elseif app.request.query.get('assort') %}
+
+        {% for data in assortimenTab %}
+
+            {% if app.request.query.get('assort') == data.id %}
+
+                {# {{dump(data)}} #}
+                <h1 class="text-center fst-italic">{{data.nom}}</h1>
+                <div class="col-8 mx-auto my-3">
+                    <img src="{{asset('img/photos/')~ data.photo}}" alt="" class="img-fluid">
+                </div>
 
             {% endif %}
 
-        {% endfor %}
+         {% endfor %}
 
-        {% elseif app.request.query.get('assort') %}
+        <h2 class="text-center fst-italic">Produits associés</h2>
 
-            {% for tab in produitData %}
-                 {# {{dump(tab)}} #}
-                {% for data in tab.assortiment %}
+        {% for data in assortimenTab %}
+            <div class="row justify-content-center ">
+
+                {% for data2 in data.produits %}
                         {# {{dump(data)}} #}
+
                     {% if app.request.query.get('assort') == data.id %}
 
-                        {{dump(data)}}
+                        {# {{dump(data2)}} #}
 
-                        {% for produit in data.produits %}
-                            {{dump(produit)}}
-                        {% endfor %}
+                        <div class="col-2 card text-center row justify-content-around mx-2 my-5 carte_subcategory">
+            
+                            <a href="{{path('details_produit', {'id' : data2.id })}}"><div class="align-self-center col-7 mx-auto mt-2"><img src="{{ asset('img/photos/' ~ data2.photo)}}" alt="{{data2.nom}}" class="img-fluid img_soutcat" ></div></a><hr>
+                            <h6 class="mb-3 fw-bold fst-italic">{{data2.nom|capitalize}}</h6>
+
+                        </div>   
 
                     {% endif %}
 
                 {% endfor %}
 
-            {% endfor %}
+            </div>
 
-        {% else %}
+        {% endfor %}
 
-        {# Il faudrait peut-être ajouter un champ couleur à la table assortiment #}
+    {% else %}
+
+        <h1>Theme {{themeData.nom}}</h1>
+
         <div class="categories  my-4 mx-auto" >
+
             <div class="splide" id="assortiment-slider">
+
                 <div class="splide__track">
 
                     <ul class="splide__list">
@@ -104,11 +162,13 @@
                                 </div>
 
                             </li>
+
                         {% endfor %}
 
                     </ul> 
                 
                 </div>
+
             </div>   
             
         </div>
@@ -118,11 +178,19 @@
             {% for tab in subcatTab %}
 
                 {% for data in tab %}
+
                     <div class="col-2 text-center card my-5">
                         
-                        <div class="mb-3"><a href="?subcat={{data.nom}}"><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="" class="img-fluid"></a></div> 
+                        <div class="mb-3">
+                        
+                            <a href="?subcat={{data.nom}}"><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="" class="img-fluid"></a>
+                        
+                        </div> 
+
                         <h5 class="fw-bold fst-italic">{{data.nom|capitalize}}</h5> 
+
                     </div>
+
                 {% endfor %}
 
             {% endfor %}
@@ -152,5 +220,5 @@
             
         {% endfor %} #}
     {% endif %}
-
+{# </div> #}
 {% endblock %}

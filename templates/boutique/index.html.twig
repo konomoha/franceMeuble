@@ -10,7 +10,7 @@
 {% block body %}
 
     <h2 class="text-center">Catégories</h2>
-    {# !!AJOUTER LES BONNES BALISES!! #}
+    {#/////////////////////////////////////// !!AJOUTER LES BONNES BALISES!! /////////////////////////////////////////////////#}
 
     <div class="categories  my-4 mx-auto" >
         <div class="splide" id="card-slider">
@@ -50,7 +50,7 @@
                 <div class="row justify-content-start my-4">
 
                     <div class="col-5 collection p-0">
-                        <a href=""><img src="{{asset('img/photos/')~ data.photo}}" class="img-fluid" alt="image {{data.nom}}"></a>
+                        <a href="{{path('boutique_theme_show', {'id': data.id})}}"><img src="{{asset('img/photos/')~ data.photo}}" class="img-fluid" alt="image {{data.nom}}"></a>
                     </div>
 
                     <h3 class="col-6 mx-3 text-center fst-italic align-self-center">{{data.description}}</h3>

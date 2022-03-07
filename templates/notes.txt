@@ -5,16 +5,16 @@ ACCUEIL:
     - ajouter option état réassort ---- DONE
     - Logo accueil enlever made in France sur france meuble. (Plusieurs versions)
     - remplacer collections par thèmes ---- DONE
-    - Ajouter un champ couleur dans la table assortiment
-    - Thème chinois qui redirigera vers tous les produits et collections made in Chine
-    - Thème turc qui redirigera vers tous les produits et collections made in Turquie
+    - Ajouter un champ couleur dans la table assortiment ---- DONE
+    - Thème chinois qui redirigera vers tous les produits et collections made in Chine ---- DONE
+    - Thème turc qui redirigera vers tous les produits et collections made in Turquie ---- DONE
     - Thème marocain (indiquer visuellement que tout est made in france) qui redirigera vers la section Maryam couture
     - Dans le menu de navigation, chaque thème ensemble de produits et de collection (ajouter un champ thème dans les produits)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-MARYAM COUTURE:
+MARYAM COUTURE: (Comment faire pour distinguer les catégories maryam couture des autres? Un autre champ?)
 
-    - slogan: "Créateur de salons sur nmesure"
+    - slogan: "Créateur de salons sur mesure"
 
     - catégories :  - boiserie (subcats: banquettes, accoudoirs, dossiers, coffre, banquette coin, etc...), 
                     - mousse (plusieurs types), 
@@ -32,6 +32,8 @@ BACKOFFICE:
     -Mettre en place un champ de recherche dans toutes les catégories
     -Mettre en place un classement des produits
     -Gérer la connexion sécurisée au Backoffice
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 CGV, MEDIATION, MENTIONS LEGALES
 
 mail : www.medicys.fr
