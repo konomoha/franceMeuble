@@ -50,7 +50,7 @@
 
                 {% if data.produits|length != null %}
 
-                    <td><p>{{data.produits|length}}</p></td>
+                    <td><p><a href="{{path('boutique_theme_show', {'id':data.theme.id})}}?assort={{data.id}}">{{data.produits|length}}</a></p></td>
 
                 {% else %}
 
