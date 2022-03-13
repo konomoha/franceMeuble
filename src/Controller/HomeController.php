@@ -19,7 +19,7 @@ class HomeController extends AbstractController
         
         $colonnes = $manager->getClassMetadata(Categorie::class)->getFieldNames();
 
-        $category = $repoCategory->findAll();
+        $category = $repoCategory->findByGroup('france_meuble');
 
         $assortiment = $repoAssortiment->findNewest();
 

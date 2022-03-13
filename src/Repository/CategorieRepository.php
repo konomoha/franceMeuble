@@ -47,4 +47,14 @@ class CategorieRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findByGroup($groupe)
+    {
+        $query = $this->createQueryBuilder(alias:'c')
+                        ->where(predicates:'c.groupe = :groupe')
+                        ->setParameters(['groupe'=>$groupe]
+                        )
+                        ->getQuery();
+        return $query->getResult();
+    }
 }

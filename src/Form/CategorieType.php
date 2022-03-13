@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class CategorieType extends AbstractType
@@ -43,6 +44,15 @@ class CategorieType extends AbstractType
                 ],
                 'required'=>false,
                 
+            ])
+
+            ->add('groupe', ChoiceType::class,[
+                'choices'=>[
+                    'france meuble'=>'france_meuble',
+                    'maryam coutures'=>'maryam_coutures'
+                ],
+                'label'=>'Groupe',
+                'required'=>false,
             ])
 
             ->add('photo', FileType::class, [
