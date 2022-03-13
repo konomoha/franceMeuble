@@ -27,6 +27,9 @@ class Categorie
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $photo;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $groupe;
+
     public function __construct()
     {
         $this->souscategories = new ArrayCollection();
@@ -99,6 +102,18 @@ class Categorie
     public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getGroupe(): ?string
+    {
+        return $this->groupe;
+    }
+
+    public function setGroupe(?string $groupe): self
+    {
+        $this->groupe = $groupe;
 
         return $this;
     }

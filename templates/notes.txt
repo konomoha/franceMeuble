@@ -12,7 +12,7 @@ ACCUEIL:
     - Dans le menu de navigation, chaque thème ensemble de produits et de collection (ajouter un champ thème dans les produits)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-MARYAM COUTURE: (Comment faire pour distinguer les catégories maryam couture des autres? Un autre champ?)
+MARYAM COUTURE: (Comment faire pour distinguer les catégories maryam couture des autres? Un autre champ? A priori il faudrait créer un champ dans la table catégorie)
 
     - slogan: "Créateur de salons sur mesure"
 
@@ -29,7 +29,7 @@ MARYAM COUTURE: (Comment faire pour distinguer les catégories maryam couture de
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 BACKOFFICE:
 
-    -Mettre en place un champ de recherche dans toutes les catégories
+    -Mettre en place un filtre pour les listes de produits, catégories, etc... 
     -Mettre en place un classement des produits
     -Gérer la connexion sécurisée au Backoffice
 
