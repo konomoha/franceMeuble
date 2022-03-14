@@ -93,20 +93,29 @@ footer div{
     
   }
   
-  .thumb_slide.is-active {
-    opacity: 1;
-  }
+.thumb_slide.is-active {
+opacity: 1;
+}
+  
+.menu_maryam{
+    position:sticky!important;
+    top: 0!important;
+}
 
-  .img-cart{
-     width: 50px;
-     height: auto;
-  }
+.maryam_nav:hover{
+    background-color: lightgray;
+}
 
-  td{
-      vertical-align: middle;
-      padding: 0;
-  }
+.img-cart{
+    width: 50px;
+    height: auto;
+}
 
-  .qte_plus i, .qte_minus i{
-    font-size: 1.5rem;
-  }
+td{
+    vertical-align: middle;
+    padding: 0;
+}
+
+.qte_plus i, .qte_minus i{
+font-size: 1.5rem;
+}

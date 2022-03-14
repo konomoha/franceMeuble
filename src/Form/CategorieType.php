@@ -49,7 +49,7 @@ class CategorieType extends AbstractType
             ->add('groupe', ChoiceType::class,[
                 'choices'=>[
                     'france meuble'=>'france_meuble',
-                    'maryam coutures'=>'maryam_coutures'
+                    'maryam couture'=>'maryam_couture'
                 ],
                 'label'=>'Groupe',
                 'required'=>false,

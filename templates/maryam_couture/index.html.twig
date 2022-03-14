@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MaryamCoutureController!{% endblock %}
+
+{% block body %}
+
+    <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
+            <li class="breadcrumb-item active">Maryam Couture</li>
+    </ol>
+
+    <div class="row justify-content-around">
+
+        <div class="col-2">
+        <ul class="menu_maryam">
+            <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav"><a href="{{path('maryam_couture_categories')}}">Catégories</a></li>
+            <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav">Service tapissserie</li>
+            <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav">Contact</li>
+            <li class="accordion-item border p-2 text-center fw-bold fst-italic my-2">
+
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button fw-bold fst-italic p-2 text-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Catégories
+                    </button>
+                </h2>
+            
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+
+                    <div class="accordion-body">
+                        {% for data in categories %}
+                            <p class="maryam_nav p-1 border rounded"><a href="{{path('boutique_category_show', {'id': data.id})}}">{{data.nom}}</a></p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+        </div>
+
+        <div class="col-9 ">
+
+            <h1 class="text-center">Maryam couture</h1>
+            <h2 class="text-center fst-italic">Créateur de salons sur mesure</h2>
+
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae commodi unde illo ea consequatur maiores eos necessitatibus non, aut recusandae porro id magnam, natus magni! Rem quia commodi inventore esse quae ipsa qui aut mollitia voluptatibus, quam tempore quaerat repellendus quasi iste tenetur recusandae molestiae, explicabo debitis, non maiores eum? Dolores non cumque, nesciunt amet inventore dolorem accusantium itaque velit rerum sint praesentium veniam ea laboriosam!</p>
+  
+        </div>
+
+    </div>
+{% endblock %}
