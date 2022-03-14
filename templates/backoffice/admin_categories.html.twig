@@ -50,15 +50,19 @@
                 <td>{{ data.groupe}}</td>
 
                 <td>
-                    {% for value in data.souscategories %}
+                        {% if data.souscategories is empty %}
 
-                        {% if value.nom != null %}
-                            <p>{{value.nom|capitalize}}</p>
+                            <p class="text-danger fst-italic">Aucune sous-catégorie</p>
+
                         {% else %}
-                            <p class="text-danger">Aucune sous-catégorie</p>
-                        {% endif %}
+                        
+                            {% for value in data.souscategories %}
 
-                    {% endfor %}
+                                <p class="my-1 px-3 text-start">- {{value.nom|capitalize}}</p>
+
+                            {% endfor %}
+
+                        {% endif %}    
                 </td>
 
                  

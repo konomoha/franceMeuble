@@ -30,12 +30,18 @@
                 <div class="accordion-body">
                 
                     <ul class="p-2">
+                    
+                    {% if data.groupe == 'france_meuble' %}
 
-                    {% for data in data.souscategories %}
+                        {% for data in data.souscategories %}
 
-                        <li><a href="{{path('boutique_subcategory_show', {'id' : data.id })}}">{{data.nom}}</a></li>
-                        
-                    {% endfor %}
+                            <li><a href="{{path('boutique_subcategory_show', {'id' : data.id })}}">{{data.nom}}</a></li>
+                            
+                        {% endfor %}
+
+                    {% else %}
+                        {# Je peux mettre dans ce else un lien qui amenera directement à maryam coutures #}
+                    {% endif %}
 
                     </ul>
 

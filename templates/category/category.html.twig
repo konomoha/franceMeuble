@@ -5,11 +5,23 @@
 {% block body %}
 
 <div aria-label="breadcrumb">
+    {% if datacat.groupe == 'maryam_couture' %}
 
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
-        <li class="breadcrumb-item active">{{datacat.nom|capitalize}}</li>
-    </ol>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{path('maryam_couture')}}">Maryam Couture</a></li>
+            <li class="breadcrumb-item"><a href="{{path('maryam_couture_categories')}}">Catégories</a></li>
+            <li class="breadcrumb-item active">{{datacat.nom|capitalize}}</li>
+        </ol>
+    
+    {% else %}
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
+            <li class="breadcrumb-item active">{{datacat.nom|capitalize}}</li>
+        </ol>
+
+    {% endif %}
 
 </div>
 
