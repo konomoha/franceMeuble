@@ -116,6 +116,10 @@ td{
     padding: 0;
 }
 
-.qte_plus i, .qte_minus i{
-font-size: 1.5rem;
+.qte_plus, .qte_minus{
+font-size: 1.5em!important;
+}
+
+.qte_item{
+    font-size: 1.1rem;
 }
