@@ -8,7 +8,7 @@ let products = {};
 
 let article = document.querySelector('.item');
 
-let qte_plus = document.querySelectorAll('.qte_plus');
+let qte_plus = document.querySelectorAll('.qte_plus'); //JS ne va chercher que dans le document html auquel il est lié. Le innerHTML appartient à un autre fichier js. 
 
 let total = document.querySelector('.total');
 
@@ -39,10 +39,10 @@ for (let i=0; i < produit.length; i++){
 cart.onLoad();
 
 if(items != null){
-    cart.renderCart(items, article, total, qte_plus);
+    cart.renderCart();
 }
 
-console.log(qte_plus.length);
+// console.log(qte_plus.length);
 
 
 // for (let i=0; i < qte_plus.length; i++){

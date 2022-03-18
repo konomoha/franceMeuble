@@ -46,7 +46,6 @@ class Cart{
             
         }
         
-        
         this.save();
     
         document.querySelector('.cart span').textContent = this.getNumberProduct();
@@ -59,39 +58,61 @@ class Cart{
     }
 
     changeQuantity(product, quantity){
-
+        
         let foundProduct = this.cart.find(p => p.id == product.id);
-    
-        if(foundProduct != undefined)
-        {
-            foundProduct.quantity += quantity;
-    
-            if (foundProduct.quantity <= 0)
+
+            if(foundProduct != undefined)
             {
-                remove(foundProduct);
+                console.log(foundProduct);
+
+                foundProduct.quantity += quantity;
+        
+                if (foundProduct.quantity <= 0)
+                {
+                    remove(foundProduct);
+                }
+                else
+                {
+                this.save(); 
+                }
+                document.querySelector('.cart span').textContent = this.getNumberProduct();
             }
-            else
-            {
-               this.save(); 
-            }
-            // location.reload();
-            // document.querySelector('.cart span').textContent = this.getNumberProduct();
-        }
     }
 
-    renderCart(item, x, y, z){
-        for(let i=0; i<item.length; i++){
+    renderCart(){ //Le bouton onclick ne fonctionne pas. De plus, la méthode changeQuantity() s'active automatiquement lorsque je rafraîchis la page. Le problème vient de quelque part dans ce innerHTML. Peut-être que toutes les fonctions présentes dans un innerHTML s'activent automatiquement au chargement de la page. Pourquoi je n'arrive pas à récupérer une class présente dans le innerHTML?
+        let items = this.getCartItems();
 
-            x.innerHTML +=`
-                <tr><td><p class='text-start mb-0'><span class='col-2 mx-5'><img src=${item[i].image} class= ' img-fluid img-cart'></span><a href='/produit/${item[i].id}'>${item[i].name} (${item[i].color})</a></p></td><td> ${item[i].quantity} <button class='${z} mx-2 cartitem'>+</button></td><td class='text-center'>${item[i].price}€</td></tr>`;
+        console.log(items.length);
+
+        items.forEach((product) =>{
+
+            article.innerHTML += 
+                "<tr><td><p class='text-start mb-0'><span class='col-2 mx-5'><img src=" + product.image + " class= ' img-fluid img-cart'></span><a href='/produit/" + product.id + "'>" + product.name + " (" + product.color + ")</a></p></td><td><span class='qte_minus mx-2'><i class='bi bi-dash-circle-fill'></i></span>" + product.quantity + "<span class='qte_plus mx-2'><i class='bi bi-plus-circle-fill'></i></span></td><td class='text-center'>"+ product.price+"€</td></tr>";
         
-                y.innerHTML = 
-                "<th colspan='2' class='text-end p-2 mx-2'>Total TTC</th><td class='text-center fw-bold'>" + this.getTotalPrice() + "€</td>";
-           
-                z[i].addEventListener('click', () => {
-                    this.changeQuantity(items[i], 1);
+                total.innerHTML = 
+                "<th colspan='2' class='text-end p-2 mx-2'>Total TTC</th><td class='text-center fw-bold'>" + cart.getTotalPrice() + "€</td>";
+
+            let qte_plus = document.querySelector('.qte_plus');
+
+            let qte_minus = document.querySelector('.qte_minus');
+
+            // console.log(qte_plus);
+            //Un autre problème se pose: les boutons marchent, mais la quantité ne change que pour le dernier article de la liste. Je n'arrive pas à comprendre pourquoi.
+
+                qte_plus.addEventListener('click', () => {
+                    
+                    console.log(product);
+                    this.changeQuantity(product, 1);
+                    // location.reload();
                 });
-        }
+
+                qte_minus.addEventListener('click', () => {
+                        
+                    this.changeQuantity(product, -1);
+                    // location.reload();
+                });
+            
+        });
     }
 
     getNumberProduct(){

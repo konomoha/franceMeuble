@@ -16,19 +16,41 @@
     <div class="row justify-content-around">
 
         <ul class="col-2 ">
-            <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav"><a href="{{path('maryam_couture_categories')}}">Catégories</a></li>
+
+            <li class="accordion-item border p-2 text-center fw-bold fst-italic my-2">
+
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button fw-bold fst-italic p-2 text-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Catégories
+                    </button>
+                </h2>
+            
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+
+                    <div class="accordion-body">
+                        {% for data in categories %}
+                            <p class="maryam_nav p-1 border rounded"><a href="{{path('boutique_category_show', {'id': data.id})}}">{{data.nom}}</a></p>
+                        {% endfor %}
+                        <p class="maryam_nav p-1 border rounded"><a href="{{path('maryam_couture_categories')}}">Voir tout</a></p>
+                    </div>
+                </div>
+
+            </li>
+
             <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav">Service tapissserie</li>
             <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav">Contact</li>
         </ul>
 
-        <div class="col-9 row justify-content-around">
+        <div class="col-9">
             <h1 class="text-center">Catégories</h1>
-            {% for data in categories %}
-                <div class="col-4 text-center card carte_categorie my-5">
-                    <h5 class="fw-bold fst-italic">{{data.nom|capitalize}}</h5>
-                    <div class="mb-3"><a href="{{path('boutique_category_show', {'id': data.id})}}"><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="" class="img-fluid"></a></div> 
-                </div>
-            {% endfor %}
+            <div class="row justify-content-around">
+                {% for data in categories %}
+                    <div class="col-3 text-center card carte_categorie my-5">
+                        <h5 class="fw-bold fst-italic">{{data.nom|capitalize}}</h5>
+                        <div class="mb-3"><a href="{{path('boutique_category_show', {'id': data.id})}}"><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="" class="img-fluid"></a></div> 
+                    </div>
+                {% endfor %}
+            </div>
             
         </div>
 
