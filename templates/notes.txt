@@ -12,7 +12,7 @@ ACCUEIL:
     - Dans le menu de navigation, chaque thème ensemble de produits et de collection (ajouter un champ thème dans les produits)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-MARYAM COUTURE: (Comment faire pour distinguer les catégories maryam couture des autres? Un autre champ? A priori il faudrait créer un champ dans la table catégorie)
+MARYAM COUTURE:
 
     - slogan: "Créateur de salons sur mesure"
 

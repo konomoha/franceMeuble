@@ -13,9 +13,7 @@
 
         <div class="col-2">
         <ul class="menu_maryam">
-            <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav"><a href="{{path('maryam_couture_categories')}}">Catégories</a></li>
-            <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav">Service tapissserie</li>
-            <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav">Contact</li>
+
             <li class="accordion-item border p-2 text-center fw-bold fst-italic my-2">
 
                 <h2 class="accordion-header" id="headingOne">
@@ -30,20 +28,35 @@
                         {% for data in categories %}
                             <p class="maryam_nav p-1 border rounded"><a href="{{path('boutique_category_show', {'id': data.id})}}">{{data.nom}}</a></p>
                         {% endfor %}
+                        <p class="maryam_nav p-1 border rounded"><a href="{{path('maryam_couture_categories')}}">Voir tout</a></p>
                     </div>
                 </div>
 
             </li>
+
+            <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav">Service tapissserie</li>
+            <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav">Contact</li>
         </ul>
         </div>
 
-        <div class="col-9 ">
+        <div class="col-9">
 
             <h1 class="text-center">Maryam couture</h1>
             <h2 class="text-center fst-italic">Créateur de salons sur mesure</h2>
 
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae commodi unde illo ea consequatur maiores eos necessitatibus non, aut recusandae porro id magnam, natus magni! Rem quia commodi inventore esse quae ipsa qui aut mollitia voluptatibus, quam tempore quaerat repellendus quasi iste tenetur recusandae molestiae, explicabo debitis, non maiores eum? Dolores non cumque, nesciunt amet inventore dolorem accusantium itaque velit rerum sint praesentium veniam ea laboriosam!</p>
-  
+
+            <div class="col-8 mx-auto my-5 pl-4">
+
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/7yf-sQWcpBI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
+            </div>
+
+            {# <div class=" col-7 mx-auto row justify-content-around">
+                <div class="col-3 text-center"><img src="{{asset('/img/photos/logo_fb.png')}}" alt="" class="img-fluid"></div>
+                <div class="col-3 text-center"><img src="{{asset('/img/photos/logo_instagram.png')}}" alt="" class="img-fluid"></div>
+            </div> #}
+           
         </div>
 
     </div>
