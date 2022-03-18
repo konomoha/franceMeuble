@@ -70,7 +70,7 @@ class Cart{
                 if (foundProduct.quantity <= 0)
                 {
                     this.remove(foundProduct);
-                    location.reload();
+                    location.reload(); //A défaut de mettre en place une méthode plus adaptée, on utilise la fonction reload() pour actualiser l'affichage des produits présents dans le panier après la suppression d'un élément.
                 }
                 else
                 {
@@ -81,7 +81,7 @@ class Cart{
             }
     }
 
-    renderCart(){ //Le bouton onclick ne fonctionne pas. De plus, la méthode changeQuantity() s'active automatiquement lorsque je rafraîchis la page. Le problème vient de quelque part dans ce innerHTML. Peut-être que toutes les fonctions présentes dans un innerHTML s'activent automatiquement au chargement de la page. Pourquoi je n'arrive pas à récupérer une class présente dans le innerHTML?
+    renderCart(){ //les queryselectors sont directement déclaré dans la fonction renderCart juste en-dessous des innerHTML. Cela permet de récupérer les attributs des boutons plus et moins dans le panier.
         let items = this.getCartItems();
 
         // console.log(items.length);
@@ -100,19 +100,20 @@ class Cart{
 
             let qte_item = document.querySelectorAll('.qte_item');
 
-            let total_price = document.querySelector('.total_price');
+            let total_price = document.querySelector('.total_price'); 
 
             // console.log(qte_plus);
-            //Un autre problème se pose: les boutons marchent, mais la quantité ne change que pour le dernier article de la liste. Je n'arrive pas à comprendre pourquoi.
+
             for(let i = 0; i < qte_plus.length; i++){
 
+                //qte_plus permettra de rajouter 1 produit de plus dans le panier. Et qte_moins servira à retirer un produit.
                 qte_plus[i].addEventListener('click', () => {
                     
                     this.changeQuantity(items[i], 1);
 
                     qte_item[i].textContent = items[i].quantity;
                 
-                    total_price.textContent = this.getTotalPrice();
+                    total_price.textContent = this.getTotalPrice(); //Le prix total sera directement mis à jour grâce à .TextContent.
 
                     // location.reload();
                 });
@@ -123,7 +124,7 @@ class Cart{
 
                     if(items[i].quantity > 0){
 
-                        qte_item[i].textContent = items[i].quantity;
+                        qte_item[i].textContent = items[i].quantity; //La quantité du produit sera mise à jour sur le template tant qu'elle sera supérieure à 1.
                     }
                     
                     total_price.textContent = this.getTotalPrice();
