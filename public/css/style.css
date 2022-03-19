@@ -117,7 +117,13 @@ td{
 }
 
 .qte_plus, .qte_minus{
-font-size: 1.5em!important;
+    font-size: 1.5em!important;
+    color: rgba(45, 87, 126, 0.952);
+}
+
+.remove_item{
+    font-size: 1.8rem;
+    color: rgb(44, 44, 44);
 }
 
 .qte_item{

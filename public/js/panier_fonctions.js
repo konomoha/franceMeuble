@@ -89,10 +89,12 @@ class Cart{
         items.forEach((product) =>{
 
             article.innerHTML += 
-                "<tr><td><p class='text-start mb-0'><span class='col-2 mx-5'><img src=" + product.image + " class= ' img-fluid img-cart'></span><a href='/produit/" + product.id + "'>" + product.name + " (" + product.color + ")</a></p></td><td><i class='bi bi-dash-circle-fill qte_minus mx-3'></i><span class='qte_item'>"+ product.quantity +"</span><i class='bi bi-plus-circle-fill qte_plus mx-3'></i></td><td class='text-center'>"+ product.price+"€</td></tr>";
+                "<tr><td><p class='text-start mb-0'><i class='bi bi-trash-fill remove_item'></i><span class='col-2 mx-5'><img src=" + product.image + " class= ' img-fluid img-cart'></span><a href='/produit/" + product.id + "'>" + product.name + " (" + product.color + ")</a></p></td><td><i class='bi bi-dash-circle-fill qte_minus mx-3'></i><span class='qte_item'>"+ product.quantity +"</span><i class='bi bi-plus-circle-fill qte_plus mx-3'></i></td><td class='text-center'>"+ product.price+"€</td></tr>";
         
             total.innerHTML = 
                 "<th colspan='2' class='text-end p-2 mx-2'>Total TTC</th><td class='text-center fw-bold'><span class='total_price'>" + cart.getTotalPrice() + "</span>€</td>";
+
+            let remove_item = document.querySelectorAll('.remove_item');
 
             let qte_plus = document.querySelectorAll('.qte_plus');
 
@@ -103,6 +105,8 @@ class Cart{
             let total_price = document.querySelector('.total_price'); 
 
             // console.log(qte_plus);
+
+            //////////////////////////////////// BOUTON AJOUTER / DIMINUER /////////////////////////////////////////
 
             for(let i = 0; i < qte_plus.length; i++){
 
@@ -130,6 +134,16 @@ class Cart{
                     total_price.textContent = this.getTotalPrice();
 
                     // location.reload();
+                });
+
+            }
+
+            //////////////////////////////////////////// BOUTON SUPPRESSION TOTALE///////////////////////////////////////
+            for(let i = 0; i < remove_item.length; i++){
+                
+                remove_item[i].addEventListener('click', () => {
+                    this.remove(items[i]);
+                    location.reload();
                 });
             }
         });
