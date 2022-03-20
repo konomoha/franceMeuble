@@ -8,11 +8,11 @@ let products = {};
 
 let article = document.querySelector('.item');
 
-let qte_plus = document.querySelectorAll('.qte_plus'); //JS ne va chercher que dans le document html auquel il est lié. Le innerHTML appartient à un autre fichier js. 
-
 let total = document.querySelector('.total');
 
-let items = cart.getCartItems();
+// let items = cart.getCartItems();
+
+let panier = document.getElementById('panier');
 
 for (let i=0; i < nbproduit.length; i++){
 
@@ -38,20 +38,22 @@ for (let i=0; i < produit.length; i++){
 
 cart.onLoad();
 
-if(items != null){
-    cart.renderCart();
+// if(items == null){
+//     cart.renderCart();
+
+// } Visiblement cette condition-là est inutile pour le afficher les produits sur le template panier
+
+if(cart.getNumberProduct() == 0){
+
+    // cart.renderCart();
+    panier.outerHTML = "<h1 class='fst-italic text-center'>Votre panier est vide !</h1>";
+
 }
+else{
 
-// console.log(qte_plus.length);
-
-
-// for (let i=0; i < qte_plus.length; i++){
-
-//     qte_plus[i].addEventListener('click', () => {
-//         cart.changeQuantity(items[i], 1);
-//     });
-
-// }
+    cart.renderCart();
+    
+}
 
 
 
