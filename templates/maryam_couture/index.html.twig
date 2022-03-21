@@ -11,32 +11,70 @@
 
     <div class="row justify-content-around">
 
-        <div class="col-2">
-        <ul class="menu_maryam">
+        <div class="col-2 accordion accordion-flush" id="accordionFlushExample">
+            {# <ul class="menu_maryam">
 
-            <li class="accordion-item border p-2 text-center fw-bold fst-italic my-2">
+                <li class="accordion-item border p-2 text-center fw-bold fst-italic my-2">
 
-                <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button fw-bold fst-italic p-2 text-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Catégories
-                    </button>
-                </h2>
-            
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button fw-bold fst-italic p-2 text-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Catégories
+                        </button>
+                    </h2>
+                
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 
-                    <div class="accordion-body">
-                        {% for data in categories %}
-                            <p class="maryam_nav p-1 border rounded"><a href="{{path('boutique_category_show', {'id': data.id})}}">{{data.nom}}</a></p>
-                        {% endfor %}
-                        <p class="maryam_nav p-1 border rounded"><a href="{{path('maryam_couture_categories')}}">Voir tout</a></p>
+                        <div class="accordion-body">
+                            {% for data in categories %}
+                                <p class="maryam_nav p-1 border rounded"><a href="{{path('boutique_category_show', {'id': data.id})}}">{{data.nom}}</a></p>
+                            {% endfor %}
+                            <p class="maryam_nav p-1 border rounded"><a href="{{path('maryam_couture_categories')}}">Voir tout</a></p>
+                        </div>
                     </div>
-                </div>
 
-            </li>
+                </li>
 
-            <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav">Service tapissserie</li>
-            <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav">Contact</li>
-        </ul>
+                <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav">Service tapissserie</li>
+                <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav">Contact</li>
+            </ul> #}
+
+            {# <div class="accordion accordion-flush" id="accordionFlushExample"> #}
+
+            <ul class="menu_maryam">
+
+                <li class="accordion-item border p-2 text-center fw-bold fst-italic my-2">
+
+                    <h2 class="accordion-header" id="flush-headingOne">
+
+                        <button class="accordion-button collapsed fw-bold fst-italic py-1 text-center" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Catégories
+                        </button>
+
+                    </h2>
+
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+
+                        <div class="accordion-body">
+
+                            {% for data in categories %}
+                                <p class="maryam_nav p-1 border rounded"><a href="{{path('boutique_category_show', {'id': data.id})}}">{{data.nom}}</a></p>
+                            {% endfor %}
+                            
+                            <p class="maryam_nav p-1 border rounded"><a href="{{path('maryam_couture_categories')}}">Voir tout</a></p>
+
+                        </div>
+
+                    </div>
+
+                </li>
+
+                <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav">Service tapissserie</li>
+
+                <li class="border p-2 text-center fw-bold fst-italic my-2 maryam_nav">Contact</li>
+
+            </ul>
+
+            {# </div> #}
         </div>
 
         <div class="col-9">

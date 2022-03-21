@@ -22,7 +22,7 @@
 
                     {% for data in data.assortiment %}
 
-                        <li class="my-2 text-center"><a href="">{{data.nom}}</a></li><hr>
+                        <li class="my-2 text-center"><a href="{{path('boutique_theme_show', {'id': data.theme.id})}}?assort={{data.id}}">{{data.nom}}</a></li><hr>
                         
                     {% endfor %}
 
