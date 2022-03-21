@@ -25,4 +25,17 @@ class AssortimentController extends AbstractController
         
     }
 
+    // #[Route('/assortiment/{id}', name: 'boutique_assortiment_show')]
+    // public function assortimentShow(Assortiment $assortiment, AssortimentRepository $repoAssortiment): Response
+    // {
+
+    //     $id = $assortiment->getId();
+    //     $datassortiment = $repoAssortiment->find($id);
+
+    //     return $this->render('assortiment/assortiment_show.html.twig', [
+    //         'datassortiment' => $datassortiment
+    //     ]);
+
+    // }
+
 }
