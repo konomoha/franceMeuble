@@ -33,7 +33,7 @@ class ThemeController extends AbstractController
 
         $themeData = $repoTheme->find($id); // variable qui servira à récupérer toutes les information du thème en fonction de l'id présent dans l'url
         
-        $produitData = $repoProduit->findByTheme($id); //Cette variable récupère toutes les données d'un produit ayant un thème précis;
+        $produitData = $repoProduit->findByTheme($id); //Cette variable récupère toutes les données d'un produit ayant un thème précis via la fonction findByTheme;
 
         $subcatData = $repoSubcat->findAll();// On récupère ici toutes les données de toutes les catégories présentes en bdd
 
@@ -41,9 +41,9 @@ class ThemeController extends AbstractController
 
         $assortimentdata = [];//Cet array vide nous peremttra de stocker les noms d'assortiments précis
 
-        $subcatTab = []; //Array qui servira à stocké les sous-catégories après filtrage
+        $subcatTab = []; //Array qui servira à stocker les sous-catégories après filtrage
 
-        $assortimenTab = [];//Array qui servira à stocké les assortiments après filtrage
+        $assortimenTab = [];//Array qui servira à stocker les assortiments après filtrage
 
         foreach($subcatData as $key=>$tab)
         {
@@ -95,7 +95,7 @@ class ThemeController extends AbstractController
 
         // dump($subcatTab);
 
-        //Je vais avoir besoin d'un méthode pour récupérer tous les produits, catégories et sous catégories liées au thème
+        //Je vais avoir besoin d'un méthode pour récupérer tous les produits, catégories et sous catégories liés au thème
 
         return $this->render('theme/theme_show.html.twig', [
             'themeData'=>$themeData,

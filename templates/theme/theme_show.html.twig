@@ -3,19 +3,25 @@
 {% block title %}
     France Meuble | Theme
 {% endblock %}
+
 {% block javascripts %}
-{{ parent() }}
+
+    {{ parent() }}
     <script src="{{ asset("js/slide.js") }}" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+
 {% endblock %}
 
 {% block body %}
-{# <div class="container" style="background-image: url('{{ asset('img/photos/') ~ themeData.photo }}');"> #}
+
+{# Le breadcrumb ici sera conditionné par les données présentes dans l'URL. Si la valeur de l'indice subcat correspond au nom de la sous-catégorie, on affichera un breadcrumb adapté en conséquence. Il y a probablement une manière plus simple de procéder mais pour le moment this will do #}
+
     {% if app.request.query.get('subcat') %}
 
             <div aria-label="breadcrumb">
 
             <ol class="breadcrumb">
+
                 <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
                 <li class="breadcrumb-item"><a href="{{path('boutique_theme_show',{'id': themeData.id })}}">{{themeData.nom|capitalize}}</a></li>
 
@@ -24,7 +30,9 @@
                 {% for data in tab %}
 
                     {% if app.request.query.get('subcat') == data.nom %}
+
                         <li class="breadcrumb-item active">{{data.nom|capitalize}}</li> 
+
                     {% endif %}
                 
                 {% endfor %}
@@ -42,6 +50,7 @@
             <ol class="breadcrumb">
 
                 <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
+
                 <li class="breadcrumb-item"><a href="{{path('boutique_theme_show',{'id': themeData.id })}}">{{themeData.nom|capitalize}}</a></li>
 
                 {% for data in assortimenTab %}
@@ -73,6 +82,12 @@
 
     {# {{dump(app.request.query.get('subcat'))}} #}
 
+    {# ////////////////////////////////////// AFFICHAGE SOUS-CATEGORIE DE THEME //////////////////////////////////////////// #}
+
+    {# 
+        Nous avons mis en place dans le ThemeController une méthode qui permet d'afficher sur le template theme_show de base toutes les catégories contenant un ou plusieurs produits ayant un thème précis. Lorsque l'on clique sur l'une de ces catégories, un indice subcat est transmit à l'URL. La valeur de cet indice correspond au nom d'une sous-catégorie précise. Cela nous permettra de filtrer dans l'array produitData tous les produits ayant un thème précis et une sous catégorie précise (par exemple toutes les chaises sur le thème de la chine).  
+    #}
+
     {% if app.request.query.get('subcat') %}
     
         <div class="row justify-content-around ">
@@ -83,7 +98,12 @@
                     
                     <div class="col-3 card text-center row justify-content-around my-5 carte_subcategory">
             
-                        <a href="{{path('details_produit', {'id' : data.id })}}"><div class="align-self-center col-7 mx-auto mt-2"><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="{{data.nom}}" class="img-fluid img_soutcat" ></div></a><hr>
+                        <a href="{{path('details_produit', {'id' : data.id })}}">
+
+                            <div class="align-self-center col-7 mx-auto mt-2"><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="{{data.nom}}" class="img-fluid img_soutcat" ></div>
+
+                        </a><hr>
+                        
                         <h5 class="mb-3 fw-bold fst-italic">{{data.nom|capitalize}}</h5>
 
                     </div>    
@@ -94,6 +114,11 @@
 
         </div>
 
+
+    {# ////////////////////////////////////// AFFICHAGE ASSORTIMENT //////////////////////////////////////////// #}
+
+    {# Dans le cas où l'indice transmis à l'URL est 'assort', on affichera la collection ayant un id identique à la valeur que contient l'indice assort. Ainsi, lorsque l'on clique sur une collection, le template affichera tous les détails de la collection en question. Nous pouvons accéder à la liste des produits associés à un assortiment précis via l'array assortimenTab mis en place dans le ThemeController. On affiche ainsi sur le template les détails d'un assortiment ainsi que tous les produits qui le composent #}
+
     {% elseif app.request.query.get('assort') %}
 
         {% for data in assortimenTab %}
@@ -102,29 +127,38 @@
 
                 {# {{dump(data)}} #}
                 <h1 class="text-center fst-italic">{{data.nom}}</h1>
+
                 <div class="col-8 mx-auto my-3">
+
                     <img src="{{asset('img/photos/')~ data.photo}}" alt="" class="img-fluid">
+
                 </div>
 
             {% endif %}
 
-         {% endfor %}
+        {% endfor %}
 
         <h2 class="text-center fst-italic">Produits associés</h2>
 
         {% for data in assortimenTab %}
-            <div class="row justify-content-center ">
+
+            <div class="row justify-content-start ">
 
                 {% for data2 in data.produits %}
                         {# {{dump(data)}} #}
 
-                    {% if app.request.query.get('assort') == data.id %}
+                    {% if app.request.query.get('assort') == data.id %} 
 
                         {# {{dump(data2)}} #}
 
                         <div class="col-2 card text-center row justify-content-around mx-2 my-5 carte_subcategory">
             
-                            <a href="{{path('details_produit', {'id' : data2.id })}}"><div class="align-self-center col-7 mx-auto mt-2"><img src="{{ asset('img/photos/' ~ data2.photo)}}" alt="{{data2.nom}}" class="img-fluid img_soutcat" ></div></a><hr>
+                            <a href="{{path('details_produit', {'id' : data2.id })}}">
+
+                                <div class="align-self-center col-7 mx-auto mt-2"><img src="{{ asset('img/photos/' ~ data2.photo)}}" alt="{{data2.nom}}" class="img-fluid img_soutcat" ></div>
+                                
+                            </a><hr>
+
                             <h6 class="mb-3 fw-bold fst-italic">{{data2.nom|capitalize}}</h6>
 
                         </div>   
@@ -138,6 +172,10 @@
         {% endfor %}
 
     {% else %}
+
+    {# //////////////////////////////////////////////////// AFFICHAGE DE BASE/////////////////////////////////////////////// #}
+
+    {# Si rien n'est transmis à l'URL le template affichera toutes les collections liées au thème sur lequel on se trouve ainsi que toutes les sous-catégories liées à ce thème. On peut envisager à la place des sous-catégories un affichage des catégories. #}
 
         <h1>Theme {{themeData.nom}}</h1>
 
@@ -197,28 +235,6 @@
             
         </div>
 
-        {# {% for data in produitData %}
-
-            {{dump(data)}}
-            
-        {% endfor %}
-        
-
-        {% for tab in subcatTab %}
-
-            {% for data in tab %}
-
-                {{dump(data)}}
-
-            {% endfor %}
-            
-        {% endfor %}
-
-        {% for data in assortimenTab %}
-
-            {{dump(data.nom)}}
-            
-        {% endfor %} #}
     {% endif %}
-{# </div> #}
+
 {% endblock %}

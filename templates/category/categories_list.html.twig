@@ -1,15 +1,8 @@
-{# <ul> #}
-{% for data in categories %}
-{# <div class="my-3">
+{# //////////////////////////////////////// LISTE DES CATEGORIES ///////////////////////////////////////////////////////// #}
 
-    <h4><a class="p-2 link-secondary" href="{{path('boutique_category_show', {'id': data.id}) }}">{{data.nom}}</a></h4>
-    
-        <ul class="p-2">
-            {% for data in data.souscategories %}
-                <li><a href="{{path('boutique_subcategory_show', {'id' : data.id })}}">{{data.nom}}</a></li>
-            {% endfor %}
-        </ul><hr>
-</div> #}
+{# Ce template affiche uniquement la liste de toutes les catégories présentes en bdd. On s'en servira principalement dans les menus de navigation#}
+{% for data in categories %}
+
 
     <div class="accordion accordion-flush" id="accordionFlush{{data.nom}}">
 
@@ -49,4 +42,3 @@
     </div>
 
 {% endfor %}
-{# </ul> #}

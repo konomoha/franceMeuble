@@ -38,17 +38,17 @@ main{
    box-shadow: 6px 8px 4px rgb(204, 204, 204);
 }
 
-.section_collection{
+.section_themes{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
 
-.section_collection div{
+.section_themes article{
     background-color: rgb(234, 238, 241);
 }
 
-.section_collection div:nth-child(even){
+.section_themes article:nth-child(even){
     justify-content: end!important;
     background-color: rgb(255, 255, 255);
 }
