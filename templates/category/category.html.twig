@@ -1,38 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}France Meuble | Categorie{% endblock %}
+{% block title %}France Meuble | Catégorie {{datacat.nom|capitalize}}{% endblock %}
 
 {% block body %}
 
-<div aria-label="breadcrumb">
-    {% if datacat.groupe == 'maryam_couture' %}
+{# On met en place ici un breadcrumb pour permettre à l'internaute de pouvoir naviguer plus facilement entre les pages. #}
+    <div aria-label="breadcrumb">
 
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
-            <li class="breadcrumb-item"><a href="{{path('maryam_couture')}}">Maryam Couture</a></li>
-            <li class="breadcrumb-item"><a href="{{path('maryam_couture_categories')}}">Catégories</a></li>
-            <li class="breadcrumb-item active">{{datacat.nom|capitalize}}</li>
-        </ol>
-    
-    {% else %}
+        {% if datacat.groupe == 'maryam_couture' %}
 
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
-            <li class="breadcrumb-item active">{{datacat.nom|capitalize}}</li>
-        </ol>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{path('maryam_couture')}}">Maryam Couture</a></li>
+                <li class="breadcrumb-item"><a href="{{path('maryam_couture_categories')}}">Catégories</a></li>
+                <li class="breadcrumb-item active">{{datacat.nom|capitalize}}</li>
+            </ol>
+        
+        {% else %}
 
-    {% endif %}
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
+                <li class="breadcrumb-item active">{{datacat.nom|capitalize}}</li>
+            </ol>
 
-</div>
+        {% endif %}
 
-<h1 class="text-center mb-5">{{datacat.nom}}</h1>
-<div class="categories row justify-content-around align-items-center">
-
-    {% for data in datacat.souscategories %}
-    <div class="col-3 text-center card carte_categorie my-5">
-       <h5 class="fw-bold fst-italic">{{data.nom|capitalize}}</h5>
-        <div class="mb-3"><a href="{{path('boutique_subcategory_show', {'id': data.id})}}"><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="" class="img-fluid"></a></div> 
     </div>
-    {% endfor %}
-</div>
+
+{# //////////////////////////////////////////////////// DETAILS CATEGORIES //////////////////////////////////////////#}
+
+{# Le détail des catégories affichera toutes les informations d'une catégorie et plus particulièrement les sous-catégories qui lui appartiennent. On se servira d'une boucle for pour afficher toutes les sous-catégories associées. #}
+
+    <h1 class="text-center mb-5">{{datacat.nom}}</h1>
+
+    <div class="categories row justify-content-around align-items-center">
+
+        {% for data in datacat.souscategories %}
+
+            <div class="col-3 text-center card carte_categorie my-5">
+
+                <h5 class="fw-bold fst-italic">{{data.nom|capitalize}}</h5>
+
+                <div class="mb-3">
+                
+                    {# Le lien mène vers tous les produits associés à la sous-catégorie via la fonction subcategory_show #}
+
+                    <a href="{{path('boutique_subcategory_show', {'id': data.id})}}"><img src="{{ asset('img/photos/' ~ data.photo)}}" alt="" class="img-fluid"></a>
+                
+                </div> 
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
 {% endblock %}

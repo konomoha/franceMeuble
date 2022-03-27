@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} France Meuble | Accueil{% endblock %} 
+{% block title %} France Meuble | Spécialiste de l'Ameublement{% endblock %} 
 {% block javascripts %}
 {{ parent() }}
     <script src="{{ asset("js/slide.js") }}" type="text/javascript"></script>
@@ -9,12 +9,18 @@
 
 {% block body %}
 
-    <h2 class="text-center">Catégories</h2>
-    {#/////////////////////////////////////// !!AJOUTER LES BONNES BALISES!! /////////////////////////////////////////////////#}
+    {#////////////////////////////////////////////////// SLIDER CATEGORIES /////////////////////////////////////////////////#}
 
     {# {{dump(category)}} #}
-    <div class="categories  my-4 mx-auto" >
+
+    {# Le slider de la page d'index est lié à un fichier js et affiche en boucle toutes les catégories présentes en bdd via une boucle for #}
+
+    <section class="categories my-4 mx-auto" >
+
+        <h2 class="text-center">Catégories</h2>
+
         <div class="splide" id="card-slider">
+
             <div class="splide__track">
 
                 <ul class="splide__list">
@@ -23,32 +29,43 @@
                         
                         <li class="card col-3 mx-3 carte_categorie splide__slide" >
 
-                            <a href="{{path('boutique_category_show', {'id': data.id}) }}"><img src="{{asset('img/photos/')~ data.photo}}" class="img-fluid" alt="image {{data.nom}}"></a>
+                            <article>
 
-                            <div class="card-body  row justify-content-center p-2">
+                                <a href="{{path('boutique_category_show', {'id': data.id}) }}"><img src="{{asset('img/photos/')~ data.photo}}" class="img-fluid" alt="image {{data.nom}}"></a>
 
-                                <h5 class="card-title text-center">{{data.nom|capitalize}}</h5>
-                                {# <a href="{{path('boutique_category_show', {'id': data.id}) }}" class="btn btn-primary col-6">Découvrir !</a> #}
+                                <div class="card-body row justify-content-center p-2">
 
-                            </div>
+                                    <h5 class="card-title text-center">{{data.nom|capitalize}}</h5>
+
+                                </div>
+
+                            </article>
 
                         </li>
+
                     {% endfor %}
 
                 </ul> 
             
             </div>
+
         </div>   
         
-    </div>
+    </section>
 
-    <h2 class="text-center">Collections</h2>
-    <section class="row justify-content-start">
-        <div class="section_collection col-11 ow justify-content-start">
+{# ////////////////////////////////////////////// SECTION THEMES /////////////////////////////////////////////////////////// #}
+
+{# L'affichage varie d'un thème à l'autre pour éviter la monotonie, on utilise pour ça l'attribut nth-child (even) #}
+
+    <section class="row justify-content-start themes">
+
+        <h2 class="text-center">Thèmes</h2>
+
+        <div class="section_themes col-11">
 
             {% for data in theme %}
 
-                <div class="row justify-content-start my-4">
+                <article class="row justify-content-start my-4">
 
                     <div class="col-5 collection p-0">
                         <a href="{{path('boutique_theme_show', {'id': data.id})}}"><img src="{{asset('img/photos/')~ data.photo}}" class="img-fluid" alt="image {{data.nom}}"></a>
@@ -56,7 +73,7 @@
 
                     <h3 class="col-6 mx-3 text-center fst-italic align-self-center">{{data.description}}</h3>
 
-                </div>
+                </article>
 
             {% endfor %}
             
@@ -69,26 +86,42 @@
 
     <hr>
     
-    <section class="row justify-content-around">
+{# ////////////////////////////////////////////////////// SERVICES //////////////////////////////////////////////////// #}
+
+    <section class="row justify-content-around services">
 
         <div class="col-3">
+
             <div class="text-center mb-2"><i class="bi bi-lock"></i></div>
+
             <h4 class="text-center">Paiement sécurisé</h4>
+
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cupiditate voluptatum quod id facilis architecto et ut corporis amet, soluta illo deleniti, accusantium sunt qui fugiat. Sequi voluptates repellendus consequuntur.</p>
+
         </div>
 
         <div class="col-3">
-            <div class="text-center mb-2"><i class="bi bi-truck"></i></i></div>
-            <h4 class="text-center">Livraison</h4
+
+            <div class="text-center mb-2"><i class="bi bi-truck"></i></div>
+
+            <h4 class="text-center">Livraison</h4>
+
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cupiditate voluptatum quod id facilis architecto et ut corporis amet, soluta illo deleniti, accusantium sunt qui fugiat. Sequi voluptates repellendus consequuntur.</p>
+
         </div>
 
         <div class="col-3">
-            <div class="text-center mb-2"><i class="bi bi-screwdriver"></i></i></div>
-            <h4 class="text-center">Montage et installation (à confirmer)</h4>
+
+            <div class="text-center mb-2"><i class="bi bi-screwdriver"></i></div>
+
+            <h4 class="text-center">Montage (à confirmer)</h4>
+
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cupiditate voluptatum quod id facilis architecto et ut corporis amet, soluta illo deleniti, accusantium sunt qui fugiat. Sequi voluptates repellendus consequuntur.</p>
+
         </div>
+
     </section>
+
     <hr>
 
 

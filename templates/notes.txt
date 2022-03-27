@@ -10,7 +10,7 @@ ACCUEIL:
     - Thème turc qui redirigera vers tous les produits et collections made in Turquie ---- DONE
     - Thème marocain (indiquer visuellement que tout est made in france) qui redirigera vers la section Maryam couture
     - Dans le menu de navigation, chaque thème ensemble de produits et de collection (ajouter un champ thème dans les produits)
-    - Ajouter un template catégorie pour France meuble
+    - Ajouter un template catégorie pour France meuble (?)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 MARYAM COUTURE:
