@@ -1,3 +1,5 @@
+{# Ce template affiche la liste complète de tous les thèmes présents en bdd. On s'en servira notamment dans le volet de navigation et dans la page d'index du site #}
+
 {% for data in theme %}
 
     <div class="accordion accordion-flush" id="accordionFlush{{data.nom}}">
@@ -20,11 +22,11 @@
                 
                     <ul class="p-1">
 
-                    {% for data in data.assortiment %}
+                        {% for data in data.assortiment %}
 
-                        <li class="my-2 text-center"><a href="{{path('boutique_theme_show', {'id': data.theme.id})}}?assort={{data.id}}">{{data.nom}}</a></li><hr>
-                        
-                    {% endfor %}
+                            <li class="my-2 text-center"><a href="{{path('boutique_theme_show', {'id': data.theme.id})}}?assort={{data.id}}">{{data.nom}}</a></li><hr>
+                            
+                        {% endfor %}
 
                     </ul>
 
@@ -37,4 +39,4 @@
     </div>
 
 {% endfor %}
-{# </ul> #}
+
