@@ -28,8 +28,9 @@ class CategoryController extends AbstractController
     #[Route('/category/{id}', name: 'boutique_category_show')]
     public function categoryShow(Categorie $category, CategorieRepository $catRepo)
     {
+        //Cette méthode permettra d'afficher sur un template les informations concernant une catégorie précise grâce à l'id transmis à l'url
         $id = $category->getId();
-        $datacat = $catRepo->find($id);
+        $datacat = $catRepo->find($id); 
 
         return $this->render('category/category.html.twig', [
             "datacat"=>$datacat

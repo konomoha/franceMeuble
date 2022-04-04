@@ -16,10 +16,9 @@ class DetailsProduitController extends AbstractController
         $id = $produit->getId();
         $nom = $produit->getNom();
 
-        $dataProduit = $produitRepo->find($id);
-        $alldata = $produitRepo->findModel($nom);
+        $dataProduit = $produitRepo->find($id);//Nous récupérons toutes les informations du produit ayant un id identique à celui présent dans l'url
 
-
+        $alldata = $produitRepo->findModel($nom); //Nous récupérons ici toutes les informations concernant les variantes d'un même produit. On s'en servira pour donner à l'internaute la possibilité de sélectionner une couleur de son choix
 
         return $this->render('details_produit/details_produit.html.twig', [
             'dataProduit' => $dataProduit,

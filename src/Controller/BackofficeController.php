@@ -225,7 +225,7 @@ class BackofficeController extends AbstractController
     {
         $colonnes = $manager->getClassMetadata(Categorie::class)->getFieldNames();
 
-        $category = $repoCategory->findAll();
+        $category = $repoCategory->findAll();//Nous récupérons toutes les informations de toutes les catégorie et les transmettons au template.
 
         return $this->render('backoffice/admin_categories.html.twig', [
             'colonnes'=>$colonnes,
