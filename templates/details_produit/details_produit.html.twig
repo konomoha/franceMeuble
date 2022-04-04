@@ -35,6 +35,8 @@
                     <div class="splide__track">
                         <ul class="splide__list">
 
+                        {# Cette liste affichera un slider contenant les photos du produit selon l'id présent dans l'URL #}
+
                             <li class="splide__slide d-flex justify-content-around mx-auto">
                                 
                                 <img src="{{asset('img/photos/')~ dataProduit.photo}}"  alt="Photo {{dataProduit.nom}}" class="img-fluid">
@@ -106,19 +108,28 @@
                 <p>Couleur: {{dataProduit.couleur|capitalize}}</p>
 
                 <div class="border ">
+                {# Nous nous servons ici de l'array alldata pour afficher toutes les couleurs disponibles pour le produit #}
                     {% for data in alldata %}
                         <a href="{{path('details_produit', {'id' : data.id })}}">{{data.couleur|capitalize}}</a>
                     {% endfor %}
                 </div>
 
             </div>
+
+            {# Dans le cas où le produit est en rupture de stock, un message sera affiché à la place du bouton panier #}
             {% if dataProduit.etat is not empty %}
 
-            <p>Réassort</p>
+            <small class="fst-italic text-danger">Produit en rupture de stock !</small>
+
             {% else %}
+                {# L'attribut data- nous permet de récupérer dans le fichier js les informations relatives au produit et de déclencher la fonction addPanier() #}
+                
                 <div class="nbproduits">
+
                     <button class="col-3 btn btn-primary p-0 btn_subcategory  produit" data-id="{{dataProduit.id}}" data-name="{{dataProduit.nom}}" data-price="{{dataProduit.prix}}" data-color="{{dataProduit.couleur}}" data-img="{{ asset('img/photos/' ~ dataProduit.photo)}}" title="Ajouter au panier"><i class="bi bi-cart-fill d-block"></i></button>
+
                 </div>
+
             {% endif %}
             
             

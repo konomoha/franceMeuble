@@ -48,6 +48,7 @@ class ProduitRepository extends ServiceEntityRepository
     }
     */
 
+    //Méthode retournant toutes les informations de tous les produits ayant un nom précis, elle prend pour argument le nom du produit. Cela permettra d'avoir accès sur le template détail produit aux informations des variantes d'un même produit, notamment les couleurs
     public function findModel($nom)
     {
         $query = $this->createQueryBuilder(alias:'p')
@@ -58,6 +59,7 @@ class ProduitRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    //findGroup() est une méthode retournant tous les produit ayant un id de sous-catégorie précis. Etant donné que plusieurs produit peuvent avoir le même nom mais une couleur différente, cette méthode regroupe les noms afin d'éviter les doublons. On s'en servira pour afficher de manière globale la liste de tous les produits pour telle ou telle catégorie.
     public function findGroup($id)
     {
         $query = $this->createQueryBuilder(alias:'p')
@@ -69,6 +71,7 @@ class ProduitRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    //findByTheme() permet de retrouver un produit ayant un id de theme précis. 
     public function findByTheme($id)
     {
         $query = $this->createQueryBuilder(alias:'p')
